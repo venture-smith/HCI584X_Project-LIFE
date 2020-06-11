@@ -1,2 +1,3 @@
 # HCI584X_Project-LIFE
-Learning Important Factual Equivalents (Calorie Edition) - Python Web-app fast food calorie calculator
+Learning Important Factual Equivalents (Calorie Edition) - Python
+A Webapp that translates common fast food menu items (that a User selects) to equivalent physical exercise duration/exertion level and healthy alternatives that people can more easily relate with. This information is meant to educate and entertain by helping the user understand the equivalent effort to offset consumption (provided the consumption is in excess of the minimum amount of calories for normal exertion throughout the day) as well as to share findings through messaging/social media in a consumable format (meme-worthy) Fact Sheet.
