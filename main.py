@@ -21,7 +21,7 @@ import fileinput
 
 
 ###### 2. SET UP DATA STRUCTURES
-# Data Heirarchy - Account - User - Preferences - Transaction history
+# Data Hierarchy - Account - User - Preferences - Transaction history
 
 class Account:
     # Create user account
@@ -53,9 +53,9 @@ class Account:
  
 class AppWindow:
 	#initialize application window
-	def __init__(self,rt):
+	def __init__(self, rt=None):
 		if rt == None:
-			self.t = tk.Tk() # This creates the window
+			self.t = tk.Tk() # This creates the top level window
 		else:
 			self.t = tk.Toplevel(rt)
 			
@@ -84,7 +84,11 @@ class AppWindow:
 		self.texteditor = tkst.ScrolledText(self.t)
 		self.texteditor.pack(expand = 1)
 	
-    #Close AppWindow
+    	def get_root(self):
+		''' return top level Tk window in case it's needed from outside the app'''
+		return self.t 
+	
+	#Close AppWindow
 	def close(self):
 		self.t.destroy()
 
@@ -96,11 +100,23 @@ class AppWindow:
 	def about(self):
 		msgbox.showinfo(title='LIFE', message='Learning Important Factual Equivalents: Calorie Edition')
 		
-if __name__ == "__main__": # Not sure what this is doing
-	app = []
+# Do NOT run this main part if this file (main.py) has been imported from another file
+# Given that you named it main.py, this is probably not needed here
+# Also, once you have all you clas stuff figured out, you could put them into a module (classes.py) and import them
+# from that module into this main progra: from classes import AppWindow
+if __name__ == "__main__": 
+
+	'''
+	app = []  # I don't understand why a list is needed
 	root = None
 	app.append(AppWindow(root))
 	root = app[0].t
-	root.mainloop() # This is the main loop
+	'''
+	app = AppWindow() # generates top window
+	root = app.get_root() # get top window
 
+	root.mainloop() # run main loop of top window
+	
 # 3. Set up modules / functions
+
+
