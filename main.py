@@ -4,16 +4,19 @@
 # Author(s): Vincent Lin
 # Created:   06/10/2020
 # TODO:      XXX YYY ZZZ
-# Note:      More on this later
+# Note:      Need to pull in data from this: https://exceltemplate.net/weight/calorie-tracker/
 #-------------------------------------------------------------------------------
 
 ###### 1. IMPORT MODULES
 
-# Using Tkinter to create a window to displaya application, will investigate creating a web app 
+# Using Tkinter to create a window to display application, will investigate creating a web app 
 from tkinter import filedialog
 from tkinter import simpledialog
+from tkinter import *
+from tkinter import ttk
 import tkinter as tk
 import tkinter.scrolledtext as tkst
+import sqlite3
 from tkinter import messagebox as msgbox
 # May not need this module - imported from a different application.
 import fileinput
@@ -50,73 +53,117 @@ class Account:
  
     def getLastName(self):
         return self.LastName
- 
-class AppWindow:
-	#initialize application window
-	def __init__(self, rt=None):
-		if rt == None:
-			self.t = tk.Tk() # This creates the top level window
-		else:
-			self.t = tk.Toplevel(rt)
-			
-		self.t.title("LIFE PROTOTYPE")
-		self.bar = tk.Menu(rt)
-
-		self.loginmenu = tk.Menu(self.bar, tearoff=0) #Setup login option
-		self.loginmenu.add_command(label = "Placeholder",command = self.donothing)
+'''
+def submit():
+    # Database functions
         
-		self.signupmenu = tk.Menu(self.bar, tearoff=0)
-		self.signupmenu.add_command(label = "Sign up",command = self.donothing)
-		
-		self.optionsmenu = tk.Menu(self.bar, tearoff=0)
-		self.optionsmenu.add_command(label = "About LIFE",command = self.about)
-		self.optionsmenu.add_command(label = "Options",command = self.donothing)
+    conn = sqlite3.connect('LIFE_MemberDB.db')
+    c= conn.cursor()
+    c.execute("INSERT INTO MemberDb VALUES (:u_name, :f_name, :l_name, :email, :pw)",
+        {
+            'u_name': u_name.get(),
+            'f_name': f_name.get(),
+            'l_name': l_name.get(),
+            'email': email.get(),
+            'pw': pw.get()
+        })
+    conn.commit()
+    conn.close()
+'''
+def login():
+    userlvl = Label(win, text = "Username :")
+    passwdlvl = Label(win, text = "Password  :")
 
-		self.bar.add_cascade(label = "Login",menu = self.loginmenu)
-		self.bar.add_cascade(label = "Sign up",menu = self.signupmenu)
-		self.bar.add_cascade(label = "Options",menu = self.optionsmenu)
-    
-		self.t.config(menu = self.bar)
+    user1 = Entry(win, textvariable = StringVar())
+    passwd1 = Entry(win, textvariable = IntVar().set(""))
 
-		self.f = tk.Frame(self.t,width = 512)
-		self.f.pack(expand =1)
+    enter = Button(win, text = "Enter", command = lambda: login(), bd = 0)
+    enter.configure(bg = "pink")
 
-		self.texteditor = tkst.ScrolledText(self.t)
-		self.texteditor.pack(expand = 1)
-	
-    	def get_root(self):
-		''' return top level Tk window in case it's needed from outside the app'''
-		return self.t 
-	
-	#Close AppWindow
-	def close(self):
-		self.t.destroy()
+    user1.place(x = 200, y = 220)
+    passwd1.place(x = 200, y = 270)
+    userlvl.place(x = 130, y = 220)
+    passwdlvl.place(x = 130, y = 270)
+    enter.place(x = 238, y = 325)
 
-	#Do nothing Placeholder
-	def donothing(self):
-		msgbox.showinfo(title='DO NOTHING', message='PLACEHOLDER')
+    #app.f_name.delete(0, END)
 
-	#About
-	def about(self):
-		msgbox.showinfo(title='LIFE', message='Learning Important Factual Equivalents: Calorie Edition')
-		
-# Do NOT run this main part if this file (main.py) has been imported from another file
-# Given that you named it main.py, this is probably not needed here
-# Also, once you have all you clas stuff figured out, you could put them into a module (classes.py) and import them
-# from that module into this main progra: from classes import AppWindow
-if __name__ == "__main__": 
+#initialize application window
+# Creating Application Window using tkinter Frame class
+class AppWindow(Frame):
+    def __init__(self, master=None):
+        Frame.__init__(self, master) # Parameters sent through frame class
+        self.master = master # Naming the master widgit
+        self.init_window()
+    def init_window(self):        	
+        self.master.title("LIFE PROTOTYPE") #window title
+        self.pack(fill=BOTH, expand=1) #sizing the main widgit
+        # Create menu bar
+        menu = Menu(self.master) 
+        self.master.config(menu=menu)
+        # Option 1: USER LOGIN        
+        loginmenu = Menu(menu)
+        menu.add_cascade(label = "Login",command  = self.donothing)
+        # Option 2: USER SIGN UP
+        signupmenu = Menu(menu)
+        menu.add_cascade(label = "Sign up",command = self.donothing)
+        # Option 3: FIND FOODS
+        # Option 4: OPTIONS
+        optionsmenu = Menu(menu)
+        menu.add_cascade(label = "Options",menu = optionsmenu)
+        optionsmenu.add_command(label = "About LIFE",command = self.about())
+        optionsmenu.add_command(label = "Preferences",command = self.donothing())
+        optionsmenu.add_command(label = "Account settings",command = self.donothing())
+        optionsmenu.add_command(label = "Logout",command = self.donothing())
+    #Do nothing Placeholder
+    def donothing(self):
+        msgbox.showinfo(title='DO NOTHING', message='PLACEHOLDER')
 
-	'''
-	app = []  # I don't understand why a list is needed
-	root = None
-	app.append(AppWindow(root))
-	root = app[0].t
-	'''
-	app = AppWindow() # generates top window
-	root = app.get_root() # get top window
+    def signup(self):
+        #Text Boxes
+        u_name = Entry(self, width=30)
+        u_name.grid(row=0, column=1, padx=20)
+        f_name = Entry(self, width=30)
+        f_name.grid(row=1, column=1, padx=20)
+        l_name = Entry(self, width=30)
+        l_name.grid(row=2, column=1)
+        email = Entry(self, width=30)
+        email.grid(row=3, column=1)
+        pw = Entry(self, width=30)
+        pw.grid(row=4, column=1)
+        #Labels
+        u_name_label = Label(self, text="User Name")
+        u_name_label.grid(row=0, column=0)
+        f_name_label = Label(self, text="First Name")
+        f_name_label.grid(row=1, column=0)
+        l_name_label = Label(self, text="Last Name")
+        l_name_label.grid(row=2, column=0)        
+        email_name_label = Label(self, text="Email")
+        email_name_label.grid(row=3, column=0)
+        pw_label = Label(self, text="Password")
+        pw_label.grid(row=4, column=0)
+        #submit_btn = Button(self, text="Submit",command = submit)
+        #submit_btn.grid(row=5, column=0, columnspan=2, pady=15, padx=15,ipadx=150)
 
-	root.mainloop() # run main loop of top window
-	
-# 3. Set up modules / functions
+    # NOTE - Implement Different "Pages"
+    #About
+    def about(self):
+        msgbox.showinfo(title='LIFE', message='Learning Important Factual Equivalents: Calorie Edition')
+    #Landing/Intro page with rotating content     
+    def mainscreen(self):
+        top_frame = tk.Frame(AppWindow, background="#FFF0C1",bd=1)
+        bottom_frame = tk.Frame(AppWindow, background="#FFF0C1",bd=1)
 
+        top_frame.grid(row=0, column=0)
+        bottom_Frame.grid(row=1, column=0)
+    #Login placeholder
+    #Restaurant/Food Item Search Page placeholder
+    #Preferences Page placeholder
+    def prog_exit(self):
+        exit()
+        #Labels
 
+root = Tk()
+root.geometry("400x300")
+app = AppWindow(root)
+root.mainloop()	
