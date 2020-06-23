@@ -88,19 +88,27 @@ def login():
 
     #app.f_name.delete(0, END)
 
-#initialize application window
-# Creating Application Window using tkinter Frame class
-class AppWindow(Frame):
-    def __init__(self, master=None):
-        Frame.__init__(self, master) # Parameters sent through frame class
-        self.master = master # Naming the master widgit
-        self.init_window()
-    def init_window(self):        	
+# Application class 
+class App(object):
+    def __init__(self, master):
+
+        self.master = master # Naming the master widget       	
         self.master.title("LIFE PROTOTYPE") #window title
-        self.pack(fill=BOTH, expand=1) #sizing the main widgit
+
+        self.frame = None
+        self.switch_to_A() # start with frame A
+
         # Create menu bar
         menu = Menu(self.master) 
-        self.master.config(menu=menu)
+        # CH this is copy/pasted from here: http://effbot.org/tkinterbook/menu.htm
+        # create a pulldown menu, and add it to the menu bar
+        filemenu = Menu(menu, tearoff=0)
+        filemenu.add_command(label="A", command=self.switch_to_A)
+        filemenu.add_command(label="B", command=self.switch_to_B)
+        filemenu.add_separator()
+        filemenu.add_command(label="Exit", command=root.quit)
+        menu.add_cascade(label="Switch Frames", menu=filemenu)
+        '''
         # Option 1: USER LOGIN        
         loginmenu = Menu(menu)
         menu.add_cascade(label = "Login",command  = self.donothing)
@@ -111,10 +119,37 @@ class AppWindow(Frame):
         # Option 4: OPTIONS
         optionsmenu = Menu(menu)
         menu.add_cascade(label = "Options",menu = optionsmenu)
+        # For some reason the callback of these actually fire here!!! 
+        # Not sure why but just stick to the example above 
         optionsmenu.add_command(label = "About LIFE",command = self.about())
         optionsmenu.add_command(label = "Preferences",command = self.donothing())
         optionsmenu.add_command(label = "Account settings",command = self.donothing())
         optionsmenu.add_command(label = "Logout",command = self.donothing())
+        '''
+        self.master.config(menu=menu)
+
+    # Based on https://stackoverflow.com/questions/7546050/switch-between-two-frames-in-tkinter#:~:text=One%20way%20to%20switch%20frames,use%20any%20generic%20Frame%20class.
+    def switch_to_B(self):
+        if self.frame is not None:
+            self.frame.destroy() # remove current frame
+        self.frame = Frame(self.master, background="blue", width=100, height=300) # B
+        self.frame.pack(fill=BOTH)
+
+        # put B label in self.frame
+        self.start_label = Label(self.frame, text="Frame B")
+        self.start_label.pack()
+
+    def switch_to_A(self):
+        if self.frame is not None:
+            self.frame.destroy() # remove current frame
+        self.frame = Frame(self.master, background="green", width=300, height=100) # A
+        self.frame.pack(fill=BOTH)
+
+        # put B label in self.frame
+        self.start_label = Label(self.frame, text="Frame A")
+        self.start_label.pack()
+
+
     #Do nothing Placeholder
     def donothing(self):
         msgbox.showinfo(title='DO NOTHING', message='PLACEHOLDER')
@@ -165,5 +200,5 @@ class AppWindow(Frame):
 
 root = Tk()
 root.geometry("400x300")
-app = AppWindow(root)
+app = App(root)
 root.mainloop()	
