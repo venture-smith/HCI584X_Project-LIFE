@@ -100,7 +100,28 @@ class AppWindow(Frame):
         self.pack(fill=BOTH, expand=1) #sizing the main widgit
         # Create menu bar
         menu = Menu(self.master) 
-        self.master.config(menu=menu)
+
+
+        # CH this is copy/pasted from here: http://effbot.org/tkinterbook/menu.htm
+        # create a pulldown menu, and add it to the menu bar
+        filemenu = Menu(menu, tearoff=0)
+        filemenu.add_command(label="Open", command=self.donothing)
+        filemenu.add_command(label="Save", command=self.donothing)
+        filemenu.add_separator()
+        filemenu.add_command(label="Exit", command=root.quit)
+        menu.add_cascade(label="File", menu=filemenu)
+
+        # create more pulldown menus
+        editmenu = Menu(menu, tearoff=0)
+        editmenu.add_command(label="Cut", command=self.donothing)
+        editmenu.add_command(label="Copy", command=self.donothing)
+        editmenu.add_command(label="Paste", command=self.donothing)
+        menu.add_cascade(label="Edit", menu=editmenu)
+
+        helpmenu = Menu(menu, tearoff=0)
+        helpmenu.add_command(label="About", command=self.donothing)
+        menu.add_cascade(label="Help", menu=helpmenu)
+        '''
         # Option 1: USER LOGIN        
         loginmenu = Menu(menu)
         menu.add_cascade(label = "Login",command  = self.donothing)
@@ -115,6 +136,9 @@ class AppWindow(Frame):
         optionsmenu.add_command(label = "Preferences",command = self.donothing())
         optionsmenu.add_command(label = "Account settings",command = self.donothing())
         optionsmenu.add_command(label = "Logout",command = self.donothing())
+        '''
+        self.master.config(menu=menu)
+
     #Do nothing Placeholder
     def donothing(self):
         msgbox.showinfo(title='DO NOTHING', message='PLACEHOLDER')
