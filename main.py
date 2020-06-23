@@ -119,6 +119,8 @@ class App(object):
         # Option 4: OPTIONS
         optionsmenu = Menu(menu)
         menu.add_cascade(label = "Options",menu = optionsmenu)
+        # For some reason the callback of these actually fire here!!! 
+        # Not sure why but just stick to the example above 
         optionsmenu.add_command(label = "About LIFE",command = self.about())
         optionsmenu.add_command(label = "Preferences",command = self.donothing())
         optionsmenu.add_command(label = "Account settings",command = self.donothing())
