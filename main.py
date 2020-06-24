@@ -96,59 +96,84 @@ class App(object):
         self.master.title("LIFE PROTOTYPE") #window title
 
         self.frame = None
-        self.switch_to_A() # start with frame A
+        self.switch_to_main() # start with frame "A" Main
 
         # Create menu bar
         menu = Menu(self.master) 
         # CH this is copy/pasted from here: http://effbot.org/tkinterbook/menu.htm
         # create a pulldown menu, and add it to the menu bar
-        filemenu = Menu(menu, tearoff=0)
-        filemenu.add_command(label="A", command=self.switch_to_A)
-        filemenu.add_command(label="B", command=self.switch_to_B)
-        filemenu.add_separator()
-        filemenu.add_command(label="Exit", command=root.quit)
-        menu.add_cascade(label="Switch Frames", menu=filemenu)
-        '''
-        # Option 1: USER LOGIN        
-        loginmenu = Menu(menu)
-        menu.add_cascade(label = "Login",command  = self.donothing)
-        # Option 2: USER SIGN UP
-        signupmenu = Menu(menu)
-        menu.add_cascade(label = "Sign up",command = self.donothing)
-        # Option 3: FIND FOODS
-        # Option 4: OPTIONS
-        optionsmenu = Menu(menu)
-        menu.add_cascade(label = "Options",menu = optionsmenu)
-        # For some reason the callback of these actually fire here!!! 
-        # Not sure why but just stick to the example above 
-        optionsmenu.add_command(label = "About LIFE",command = self.about())
-        optionsmenu.add_command(label = "Preferences",command = self.donothing())
-        optionsmenu.add_command(label = "Account settings",command = self.donothing())
-        optionsmenu.add_command(label = "Logout",command = self.donothing())
-        '''
+        mainmenu = Menu(menu, tearoff=0)
+        menu.add_cascade(label="Main", menu=mainmenu)
+        mainmenu.add_command(label="Home", command=self.switch_to_main)
+        mainmenu.add_command(label="Exit", command=root.quit)
+
+        signupmenu = Menu(menu, tearoff=0)
+        menu.add_cascade(label="Signup", menu=signupmenu)
+
+        optionsmenu = Menu(menu, tearoff=0)
+        optionsmenu.add_command(label="About LIFE", command=self.about)
+        optionsmenu.add_command(label="Set preferences", command=self.switch_to_B)
+        optionsmenu.add_separator()
+        optionsmenu.add_command(label="Logout", command=self.switch_to_main)
+
+        menu.add_cascade(label="Options", menu=optionsmenu)
+
         self.master.config(menu=menu)
 
     # Based on https://stackoverflow.com/questions/7546050/switch-between-two-frames-in-tkinter#:~:text=One%20way%20to%20switch%20frames,use%20any%20generic%20Frame%20class.
     def switch_to_B(self):
         if self.frame is not None:
             self.frame.destroy() # remove current frame
-        self.frame = Frame(self.master, background="blue", width=100, height=300) # B
+        self.frame = Frame(self.master, background="white", width=100, height=300) # B
         self.frame.pack(fill=BOTH)
+
+        u_name = Entry(self.frame, width=30)
+        u_name.grid(row=0, column=1, padx=20)
+        f_name = Entry(self.frame, width=30)
+        f_name.grid(row=1, column=1, padx=20)
+        l_name = Entry(self.frame, width=30)
+        l_name.grid(row=2, column=1)
+        email = Entry(self.frame, width=30)
+        email.grid(row=3, column=1)
+        pw = Entry(self.frame, width=30)
+        pw.grid(row=4, column=1)
+        #Labels
+        u_name_label = Label(self.frame, text="User Name")
+        u_name_label.grid(row=0, column=0)
+        f_name_label = Label(self.frame, text="First Name")
+        f_name_label.grid(row=1, column=0)
+        l_name_label = Label(self.frame, text="Last Name")
+        l_name_label.grid(row=2, column=0)        
+        email_name_label = Label(self.frame, text="Email")
+        email_name_label.grid(row=3, column=0)
+        pw_label = Label(self.frame, text="Password")
+        pw_label.grid(row=4, column=0)
 
         # put B label in self.frame
         self.start_label = Label(self.frame, text="Frame B")
         self.start_label.pack()
 
-    def switch_to_A(self):
+    def switch_to_main(self):
         if self.frame is not None:
             self.frame.destroy() # remove current frame
-        self.frame = Frame(self.master, background="green", width=300, height=100) # A
+        self.frame = Frame(self.master, background="white", width=300, height=300) # A
         self.frame.pack(fill=BOTH)
 
         # put B label in self.frame
-        self.start_label = Label(self.frame, text="Frame A")
+        self.start_label = Label(self.frame, text="PLACEHOLDER: Logo image, example meme, call to action")
+
         self.start_label.pack()
 
+  #About
+    def about(self):
+        if self.frame is not None:
+            self.frame.destroy() # remove current frame
+        self.frame = Frame(self.master, background="white", width=300, height=100) # A
+        self.frame.pack(fill=BOTH)
+
+        # put B label in self.frame
+        self.start_label = Label(self.frame, text="ABOUT LIFE: A fastfood, exercise meme generator")
+        self.start_label.pack()
 
     #Do nothing Placeholder
     def donothing(self):
@@ -181,19 +206,11 @@ class App(object):
         #submit_btn.grid(row=5, column=0, columnspan=2, pady=15, padx=15,ipadx=150)
 
     # NOTE - Implement Different "Pages"
-    #About
-    def about(self):
-        msgbox.showinfo(title='LIFE', message='Learning Important Factual Equivalents: Calorie Edition')
-    #Landing/Intro page with rotating content     
-    def mainscreen(self):
-        top_frame = tk.Frame(AppWindow, background="#FFF0C1",bd=1)
-        bottom_frame = tk.Frame(AppWindow, background="#FFF0C1",bd=1)
-
-        top_frame.grid(row=0, column=0)
-        bottom_Frame.grid(row=1, column=0)
+  
     #Login placeholder
     #Restaurant/Food Item Search Page placeholder
     #Preferences Page placeholder
+
     def prog_exit(self):
         exit()
         #Labels
