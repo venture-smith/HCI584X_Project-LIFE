@@ -9,18 +9,21 @@
 
 fname="HCI584X_Project-LIFE\exercise.csv"
 exercise="Water polo" # CREATE A FUNCTION TO SELECT/RANK TOP 3 ACTIVITIES
-weight=135
+weight=200
 src_calories=550
 
 # importing module  
 import csv 
 
-def lookup_multiplier(file, req_exercise, weight, src_calories, delimiter=","):
-    ''' add a doc string '''
+def pull_csv(file, delimiter=','):
     if not delimiter:
         delimiter = ','   # why not set delimiter=',' in function header (instead None?)
-    reader = csv.DictReader(open(file), delimiter=delimiter)
-    for row in reader:
+    readexertable = csv.DictReader(open(file), delimiter=delimiter)
+    return readexertable
+
+def lookup_multiplier(req_exercise, weight, src_calories, exertable):
+    ''' add a doc string '''
+    for row in exertable:
         Multiple = row["Multiplier"]
         Exercise = row["Exercise"]
         #print(Exercise," equals ",Multiple)
@@ -29,7 +32,8 @@ def lookup_multiplier(file, req_exercise, weight, src_calories, delimiter=","):
             Minutes = (src_calories) / (weight * MultiplierX)
             return Minutes
 
-myvar = lookup_multiplier(fname, exercise, weight, src_calories)
+exertable = pull_csv(fname)
+myvar = lookup_multiplier(exercise, weight, src_calories, exertable)
 print ("Your exercise is: ", exercise, ".")
 print ("Your weight is: ", weight," lbs.")
 print ("To burn ", src_calories, " calories, you'd have to")

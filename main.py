@@ -20,7 +20,6 @@ import sqlite3
 from tkinter import messagebox as msgbox
 # May not need this module - imported from a different application.
 import fileinput
-# May need a math module here
 
 
 ###### 2. SET UP DATA STRUCTURES
@@ -103,18 +102,25 @@ class App(object):
         # CH this is copy/pasted from here: http://effbot.org/tkinterbook/menu.htm
         # create a pulldown menu, and add it to the menu bar
         mainmenu = Menu(menu, tearoff=0)
-        menu.add_cascade(label="Main", menu=mainmenu)
-        mainmenu.add_command(label="Home", command=self.switch_to_main)
-        mainmenu.add_command(label="Exit", command=root.quit)
+        #menu.add_cascade(label="Main", menu=mainmenu)
+        menu.add_command(label="Main", command=self.switch_to_main)
+        #mainmenu.add_command(label="Exit", command=root.quit)
 
         signupmenu = Menu(menu, tearoff=0)
-        menu.add_cascade(label="Signup", menu=signupmenu)
+        #menu.add_cascade(label="Signup", menu=signupmenu)
+        menu.add_command(label="Signup", command=self.switch_to_B)
+
+        setexprefmenu = Menu(menu, tearoff=0)
+        menu.add_command(label="Exercise Prefs", command=self.switch_to_B)
+
+        findfoodmenu = Menu(menu, tearoff=0)
+        menu.add_command(label="Fast Food Match", command=self.switch_to_B)
 
         optionsmenu = Menu(menu, tearoff=0)
         optionsmenu.add_command(label="About LIFE", command=self.about)
         optionsmenu.add_command(label="Set preferences", command=self.switch_to_B)
         optionsmenu.add_separator()
-        optionsmenu.add_command(label="Logout", command=self.switch_to_main)
+        optionsmenu.add_command(label="Logout", command=self.switch_to_C)
 
         menu.add_cascade(label="Options", menu=optionsmenu)
 
@@ -151,6 +157,16 @@ class App(object):
 
         # put B label in self.frame
         self.start_label = Label(self.frame, text="Frame B")
+        self.start_label.pack()
+
+    def switch_to_C(self):
+        if self.frame is not None:
+            self.frame.destroy() # remove current frame
+        self.frame = Frame(self.master, background="white", width=100, height=300) # C
+        self.frame.pack(fill=BOTH)
+
+        # put C label in self.frame
+        self.start_label = Label(self.frame, text="Frame C")
         self.start_label.pack()
 
     def switch_to_main(self):
