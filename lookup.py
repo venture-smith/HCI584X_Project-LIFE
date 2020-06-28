@@ -7,11 +7,13 @@
 # Note:      This function looks up the multiplier to be used in the calculation
 #-------------------------------------------------------------------------------
 
+# DIAGNOSTIC BELOW REMOVE
+'''
 fname="HCI584X_Project-LIFE\exercise.csv"
-exercise="Water polo" # CREATE A FUNCTION TO SELECT/RANK TOP 3 ACTIVITIES
+exercise="Driving Car " # CREATE A FUNCTION TO SELECT/RANK TOP 3 ACTIVITIES
 weight=200
 src_calories=550
-
+'''
 # importing module  
 import csv 
 
@@ -26,19 +28,20 @@ def lookup_multiplier(req_exercise, weight, src_calories, exertable):
     for row in exertable:
         Multiple = row["Multiplier"]
         Exercise = row["Exercise"]
-        #print(Exercise," equals ",Multiple)
-        if exercise == req_exercise:
+        #print(Exercise," equals ",Multiple) # diagnostic - remove this later
+        if Exercise == req_exercise:
             MultiplierX = float(Multiple)
             Minutes = (src_calories) / (weight * MultiplierX)
             return Minutes
-
+# DIAGNOSTIC BELOW - REMOVE
+''' 
 exertable = pull_csv(fname)
 myvar = lookup_multiplier(exercise, weight, src_calories, exertable)
 print ("Your exercise is: ", exercise, ".")
 print ("Your weight is: ", weight," lbs.")
 print ("To burn ", src_calories, " calories, you'd have to")
-print ("exercise for ", "{:6.2f}".format(myvar), " minutes.")
-
+print ("exercise for ", "{:6.2f}".format(myvar), " minutes.") # note formatting breaks if myvar is null
+'''
 # suggestion:
 # - read in csv file once and store in dictionary
 # - give this dict to the function and simply see if req_excercise is  a valid key, if so, get its value

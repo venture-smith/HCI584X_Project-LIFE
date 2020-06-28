@@ -20,10 +20,17 @@ import sqlite3
 from tkinter import messagebox as msgbox
 # May not need this module - imported from a different application.
 import fileinput
+from lookup import *
 
+# Preferences
+from preferences import *
 
 ###### 2. SET UP DATA STRUCTURES
 # Data Hierarchy - Account - User - Preferences - Transaction history
+def write_to_csv(accountfile,u_name):
+    with open(accountfile, 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow([u_name])
 
 class Account:
     # Create user account
@@ -108,17 +115,17 @@ class App(object):
 
         signupmenu = Menu(menu, tearoff=0)
         #menu.add_cascade(label="Signup", menu=signupmenu)
-        menu.add_command(label="Signup", command=self.switch_to_B)
+        menu.add_command(label="Signup", command=self.switch_to_signup)
 
         setexprefmenu = Menu(menu, tearoff=0)
-        menu.add_command(label="Exercise Prefs", command=self.switch_to_B)
+        menu.add_command(label="Exercise Prefs", command=self.switch_to_setexpref)
 
         findfoodmenu = Menu(menu, tearoff=0)
-        menu.add_command(label="Fast Food Match", command=self.switch_to_B)
+        menu.add_command(label="Fast Food Match", command=self.switch_to_findfood)
 
         optionsmenu = Menu(menu, tearoff=0)
         optionsmenu.add_command(label="About LIFE", command=self.about)
-        optionsmenu.add_command(label="Set preferences", command=self.switch_to_B)
+        #optionsmenu.add_command(label="Change password", command=self.switch_to_main)
         optionsmenu.add_separator()
         optionsmenu.add_command(label="Logout", command=self.switch_to_C)
 
@@ -127,11 +134,17 @@ class App(object):
         self.master.config(menu=menu)
 
     # Based on https://stackoverflow.com/questions/7546050/switch-between-two-frames-in-tkinter#:~:text=One%20way%20to%20switch%20frames,use%20any%20generic%20Frame%20class.
-    def switch_to_B(self):
+    def switch_to_signup(self):
         if self.frame is not None:
             self.frame.destroy() # remove current frame
         self.frame = Frame(self.master, background="white", width=100, height=300) # B
         self.frame.pack(fill=BOTH)
+
+        global u_name
+        global f_name
+        global l_name
+        global email
+        global pw
 
         u_name = Entry(self.frame, width=30)
         u_name.grid(row=0, column=1, padx=20)
@@ -154,9 +167,102 @@ class App(object):
         email_name_label.grid(row=3, column=0)
         pw_label = Label(self.frame, text="Password")
         pw_label.grid(row=4, column=0)
-
+        # Submit button
+        submit_button = Button(self.frame, text="Submit",command=self.switch_to_submitted)         
+        submit_button.grid(row=6, column=0, columnspan=2, pady=5, padx=5, ipadx=50)
         # put B label in self.frame
-        self.start_label = Label(self.frame, text="Frame B")
+        self.start_label = Label(self.frame, text="Sign up")
+        self.start_label.pack()
+
+        # put C label in self.frame
+        self.start_label = Label(self.frame, text="Set Exercise Preferences")
+        self.start_label.pack()
+
+    def switch_to_submitted(self):
+        if self.frame is not None:
+            self.frame.destroy() # remove current frame
+        self.frame = Frame(self.master, background="white", width=100, height=300) # C
+        self.frame.pack(fill=BOTH)
+        write_to_csv(accountfile, u_name) 
+        # put C label in self.frame
+        self.start_label = Label(self.frame, text="Submitted")
+        self.start_label.pack()
+
+    def switch_to_setexpref(self):
+        if self.frame is not None:
+            self.frame.destroy() # remove current frame
+        self.frame = Frame(self.master, background="white", width=100, height=300) # C
+        self.frame.pack(fill=BOTH)
+
+        def on_keyrelease(event):
+
+            # get text from entry
+            value = event.widget.get()
+            value = value.strip().lower()
+
+            # get data from test_list
+            if value == '':
+                data = test_list
+            else:
+                data = []
+                for item in test_list:
+                    if value in item.lower():
+                        data.append(item)                
+
+            # update data in listbox
+            listbox_update(data)
+
+
+        def listbox_update(data):
+            # delete previous data
+            listbox.delete(0, 'end')
+
+            # sorting data 
+            data = sorted(data, key=str.lower)
+
+            # put new data
+            for item in data:
+                listbox.insert('end', item)
+
+
+        def on_select(event):
+            # display element selected on list
+            print('(event) previous:', event.widget.get('active'))
+            print('(event)  current:', event.widget.get(event.widget.curselection()))
+            print('---')
+
+
+        exertable=pull_csv(fname,',') #initialize exercise table from CSV file
+        dict_list = []
+        for lines in exertable:
+            dict_list.append(lines['Exercise'])
+        #test_list = ('apple', 'banana', 'Cranberry', 'dogwood', 'alpha', 'Acorn', 'Anise', 'Strawberry' )
+        test_list = dict_list
+
+        #root = tk.Tk()
+
+        entry = tk.Entry(self.frame) # Tkinter type Entry Box
+        entry.pack()
+        entry.bind('<KeyRelease>', on_keyrelease)
+
+        listbox = tk.Listbox(root)
+        listbox.pack()
+        #listbox.bind('<Double-Button-1>', on_select)
+        listbox.bind('<<ListboxSelect>>', on_select)
+        listbox_update(test_list)
+
+        # put C label in self.frame
+        self.start_label = Label(self.frame, text="Set Exercise Preferences")
+        self.start_label.pack()
+
+    def switch_to_findfood(self):
+        if self.frame is not None:
+            self.frame.destroy() # remove current frame
+        self.frame = Frame(self.master, background="white", width=100, height=300) # C
+        self.frame.pack(fill=BOTH)
+
+        # put C label in self.frame
+        self.start_label = Label(self.frame, text="Find Fast Food")
         self.start_label.pack()
 
     def switch_to_C(self):
