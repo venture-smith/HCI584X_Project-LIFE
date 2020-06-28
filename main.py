@@ -194,6 +194,7 @@ class App(object):
         self.frame = Frame(self.master, background="white", width=100, height=300) # C
         self.frame.pack(fill=BOTH)
 
+        # Auto Complete Code from: https://stackoverflow.com/questions/47839813/python-tkinter-autocomplete-combobox-with-like-search
         def on_keyrelease(event):
 
             # get text from entry
@@ -224,42 +225,67 @@ class App(object):
             for item in data:
                 listbox.insert('end', item)
 
-
         def on_select(event):
             # display element selected on list
             print('(event) previous:', event.widget.get('active'))
             print('(event)  current:', event.widget.get(event.widget.curselection()))
             print('---')
 
+        # Add sub-frames
+        f1 = Frame(self.frame, background="white")
+        f2 = Frame(self.frame, background="white")
+        #f3 = Frame(self.frame, background="white")
+        #f4 = Frame(self.frame, background="white")
+        f1.pack(side=LEFT)
+        f2.pack(side=LEFT)
+        #f3.pack(side=LEFT)
+        #f4.pack(side=LEFT)
+        # Add sub-sub-frames
+        f1suba = Frame(f1, background="white")
+        f1subb = Frame(f1, background="white")
+        f1suba.pack(side=TOP, padx=20, pady=20)
+        f1subb.pack(side=BOTTOM)
+        f2suba = Frame(f2, background="white")
+        f2subb = Frame(f2, background="white")
+        f2suba.pack(side=TOP)
+        f2subb.pack(side=BOTTOM)
 
-        exertable=pull_csv(fname,',') #initialize exercise table from CSV file
-        dict_list = []
+
+        #initialize exercise table from CSV file
+        exertable=pull_csv(fname,',') 
+        dict_list = [] # Create list for dictionary
         for lines in exertable:
             dict_list.append(lines['Exercise'])
         #test_list = ('apple', 'banana', 'Cranberry', 'dogwood', 'alpha', 'Acorn', 'Anise', 'Strawberry' )
         test_list = dict_list
 
         #root = tk.Tk()
+        # put C label in self.frame
+        self.start_label = Label(f1suba, text="Choose your top 3\n Physical Activites:")
+        self.start_label.pack(side = LEFT, expand = False)
 
-        entry = tk.Entry(self.frame) # Tkinter type Entry Box
-        entry.pack()
-        entry.bind('<KeyRelease>', on_keyrelease)
+        #selectstring = "#1 Selected activity" + event.widget.get('active')
+        #self.selected_label = Label(self.frame, text=selectstring)
+        #self.selected_label.pack(side = RIGHT, expand = False)
 
-        listbox = tk.Listbox(root)
-        listbox.pack()
+        listbox = tk.Listbox(f1subb)
+        listbox.pack(side = LEFT, expand = True, fill = Y)
         #listbox.bind('<Double-Button-1>', on_select)
         listbox.bind('<<ListboxSelect>>', on_select)
         listbox_update(test_list)
 
-        # put C label in self.frame
-        self.start_label = Label(self.frame, text="Set Exercise Preferences")
-        self.start_label.pack()
+        entry = tk.Entry(f2suba) # Tkinter type Entry Box
+        entry.pack(side = LEFT, expand = True, fill = Y)
+        entry.bind('<KeyRelease>', on_keyrelease)
+
+        self.start_button = Button(f2subb, text ="Select", command = self.switch_to_setexpref)
+        self.start_button.pack(padx=20, pady=20)
 
     def switch_to_findfood(self):
         if self.frame is not None:
             self.frame.destroy() # remove current frame
         self.frame = Frame(self.master, background="white", width=100, height=300) # C
-        self.frame.pack(fill=BOTH)
+        self.frame.pack(side = LEFT, fill= Y)
 
         # put C label in self.frame
         self.start_label = Label(self.frame, text="Find Fast Food")
@@ -281,10 +307,22 @@ class App(object):
         self.frame = Frame(self.master, background="white", width=300, height=300) # A
         self.frame.pack(fill=BOTH)
 
+        f1 = Frame(self.frame, background="white")
+        f2 = Frame(self.frame, background="white")
+        f1.pack(side=LEFT)
+        f2.pack(side=RIGHT)
         # put B label in self.frame
-        self.start_label = Label(self.frame, text="PLACEHOLDER: Logo image, example meme, call to action")
+        #self.start_label = Label(self.frame, text="PLACEHOLDER: Logo image, example meme, call to action")
+        #self.start_label.pack()
 
-        self.start_label.pack()
+        self.start_label = Label(f1, text="This program will show you\nwhat your favorite fast food\nequivalents are in terms of\nyour preferred physical activity.", bg="white")
+        self.start_label.pack(padx=20, pady=20)
+
+        self.start_button = Button(f2, text ="Start Now", command = self.switch_to_setexpref)
+        self.start_button.pack(padx=20, pady=20)
+
+        #self.chosen_label = Label(f2, text="Choose your\n activity!", bg="white")
+        #self.chosen_label.pack(padx=20, pady=20)
 
   #About
     def about(self):
