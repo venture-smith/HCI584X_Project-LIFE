@@ -18,6 +18,7 @@ import tkinter as tk
 import tkinter.scrolledtext as tkst
 import sqlite3
 from tkinter import messagebox as msgbox
+from PIL import ImageTk, Image
 # May not need this module - imported from a different application.
 import fileinput
 from lookup import *
@@ -100,7 +101,7 @@ class App(object):
 
         self.master = master # Naming the master widget       	
         self.master.title("LIFE PROTOTYPE") #window title
-
+        master.geometry(appresolution)
         self.frame = None
         self.switch_to_main() # start with frame "A" Main
 
@@ -127,7 +128,7 @@ class App(object):
         optionsmenu.add_command(label="About LIFE", command=self.about)
         #optionsmenu.add_command(label="Change password", command=self.switch_to_main)
         optionsmenu.add_separator()
-        optionsmenu.add_command(label="Logout", command=self.switch_to_C)
+        optionsmenu.add_command(label="Logout", command=self.switch_to_result)
 
         menu.add_cascade(label="Options", menu=optionsmenu)
 
@@ -137,7 +138,7 @@ class App(object):
     def switch_to_signup(self):
         if self.frame is not None:
             self.frame.destroy() # remove current frame
-        self.frame = Frame(self.master, background="white", width=100, height=300) # B
+        self.frame = Frame(self.master, background="white", width=640, height=480) # B
         self.frame.pack(fill=BOTH)
 
         global u_name
@@ -181,7 +182,7 @@ class App(object):
     def switch_to_submitted(self):
         if self.frame is not None:
             self.frame.destroy() # remove current frame
-        self.frame = Frame(self.master, background="white", width=100, height=300) # C
+        self.frame = Frame(self.master, background="white", width=appwidth, height=appheight) # C
         self.frame.pack(fill=BOTH)
         write_to_csv(accountfile, u_name) 
         # put C label in self.frame
@@ -191,7 +192,7 @@ class App(object):
     def switch_to_setexpref(self):
         if self.frame is not None:
             self.frame.destroy() # remove current frame
-        self.frame = Frame(self.master, background="white", width=100, height=300) # C
+        self.frame = Frame(self.master, background="white", width=appwidth, height=appheight) 
         self.frame.pack(fill=BOTH)
 
         # Auto Complete Code from: https://stackoverflow.com/questions/47839813/python-tkinter-autocomplete-combobox-with-like-search
@@ -232,23 +233,23 @@ class App(object):
             print('---')
 
         # Add sub-frames
-        f1 = Frame(self.frame, background="white")
-        f2 = Frame(self.frame, background="white")
-        #f3 = Frame(self.frame, background="white")
-        #f4 = Frame(self.frame, background="white")
+        f1 = Frame(self.frame, background="white", width=appwidth/4, height=appheight)
+        f2 = Frame(self.frame, background="white", width=appwidth/4, height=appheight)
+        f3 = Frame(self.frame, background="white", width=appwidth/4, height=appheight)
+        f4 = Frame(self.frame, background="white", width=appwidth/4, height=appheight)
         f1.pack(side=LEFT)
         f2.pack(side=LEFT)
-        #f3.pack(side=LEFT)
-        #f4.pack(side=LEFT)
+        f3.pack(side=LEFT)
+        f4.pack(side=LEFT)
         # Add sub-sub-frames
-        f1suba = Frame(f1, background="white")
-        f1subb = Frame(f1, background="white")
-        f1suba.pack(side=TOP, padx=20, pady=20)
-        f1subb.pack(side=BOTTOM)
-        f2suba = Frame(f2, background="white")
-        f2subb = Frame(f2, background="white")
-        f2suba.pack(side=TOP)
-        f2subb.pack(side=BOTTOM)
+        #f1suba = Frame(f1, background="white")
+        #f1subb = Frame(f1, background="white")
+        #f1suba.pack(side=TOP, padx=20, pady=20)
+        #f1subb.pack(side=BOTTOM)
+        #f2suba = Frame(f2, background="white")
+        #f2subb = Frame(f2, background="white")
+        #f2suba.pack(side=TOP)
+        #f2subb.pack(side=BOTTOM)
 
 
         #initialize exercise table from CSV file
@@ -260,65 +261,130 @@ class App(object):
         test_list = dict_list
 
         #root = tk.Tk()
-        # put C label in self.frame
-        self.start_label = Label(f1suba, text="Choose your top 3\n Physical Activites:")
-        self.start_label.pack(side = LEFT, expand = False)
+        # put label in self.frame
+        #self.start_label = Label(f1suba, text="Choose your top 3\n Physical Activites:")
+        #self.start_label.pack(side = LEFT, expand = False)
+
+        self.start_label = Label(f1, text="Choose your top 3\n Physical Activites:",bg='white')
+        self.start_label.config(font=headfont)
+        self.start_label.place(in_= f1, relx = 0.5, rely = 0.15, anchor=CENTER)
+
+        self.exer_instruct_label = Label(f1, text="Scroll down the list\nwith the arrow keys",bg='white')
+        self.exer_instruct_label.place(in_= f1, relx = 0.5, rely = 0.22, anchor=N)
 
         #selectstring = "#1 Selected activity" + event.widget.get('active')
         #self.selected_label = Label(self.frame, text=selectstring)
         #self.selected_label.pack(side = RIGHT, expand = False)
 
-        listbox = tk.Listbox(f1subb)
-        listbox.pack(side = LEFT, expand = True, fill = Y)
+        #listbox = tk.Listbox(f1subb)
+        #listbox.pack(side = LEFT, expand = True, fill = Y)
+
+        listbox = tk.Listbox(f1)
+        listbox.place(in_= f1, relx = 0.5, rely = 0.33, anchor=N)
         #listbox.bind('<Double-Button-1>', on_select)
         listbox.bind('<<ListboxSelect>>', on_select)
         listbox_update(test_list)
 
-        entry = tk.Entry(f2suba) # Tkinter type Entry Box
-        entry.pack(side = LEFT, expand = True, fill = Y)
+        # COLUMN 2
+        self.searchex_instruct_label = Label(f2, text="Search list by typing...",bg='white')
+        self.searchex_instruct_label.place(in_= f2, relx = 0.5, rely = 0.22, anchor=N)
+
+        entry = tk.Entry(f2) # Tkinter type Entry Box
+        entry.place(in_= f2, relx = 0.5, rely = 0.33, anchor = N)
+        #entry.pack(side = LEFT, expand = True, fill = Y)
         entry.bind('<KeyRelease>', on_keyrelease)
 
-        self.start_button = Button(f2subb, text ="Select", command = self.switch_to_setexpref)
-        self.start_button.pack(padx=20, pady=20)
+        searchimg = ImageTk.PhotoImage(Image.open(searchimgpath))
+        self.search_image = Label(f2, image = searchimg)
+        self.search_image.image = searchimg # Had to add this to "anchor" image - don't know why
+        self.search_image.place(in_=f2, relx = 0.9, rely=0.35, anchor = CENTER)
+
+        self.start_button = Button(f2, text ="Select", command = self.switch_to_setexpref)
+        self.start_button.place(in_=f2, relx = 0.5, rely = 0.40, anchor = CENTER)
+        #self.start_button.pack(padx=20, pady=20)
+
+        # COLUMN 3
+        self.fav1_label = Label(f3, text="FAVORITE ACTIVITY #1",bg='white')
+        self.fav1_label.place(in_= f3, relx = 0.5, rely = 0.22, anchor=N)
+
+        self.fav2_label = Label(f3, text="FAVORITE ACTIVITY #2",bg='white')
+        self.fav2_label.place(in_= f3, relx = 0.5, rely = 0.37, anchor=N)
+
+        self.fav3_label = Label(f3, text="FAVORITE ACTIVITY #3",bg='white')
+        self.fav3_label.place(in_= f3, relx = 0.5, rely = 0.52, anchor=N)
+
+        # COLUMN 4
+        self.next_button = Button(f4, text ="Next", command = self.switch_to_findfood)
+        self.next_button.place(in_= f4, relx = 0.5, rely = 0.5, anchor=CENTER)
 
     def switch_to_findfood(self):
         if self.frame is not None:
             self.frame.destroy() # remove current frame
-        self.frame = Frame(self.master, background="white", width=100, height=300) # C
+        self.frame = Frame(self.master, background="white", width=appwidth, height=appheight) 
         self.frame.pack(side = LEFT, fill= Y)
 
-        # put C label in self.frame
-        self.start_label = Label(self.frame, text="Find Fast Food")
-        self.start_label.pack()
+        # Add sub-frames
+        f1 = Frame(self.frame, background="white", width=appwidth/4, height=appheight)
+        f2 = Frame(self.frame, background="white", width=appwidth/4, height=appheight)
+        f3 = Frame(self.frame, background="white", width=appwidth/4, height=appheight)
+        f4 = Frame(self.frame, background="white", width=appwidth/4, height=appheight)
+        f1.pack(side=LEFT)
+        f2.pack(side=LEFT)
+        f3.pack(side=LEFT)
+        f4.pack(side=LEFT)
+        
+        # Add sub-sub-frames
+        #f1suba = Frame(f1, background="white")
+        #f1subb = Frame(f1, background="white")
+        #f1suba.pack(side=TOP, padx=20, pady=20)
+        #f1subb.pack(side=BOTTOM)
+        #f2suba = Frame(f2, background="white")
+        #f2subb = Frame(f2, background="white")
+        #f2suba.pack(side=TOP)
+        #f2subb.pack(side=BOTTOM)
 
-    def switch_to_C(self):
+        # put label in self.frame
+        self.start_label = Label(f1, text="Find your favorite\nfast food restaurant\n and entree")
+        self.start_label.pack(side = LEFT, expand = False, padx=20, pady=20)
+
+        self.next_button = Button(f1, text ="Next", command = self.switch_to_result)
+        self.next_button.pack(side = RIGHT, expand = False)
+
+    def switch_to_result(self):
         if self.frame is not None:
             self.frame.destroy() # remove current frame
-        self.frame = Frame(self.master, background="white", width=100, height=300) # C
+        self.frame = Frame(self.master, background="white", width=640, height=480) 
         self.frame.pack(fill=BOTH)
 
-        # put C label in self.frame
-        self.start_label = Label(self.frame, text="Frame C")
+        # put label in self.frame
+        self.start_label = Label(self.frame, text="Result")
         self.start_label.pack()
 
     def switch_to_main(self):
         if self.frame is not None:
             self.frame.destroy() # remove current frame
-        self.frame = Frame(self.master, background="white", width=300, height=300) # A
+        self.frame = Frame(self.master, background="white", width=640, height=480) # A
         self.frame.pack(fill=BOTH)
 
-        f1 = Frame(self.frame, background="white")
-        f2 = Frame(self.frame, background="white")
+        f1 = Frame(self.frame, background="white", width=213, height=480)
+        f2 = Frame(self.frame, background="white", width=213, height=480)
+        f3 = Frame(self.frame, background="white", width=213, height=480)
         f1.pack(side=LEFT)
-        f2.pack(side=RIGHT)
+        f2.pack(side=LEFT)
+        f3.pack(side=LEFT)
         # put B label in self.frame
         #self.start_label = Label(self.frame, text="PLACEHOLDER: Logo image, example meme, call to action")
         #self.start_label.pack()
 
-        self.start_label = Label(f1, text="This program will show you\nwhat your favorite fast food\nequivalents are in terms of\nyour preferred physical activity.", bg="white")
-        self.start_label.pack(padx=20, pady=20)
+        startimg = ImageTk.PhotoImage(Image.open(startimgpath))
+        self.start_image = Label(f1, image = startimg)
+        self.start_image.image = startimg # Had to add this to "anchor" image - don't know why
+        self.start_image.pack(side = LEFT, expand = FALSE)
 
-        self.start_button = Button(f2, text ="Start Now", command = self.switch_to_setexpref)
+        self.start_label = Label(f2, text="This program will show you\nwhat your favorite fast food\nequivalents are in terms of\nyour preferred physical activity.", bg="white")
+        self.start_label.pack(side = TOP, padx=20, pady=20)
+
+        self.start_button = Button(f3, text ="Start Now", command = self.switch_to_setexpref)
         self.start_button.pack(padx=20, pady=20)
 
         #self.chosen_label = Label(f2, text="Choose your\n activity!", bg="white")
@@ -364,12 +430,6 @@ class App(object):
         pw_label.grid(row=4, column=0)
         #submit_btn = Button(self, text="Submit",command = submit)
         #submit_btn.grid(row=5, column=0, columnspan=2, pady=15, padx=15,ipadx=150)
-
-    # NOTE - Implement Different "Pages"
-  
-    #Login placeholder
-    #Restaurant/Food Item Search Page placeholder
-    #Preferences Page placeholder
 
     def prog_exit(self):
         exit()
