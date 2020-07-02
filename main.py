@@ -5,6 +5,7 @@
 # Created:   06/10/2020
 # TODO:      XXX YYY ZZZ
 # Note:      Need to pull in data from this: https://exceltemplate.net/weight/calorie-tracker/
+#            Restaurant and food item calorie sources from: http://fastfoodmacros.com/
 #-------------------------------------------------------------------------------
 
 ###### 1. IMPORT MODULES
@@ -16,11 +17,10 @@ from tkinter import *
 from tkinter import ttk
 import tkinter as tk
 import tkinter.scrolledtext as tkst
-import sqlite3
+# import sqlite3 # Bring this back in if we end up using a database for a webapp.
 from tkinter import messagebox as msgbox
 from PIL import ImageTk, Image
-# May not need this module - imported from a different application.
-import fileinput
+import fileinput # May not need this module - imported from a different application.
 from lookup import *
 
 # Preferences
@@ -35,13 +35,17 @@ def write_to_csv(accountfile,u_name):
 
 class Account:
     # Create user account
-    def __init__(self, id, LoginId, Email, Password, FirstName, LastName):
+    def __init__(self, id, LoginId, Email, Password, FirstName, LastName, Pref1, Pref2, Pref3, Weight):
         self.id = id
         self.LoginId = LoginId
         self.Email = Email
         self.Password = Password
         self.FirstName = FirstName
-        self.Lastname = LastName
+        self.LastName = LastName
+        self.Pref1 = Pref1
+        self.Pref2 = Pref2
+        self.Pref3 = Pref3
+        self.Weight = Weight
  
     def getId(self):
         return self.id
@@ -60,7 +64,20 @@ class Account:
  
     def getLastName(self):
         return self.LastName
-'''
+
+    def getPref1(self):
+        return self.Pref1
+    
+    def getPref2(self):
+        return self.Pref2
+
+    def getPref3(self):
+        return self.Pref3
+
+    def getWeight(self):
+        return self.Weight
+
+''' # This is for a web app database - leave this here for now.
 def submit():
     # Database functions
         
@@ -179,6 +196,10 @@ class App(object):
         self.start_label = Label(self.frame, text="Set Exercise Preferences")
         self.start_label.pack()
 
+    def refresh(self):
+        self.destroy()
+        self.__init__()
+
     def switch_to_submitted(self):
         if self.frame is not None:
             self.frame.destroy() # remove current frame
@@ -231,6 +252,12 @@ class App(object):
             print('(event) previous:', event.widget.get('active'))
             print('(event)  current:', event.widget.get(event.widget.curselection()))
             print('---')
+            current_selection = event.widget.get(event.widget.curselection())
+
+        def on_press():
+            userzero.Pref1 = current_selection
+            refresh()
+            return
 
         # Add sub-frames
         f1 = Frame(self.frame, background="white", width=appwidth/4, height=appheight)
@@ -251,16 +278,13 @@ class App(object):
         #f2suba.pack(side=TOP)
         #f2subb.pack(side=BOTTOM)
 
-
         #initialize exercise table from CSV file
         exertable=pull_csv(fname,',') 
         dict_list = [] # Create list for dictionary
         for lines in exertable:
             dict_list.append(lines['Exercise'])
-        #test_list = ('apple', 'banana', 'Cranberry', 'dogwood', 'alpha', 'Acorn', 'Anise', 'Strawberry' )
         test_list = dict_list
 
-        #root = tk.Tk()
         # put label in self.frame
         #self.start_label = Label(f1suba, text="Choose your top 3\n Physical Activites:")
         #self.start_label.pack(side = LEFT, expand = False)
@@ -269,24 +293,18 @@ class App(object):
         self.start_label.config(font=headfont)
         self.start_label.place(in_= f1, relx = 0.5, rely = 0.15, anchor=CENTER)
 
-        self.exer_instruct_label = Label(f1, text="Scroll down the list\nwith the arrow keys",bg='white')
+        self.exer_instruct_label = Label(f1, text="Scroll down the list\nwith the arrow keys...",bg='white')
         self.exer_instruct_label.place(in_= f1, relx = 0.5, rely = 0.22, anchor=N)
 
-        #selectstring = "#1 Selected activity" + event.widget.get('active')
-        #self.selected_label = Label(self.frame, text=selectstring)
-        #self.selected_label.pack(side = RIGHT, expand = False)
-
-        #listbox = tk.Listbox(f1subb)
-        #listbox.pack(side = LEFT, expand = True, fill = Y)
-
+        # Create Listbox of Exercises
         listbox = tk.Listbox(f1)
         listbox.place(in_= f1, relx = 0.5, rely = 0.33, anchor=N)
-        #listbox.bind('<Double-Button-1>', on_select)
+        #listbox.bind('<Double-Button-1>', on_select) # Not sure what this is - look it up!
         listbox.bind('<<ListboxSelect>>', on_select)
         listbox_update(test_list)
 
         # COLUMN 2
-        self.searchex_instruct_label = Label(f2, text="Search list by typing...",bg='white')
+        self.searchex_instruct_label = Label(f2, text="OR...search list by typing...",bg='white')
         self.searchex_instruct_label.place(in_= f2, relx = 0.5, rely = 0.22, anchor=N)
 
         entry = tk.Entry(f2) # Tkinter type Entry Box
@@ -304,18 +322,27 @@ class App(object):
         #self.start_button.pack(padx=20, pady=20)
 
         # COLUMN 3
-        self.fav1_label = Label(f3, text="FAVORITE ACTIVITY #1",bg='white')
-        self.fav1_label.place(in_= f3, relx = 0.5, rely = 0.22, anchor=N)
+        self.fav1a_label = Label(f3, text="FAVORITE ACTIVITY #1",bg='white')
+        self.fav1a_label.place(in_= f3, relx = 0.5, rely = 0.22, anchor=N)
 
-        self.fav2_label = Label(f3, text="FAVORITE ACTIVITY #2",bg='white')
-        self.fav2_label.place(in_= f3, relx = 0.5, rely = 0.37, anchor=N)
+        self.fav1b_label = Label(f3, text=userzero.Pref1,bg='white')
+        self.fav1b_label.place(in_= f3, relx = 0.5, rely = 0.28, anchor=N)
 
-        self.fav3_label = Label(f3, text="FAVORITE ACTIVITY #3",bg='white')
-        self.fav3_label.place(in_= f3, relx = 0.5, rely = 0.52, anchor=N)
+        self.fav2a_label = Label(f3, text="FAVORITE ACTIVITY #2",bg='white')
+        self.fav2a_label.place(in_= f3, relx = 0.5, rely = 0.37, anchor=N)
+
+        self.fav2b_label = Label(f3, text=userzero.Pref2,bg='white')
+        self.fav2b_label.place(in_= f3, relx = 0.5, rely = 0.43, anchor=N)
+
+        self.fav3a_label = Label(f3, text="FAVORITE ACTIVITY #3",bg='white')
+        self.fav3a_label.place(in_= f3, relx = 0.5, rely = 0.52, anchor=N)
+
+        self.fav3b_label = Label(f3, text=userzero.Pref3,bg='white')
+        self.fav3b_label.place(in_= f3, relx = 0.5, rely = 0.58, anchor=N)
 
         # COLUMN 4
         self.next_button = Button(f4, text ="Next", command = self.switch_to_findfood)
-        self.next_button.place(in_= f4, relx = 0.5, rely = 0.5, anchor=CENTER)
+        self.next_button.place(in_= f4, relx = 0.5, rely = 0.4, anchor=CENTER)
 
     def switch_to_findfood(self):
         if self.frame is not None:
@@ -353,7 +380,7 @@ class App(object):
     def switch_to_result(self):
         if self.frame is not None:
             self.frame.destroy() # remove current frame
-        self.frame = Frame(self.master, background="white", width=640, height=480) 
+        self.frame = Frame(self.master, background="white", width=appwidth, height=appheight) 
         self.frame.pack(fill=BOTH)
 
         # put label in self.frame
@@ -363,12 +390,12 @@ class App(object):
     def switch_to_main(self):
         if self.frame is not None:
             self.frame.destroy() # remove current frame
-        self.frame = Frame(self.master, background="white", width=640, height=480) # A
+        self.frame = Frame(self.master, background="white", width=appwidth, height=appheight) # A
         self.frame.pack(fill=BOTH)
 
-        f1 = Frame(self.frame, background="white", width=213, height=480)
-        f2 = Frame(self.frame, background="white", width=213, height=480)
-        f3 = Frame(self.frame, background="white", width=213, height=480)
+        f1 = Frame(self.frame, background="white", width=appwidth / 3, height=appheight)
+        f2 = Frame(self.frame, background="white", width=appwidth / 3, height=appheight)
+        f3 = Frame(self.frame, background="white", width=appwidth / 3, height=appheight)
         f1.pack(side=LEFT)
         f2.pack(side=LEFT)
         f3.pack(side=LEFT)
@@ -435,7 +462,13 @@ class App(object):
         exit()
         #Labels
 
+# Initialize Account values
+userzero = Account(did, dLoginId, dEmail, dPassword, dFirstName, dLastName, dPref1, dPref2, dPref3, dWeight)
+
+# Initialize Window
 root = Tk()
 root.geometry("400x300")
+
+# Run program loop
 app = App(root)
 root.mainloop()	

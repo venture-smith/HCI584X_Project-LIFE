@@ -9,6 +9,7 @@
 
 # Files
 accountfile = "HCI584X_Project-LIFE\account.csv"
+foodfile = "HCI584X_Project-LIFE\food.csv"
 startimgpath = "HCI584X_Project-LIFE\main.jpg"
 searchimgpath = "HCI584X_Project-LIFE\search.jpg"
 fname="HCI584X_Project-LIFE\exercise.csv"
@@ -18,11 +19,16 @@ exercise="Water polo" # CREATE A FUNCTION TO SELECT/RANK TOP 3 ACTIVITIES
 weight=200
 src_calories=550
 
-u_name = ""
-f_name = ""
-l_name = ""
-email = ""
-pw = ""
+did = ""
+dLoginId = ""
+dEmail = ""
+dPassword = ""
+dFirstName = "User"
+dLastName = ""
+dPref1 = "Water polo"
+dPref2 = "NA"
+dPref3 = "NA"
+dWeight = ""
 
 # App Settings
 #Fonts
