@@ -26,6 +26,9 @@ from lookup import *
 # Preferences
 from preferences import *
 
+global fss
+fss = 0 #Initialize setting
+
 ###### 2. SET UP DATA STRUCTURES
 # Data Hierarchy - Account - User - Preferences - Transaction history
 def write_to_csv(accountfile,u_name):
@@ -253,17 +256,49 @@ class App(object):
             print('(event)  current:', event.widget.get(event.widget.curselection()))
             print('---')
             current_selection = event.widget.get(event.widget.curselection())
+            # If this is the first time running and not reset STATE 0, look for the first empty slot to add one - indicate the slot just filled STATE X (slot just filled)
+            # 
+            if userzero.Pref1 == "NA":  # Look for the first open slot starting with the first slot
+                self.fa1.set(current_selection)
+                userzero.Pref1 = current_selection
+                fss = 1 
+            elif userzero.Pref2 == "NA": # Look for open slot on #2
+                self.fa2.set(current_selection)
+                userzero.Pref2 = current_selection
+                fss = 2
+            elif userzero.Pref3 == "NA": # Look for open slot on #3
+                self.fa3.set(current_selection)
+                userzero.Pref3 = current_selection
+                fss = 3
+            elif fss == 0: # If no open slots, start with replacing the first one if beginning of sequence
+                self.fa1.set(current_selection)
+                userzero.Pref1 = current_selection
+                fss = 1 
+            elif fss == 1: # Go to next in sequence
+                self.fa2.set(current_selection)
+                userzero.Pref2 = current_selection
+                fss = 2
+            elif fss == 2:
+                self.fa3.set(current_selection)
+                userzero.Pref3 = current_selection
+                fss = 3
+            elif fss == 3: # If last start back at the beginning
+                self.fa1.set(current_selection)
+                userzero.Pref1 = current_selection
+                fss = 1 
 
-        def on_press():
-            userzero.Pref1 = current_selection
-            refresh()
-            return
+            print (fss)
+
+        #def on_press():
+        #    userzero.Pref1 = current_selection
+        #    refresh()
+        #    return
 
         # Add sub-frames
-        f1 = Frame(self.frame, background="white", width=appwidth/4, height=appheight)
-        f2 = Frame(self.frame, background="white", width=appwidth/4, height=appheight)
-        f3 = Frame(self.frame, background="white", width=appwidth/4, height=appheight)
-        f4 = Frame(self.frame, background="white", width=appwidth/4, height=appheight)
+        f1 = Frame(self.frame, background="white", width=appwidth*0.4, height=appheight)
+        f2 = Frame(self.frame, background="white", width=appwidth*0.1, height=appheight)
+        f3 = Frame(self.frame, background="white", width=appwidth*0.4, height=appheight)
+        f4 = Frame(self.frame, background="white", width=appwidth*0.1, height=appheight)
         f1.pack(side=LEFT)
         f2.pack(side=LEFT)
         f3.pack(side=LEFT)
@@ -285,59 +320,70 @@ class App(object):
             dict_list.append(lines['Exercise'])
         test_list = dict_list
 
+        #faselectstate = 0 # Initialize selection state
+
+        # Initialize Favorite Activity Tk state var that automatically update
+        self.fa1 = StringVar()
+        self.fa2 = StringVar()
+        self.fa3 = StringVar()
+        self.fa1.set(userzero.Pref1)
+        self.fa2.set(userzero.Pref2)
+        self.fa3.set(userzero.Pref3)
+
         # put label in self.frame
         #self.start_label = Label(f1suba, text="Choose your top 3\n Physical Activites:")
         #self.start_label.pack(side = LEFT, expand = False)
 
-        self.start_label = Label(f1, text="Choose your top 3\n Physical Activites:",bg='white')
+        self.start_label = Label(f1, text="Choose your top 3\nPREFERRED Physical Activites:",bg='white')
         self.start_label.config(font=headfont)
-        self.start_label.place(in_= f1, relx = 0.5, rely = 0.15, anchor=CENTER)
+        self.start_label.place(in_= f1, relx = 0.5, rely = 0.05, anchor=CENTER)
 
-        self.exer_instruct_label = Label(f1, text="Scroll down the list\nwith the arrow keys...",bg='white')
-        self.exer_instruct_label.place(in_= f1, relx = 0.5, rely = 0.22, anchor=N)
+        self.exer_instruct_label = Label(f1, text="Scroll down the list to find your activity\nof interest. Select the activity by clicking on it.\n\nTry typing the first few characters describing\nyour activity to filter the list.",justify=LEFT,bg='white')
+        self.exer_instruct_label.place(in_= f1, relx = 0.1, rely = 0.10, anchor=NW)
 
-        # Create Listbox of Exercises
-        listbox = tk.Listbox(f1)
-        listbox.place(in_= f1, relx = 0.5, rely = 0.33, anchor=N)
-        #listbox.bind('<Double-Button-1>', on_select) # Not sure what this is - look it up!
-        listbox.bind('<<ListboxSelect>>', on_select)
-        listbox_update(test_list)
-
-        # COLUMN 2
-        self.searchex_instruct_label = Label(f2, text="OR...search list by typing...",bg='white')
-        self.searchex_instruct_label.place(in_= f2, relx = 0.5, rely = 0.22, anchor=N)
-
-        entry = tk.Entry(f2) # Tkinter type Entry Box
-        entry.place(in_= f2, relx = 0.5, rely = 0.33, anchor = N)
+        entry = tk.Entry(f1) # Tkinter type Entry Box
+        entry.place(in_= f1, relx = 0.1, rely = 0.25, anchor = NW, width=220)
         #entry.pack(side = LEFT, expand = True, fill = Y)
         entry.bind('<KeyRelease>', on_keyrelease)
 
         searchimg = ImageTk.PhotoImage(Image.open(searchimgpath))
-        self.search_image = Label(f2, image = searchimg)
+        self.search_image = Label(f1, image = searchimg)
         self.search_image.image = searchimg # Had to add this to "anchor" image - don't know why
-        self.search_image.place(in_=f2, relx = 0.9, rely=0.35, anchor = CENTER)
+        self.search_image.place(in_=f1, relx = 0.9, rely=0.265, anchor = CENTER)
 
-        self.start_button = Button(f2, text ="Select", command = self.switch_to_setexpref)
-        self.start_button.place(in_=f2, relx = 0.5, rely = 0.40, anchor = CENTER)
+        # Create Listbox of Exercises
+        listbox = tk.Listbox(f1)
+        listbox.place(in_= f1, relx = 0.1, rely = 0.30, anchor=NW, height = 250, width = 250)
+        #listbox.bind('<Double-Button-1>', on_select) # Not sure what this is - look it up!
+        listbox.bind('<<ListboxSelect>>', on_select)
+        listbox_update(test_list)
+        # Add scrollbar to listbox https://www.geeksforgeeks.org/scrollable-listbox-in-python-tkinter/
+        scrollbar = Scrollbar(f1)
+        scrollbar.place(in_=f1, relx = 0.9, rely = 0.30, anchor=NW, height=250)
+        listbox.config(yscrollcommand = scrollbar.set)
+        scrollbar.config(command = listbox.yview)
+
+        #self.start_button = Button(f2, text ="Select", command = self.switch_to_setexpref)
+        #self.start_button.place(in_=f2, relx = 0.5, rely = 0.40, anchor = CENTER)
         #self.start_button.pack(padx=20, pady=20)
 
         # COLUMN 3
         self.fav1a_label = Label(f3, text="FAVORITE ACTIVITY #1",bg='white')
         self.fav1a_label.place(in_= f3, relx = 0.5, rely = 0.22, anchor=N)
 
-        self.fav1b_label = Label(f3, text=userzero.Pref1,bg='white')
+        self.fav1b_label = Label(f3, textvariable = self.fa1,bg='white')
         self.fav1b_label.place(in_= f3, relx = 0.5, rely = 0.28, anchor=N)
 
         self.fav2a_label = Label(f3, text="FAVORITE ACTIVITY #2",bg='white')
         self.fav2a_label.place(in_= f3, relx = 0.5, rely = 0.37, anchor=N)
 
-        self.fav2b_label = Label(f3, text=userzero.Pref2,bg='white')
+        self.fav2b_label = Label(f3, textvariable = self.fa2,bg='white')
         self.fav2b_label.place(in_= f3, relx = 0.5, rely = 0.43, anchor=N)
 
         self.fav3a_label = Label(f3, text="FAVORITE ACTIVITY #3",bg='white')
         self.fav3a_label.place(in_= f3, relx = 0.5, rely = 0.52, anchor=N)
 
-        self.fav3b_label = Label(f3, text=userzero.Pref3,bg='white')
+        self.fav3b_label = Label(f3, textvariable = self.fa3,bg='white')
         self.fav3b_label.place(in_= f3, relx = 0.5, rely = 0.58, anchor=N)
 
         # COLUMN 4
