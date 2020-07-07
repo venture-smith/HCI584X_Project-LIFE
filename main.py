@@ -26,11 +26,10 @@ from lookup import *
 # Preferences
 from preferences import *
 
-global fss
-fss = 0 #Initialize setting
-
-###### 2. SET UP DATA STRUCTURES
+# 2. SET UP DATA STRUCTURES
 # Data Hierarchy - Account - User - Preferences - Transaction history
+
+# This function is a test item to write back out to the CSV - Delete or enhance as necessary
 def write_to_csv(accountfile,u_name):
     with open(accountfile, 'w', newline='') as file:
         writer = csv.writer(file)
@@ -38,7 +37,7 @@ def write_to_csv(accountfile,u_name):
 
 class Account:
     # Create user account
-    def __init__(self, id, LoginId, Email, Password, FirstName, LastName, Pref1, Pref2, Pref3, Weight):
+    def __init__(self, id, LoginId, Email, Password, FirstName, LastName, Pref1, Pref2, Pref3, Weight, Units):
         self.id = id
         self.LoginId = LoginId
         self.Email = Email
@@ -49,6 +48,7 @@ class Account:
         self.Pref2 = Pref2
         self.Pref3 = Pref3
         self.Weight = Weight
+        self.Units = Units
  
     def getId(self):
         return self.id
@@ -80,6 +80,9 @@ class Account:
     def getWeight(self):
         return self.Weight
 
+    def getUnits(self):
+        return self.Units
+
 ''' # This is for a web app database - leave this here for now.
 def submit():
     # Database functions
@@ -96,6 +99,9 @@ def submit():
         })
     conn.commit()
     conn.close()
+'''
+
+# This section placeholder for loading account/previously saved preferences
 '''
 def login():
     userlvl = Label(win, text = "Username :")
@@ -114,6 +120,7 @@ def login():
     enter.place(x = 238, y = 325)
 
     #app.f_name.delete(0, END)
+'''
 
 # Application class 
 class App(object):
@@ -124,6 +131,7 @@ class App(object):
         master.geometry(appresolution)
         self.frame = None
         self.switch_to_main() # start with frame "A" Main
+        self.fss = 0
 
         # Create menu bar
         menu = Menu(self.master) 
@@ -134,9 +142,9 @@ class App(object):
         menu.add_command(label="Main", command=self.switch_to_main)
         #mainmenu.add_command(label="Exit", command=root.quit)
 
-        signupmenu = Menu(menu, tearoff=0)
+        #signupmenu = Menu(menu, tearoff=0)
         #menu.add_cascade(label="Signup", menu=signupmenu)
-        menu.add_command(label="Signup", command=self.switch_to_signup)
+        #menu.add_command(label="Load Preferences", command=self.switch_to_signup)
 
         setexprefmenu = Menu(menu, tearoff=0)
         menu.add_command(label="Exercise Prefs", command=self.switch_to_setexpref)
@@ -153,7 +161,8 @@ class App(object):
         menu.add_cascade(label="Options", menu=optionsmenu)
 
         self.master.config(menu=menu)
-
+    
+    # This section reserved for save settings
     # Based on https://stackoverflow.com/questions/7546050/switch-between-two-frames-in-tkinter#:~:text=One%20way%20to%20switch%20frames,use%20any%20generic%20Frame%20class.
     def switch_to_signup(self):
         if self.frame is not None:
@@ -199,9 +208,12 @@ class App(object):
         self.start_label = Label(self.frame, text="Set Exercise Preferences")
         self.start_label.pack()
 
+    # This function possibly deprecated - bring this back as necessary
+    '''
     def refresh(self):
         self.destroy()
         self.__init__()
+    '''
 
     def switch_to_submitted(self):
         if self.frame is not None:
@@ -261,48 +273,43 @@ class App(object):
             if userzero.Pref1 == "NA":  # Look for the first open slot starting with the first slot
                 self.fa1.set(current_selection)
                 userzero.Pref1 = current_selection
-                fss = 1 
+                self.fss = 1 
             elif userzero.Pref2 == "NA": # Look for open slot on #2
                 self.fa2.set(current_selection)
                 userzero.Pref2 = current_selection
-                fss = 2
+                self.fss = 2
             elif userzero.Pref3 == "NA": # Look for open slot on #3
                 self.fa3.set(current_selection)
                 userzero.Pref3 = current_selection
-                fss = 3
-            elif fss == 0: # If no open slots, start with replacing the first one if beginning of sequence
+                self.fss = 3
+            elif self.fss == 0: # If no open slots, start with replacing the first one if beginning of sequence
                 self.fa1.set(current_selection)
                 userzero.Pref1 = current_selection
-                fss = 1 
-            elif fss == 1: # Go to next in sequence
+                self.fss = 1 
+            elif self.fss == 1: # Go to next in sequence
                 self.fa2.set(current_selection)
                 userzero.Pref2 = current_selection
-                fss = 2
-            elif fss == 2:
+                self.fss = 2
+            elif self.fss == 2:
                 self.fa3.set(current_selection)
                 userzero.Pref3 = current_selection
-                fss = 3
-            elif fss == 3: # If last start back at the beginning
+                self.fss = 3
+            elif self.fss == 3: # If last start back at the beginning
                 self.fa1.set(current_selection)
                 userzero.Pref1 = current_selection
-                fss = 1 
+                self.fss = 1 
+            #print (fss) # Diagnostic
 
-            print (fss)
-
-        #def on_press():
-        #    userzero.Pref1 = current_selection
-        #    refresh()
-        #    return
-
-        # Add sub-frames
+        # Add sub-frames - note the %s for appwidth need to add to 1.
         f1 = Frame(self.frame, background="white", width=appwidth*0.4, height=appheight)
-        f2 = Frame(self.frame, background="white", width=appwidth*0.1, height=appheight)
-        f3 = Frame(self.frame, background="white", width=appwidth*0.4, height=appheight)
-        f4 = Frame(self.frame, background="white", width=appwidth*0.1, height=appheight)
+        f2 = Frame(self.frame, background="white", width=appwidth*0.4, height=appheight)
+        f3 = Frame(self.frame, background="white", width=appwidth*0.2, height=appheight)
+        #f4 = Frame(self.frame, background="white", width=appwidth*0.1, height=appheight)
         f1.pack(side=LEFT)
         f2.pack(side=LEFT)
         f3.pack(side=LEFT)
-        f4.pack(side=LEFT)
+        #f4.pack(side=LEFT)
+        
         # Add sub-sub-frames
         #f1suba = Frame(f1, background="white")
         #f1subb = Frame(f1, background="white")
@@ -333,6 +340,8 @@ class App(object):
         # put label in self.frame
         #self.start_label = Label(f1suba, text="Choose your top 3\n Physical Activites:")
         #self.start_label.pack(side = LEFT, expand = False)
+
+        # COLUMN1
 
         self.start_label = Label(f1, text="Choose your top 3\nPREFERRED Physical Activites:",bg='white')
         self.start_label.config(font=headfont)
@@ -367,28 +376,83 @@ class App(object):
         #self.start_button.place(in_=f2, relx = 0.5, rely = 0.40, anchor = CENTER)
         #self.start_button.pack(padx=20, pady=20)
 
+        # COLUMN 2
+        self.fav1a_label = Label(f2, text="FAVORITE ACTIVITY #1",bg='white')
+        self.fav1a_label.config(font=subheadfont)
+        self.fav1a_label.place(in_= f2, relx = 0.5, rely = 0.22, anchor=N)
+
+        self.fav1b_label = Label(f2, textvariable = self.fa1,bg='white')
+        self.fav1b_label.place(in_= f2, relx = 0.5, rely = 0.28, anchor=N)
+
+        self.fav2a_label = Label(f2, text="FAVORITE ACTIVITY #2",bg='white')
+        self.fav2a_label.config(font=subheadfont)
+        self.fav2a_label.place(in_= f2, relx = 0.5, rely = 0.37, anchor=N)
+
+        self.fav2b_label = Label(f2, textvariable = self.fa2,bg='white')
+        self.fav2b_label.place(in_= f2, relx = 0.5, rely = 0.43, anchor=N)
+
+        self.fav3a_label = Label(f2, text="FAVORITE ACTIVITY #3",bg='white')
+        self.fav3a_label.config(font=subheadfont)
+        self.fav3a_label.place(in_= f2, relx = 0.5, rely = 0.52, anchor=N)
+
+        self.fav3b_label = Label(f2, textvariable = self.fa3,bg='white')
+        self.fav3b_label.place(in_= f2, relx = 0.5, rely = 0.58, anchor=N)
+
         # COLUMN 3
-        self.fav1a_label = Label(f3, text="FAVORITE ACTIVITY #1",bg='white')
-        self.fav1a_label.place(in_= f3, relx = 0.5, rely = 0.22, anchor=N)
+        self.exnext_button = Button(f3, text ="Next", bg='white', command = self.switch_to_weight)
+        self.exnext_button.place(in_= f3, relx = 0.5, rely = 0.4, anchor=CENTER)
 
-        self.fav1b_label = Label(f3, textvariable = self.fa1,bg='white')
-        self.fav1b_label.place(in_= f3, relx = 0.5, rely = 0.28, anchor=N)
+    def switch_to_weight(self):
+        
+        def unit_sel():
+            print( "You selected the option " + str(var.get()))
+            unitwt = str(var.get())
+            userzero.Units = unitwt
+        def wton_keyrelease(event):
+            # get text from entry
+            value = event.widget.get()
+            userzero.Weight = value
+            print (userzero.Weight)
 
-        self.fav2a_label = Label(f3, text="FAVORITE ACTIVITY #2",bg='white')
-        self.fav2a_label.place(in_= f3, relx = 0.5, rely = 0.37, anchor=N)
+        if self.frame is not None:
+            self.frame.destroy() # remove current frame
+        self.frame = Frame(self.master, background="white", width=appwidth, height=appheight) 
+        self.frame.pack(side = LEFT, fill= Y)
 
-        self.fav2b_label = Label(f3, textvariable = self.fa2,bg='white')
-        self.fav2b_label.place(in_= f3, relx = 0.5, rely = 0.43, anchor=N)
+        # Add sub-frames
+        f1 = Frame(self.frame, background="white", width=appwidth*.2, height=appheight)
+        f2 = Frame(self.frame, background="white", width=appwidth*.4, height=appheight)
+        f3 = Frame(self.frame, background="white", width=appwidth*.2, height=appheight)
+        f4 = Frame(self.frame, background="white", width=appwidth*.2, height=appheight)
+        f1.pack(side=LEFT)
+        f2.pack(side=LEFT)
+        f3.pack(side=LEFT)
+        f4.pack(side=LEFT)
 
-        self.fav3a_label = Label(f3, text="FAVORITE ACTIVITY #3",bg='white')
-        self.fav3a_label.place(in_= f3, relx = 0.5, rely = 0.52, anchor=N)
+        self.back_button = Button(f1, text ="Back", bg='white',command = self.switch_to_setexpref)
+        self.back_button.place(in_= f1, relx = 0.5, rely = 0.4, anchor=CENTER)
+        
+        self.start_label = Label(f2, text="ENTER YOUR WEIGHT:", bg='white')
+        self.start_label.config(font=subheadfont)
+        self.start_label.place(in_=f2, relx = 0.5, rely = 0.36, anchor = CENTER)
 
-        self.fav3b_label = Label(f3, textvariable = self.fa3,bg='white')
-        self.fav3b_label.place(in_= f3, relx = 0.5, rely = 0.58, anchor=N)
+        wtentry = tk.Entry(f2) # Tkinter type Entry Box
+        wtentry.place(in_= f2, relx = 0.5, rely = 0.40, anchor = CENTER, width=50)
+        wtentry.bind('<KeyRelease>', wton_keyrelease)
+        
+        # LBS vs KGS
+        var = StringVar()
+        R1 = Radiobutton(f3, text="Pounds/Lbs.", bg='white', variable=var, value="LB",
+                        command=unit_sel)
+        R1.place(in_=f3, relx = 0.1, rely = 0.35, anchor = NW )
 
-        # COLUMN 4
-        self.next_button = Button(f4, text ="Next", command = self.switch_to_findfood)
-        self.next_button.place(in_= f4, relx = 0.5, rely = 0.4, anchor=CENTER)
+        R2 = Radiobutton(f3, text="Kilograms/Kgs.", bg='white', variable=var, value="KG",
+                        command=unit_sel)
+        R2.place(in_=f3, relx = 0.1, rely = 0.40, anchor = NW )
+
+        # Next button
+        self.wtnext_button = Button(f4, text ="Next", bg='white', command = self.switch_to_findfood)
+        self.wtnext_button.place(in_= f4, relx = 0.5, rely = 0.4, anchor=CENTER)
 
     def switch_to_findfood(self):
         if self.frame is not None:
@@ -406,6 +470,9 @@ class App(object):
         f3.pack(side=LEFT)
         f4.pack(side=LEFT)
         
+        print ("Find Food")
+        print (userzero.Units)
+        print (userzero.Weight)
         # Add sub-sub-frames
         #f1suba = Frame(f1, background="white")
         #f1subb = Frame(f1, background="white")
@@ -417,17 +484,33 @@ class App(object):
         #f2subb.pack(side=BOTTOM)
 
         # put label in self.frame
-        self.start_label = Label(f1, text="Find your favorite\nfast food restaurant\n and entree")
+
+        self.back_button = Button(f1, text ="Back", bg='white',command = self.switch_to_weight)
+        self.back_button.place(in_= f1, relx = 0.5, rely = 0.4, anchor=CENTER)
+
+        self.start_label = Label(f2, text="Find your favorite\nfast food restaurant\n and entree")
         self.start_label.pack(side = LEFT, expand = False, padx=20, pady=20)
 
-        self.next_button = Button(f1, text ="Next", command = self.switch_to_result)
-        self.next_button.pack(side = RIGHT, expand = False)
+        self.sec_label = Label(f3, text="Find your favorite\nfast food restaurant\n and entree")
+        self.sec_label.pack(side = LEFT, expand = False, padx=20, pady=20)
+
+        self.sec_label2 = Label(f3, text=userzero.Pref1)
+        self.sec_label2.pack(side = LEFT, expand = False, padx=20, pady=20)
+        
+        self.sec_label3 = Label(f3, text=userzero.Units)
+        self.sec_label3.pack(side = LEFT, expand = False, padx=20, pady=20)
+
+
+        self.fdnext_button = Button(f4, text ="Next", command = self.switch_to_result)
+        self.fdnext_button.place(in_= f4, relx = 0.5, rely = 0.4, anchor=CENTER)
 
     def switch_to_result(self):
         if self.frame is not None:
             self.frame.destroy() # remove current frame
         self.frame = Frame(self.master, background="white", width=appwidth, height=appheight) 
         self.frame.pack(fill=BOTH)
+        
+        print ("Result")
 
         # put label in self.frame
         self.start_label = Label(self.frame, text="Result")
@@ -509,7 +592,7 @@ class App(object):
         #Labels
 
 # Initialize Account values
-userzero = Account(did, dLoginId, dEmail, dPassword, dFirstName, dLastName, dPref1, dPref2, dPref3, dWeight)
+userzero = Account(did, dLoginId, dEmail, dPassword, dFirstName, dLastName, dPref1, dPref2, dPref3, dWeight, dUnits)
 
 # Initialize Window
 root = Tk()

@@ -25,17 +25,20 @@ dEmail = ""
 dPassword = ""
 dFirstName = "User"
 dLastName = ""
-dPref1 = "Water polo"
+dPref1 = "NA"
 dPref2 = "NA"
 dPref3 = "NA"
 dWeight = ""
+dUnits = "LB"
+
 
 # App Settings
 #Fonts
 headfont = ('arial', 12, 'bold')
+subheadfont = ('arial', 10, 'bold')
 parafont = ('times', 10)
 #Window Size
 appwidth=800
-appheight=400
+appheight=600
 appresolution = str(appwidth)+'x'+str(appheight)
 
