@@ -250,14 +250,11 @@ class App(object):
             # update data in listbox
             listbox_update(data)
 
-
         def listbox_update(data):
             # delete previous data
             listbox.delete(0, 'end')
-
             # sorting data 
             data = sorted(data, key=str.lower)
-
             # put new data
             for item in data:
                 listbox.insert('end', item)
@@ -399,14 +396,14 @@ class App(object):
         self.fav3b_label.place(in_= f2, relx = 0.5, rely = 0.58, anchor=N)
 
         # COLUMN 3
-        self.exnext_button = Button(f3, text ="Next", bg='white', command = self.switch_to_weight)
+        self.exnext_button = Button(f3, text ="Next", bg=buttcolor, command = self.switch_to_weight)
         self.exnext_button.place(in_= f3, relx = 0.5, rely = 0.4, anchor=CENTER)
 
     def switch_to_weight(self):
         
         def unit_sel():
-            print( "You selected the option " + str(var.get()))
-            unitwt = str(var.get())
+            print( "You selected the option " + str(self.uvar.get()))
+            unitwt = str(self.uvar.get())
             userzero.Units = unitwt
         def wton_keyrelease(event):
             # get text from entry
@@ -429,29 +426,32 @@ class App(object):
         f3.pack(side=LEFT)
         f4.pack(side=LEFT)
 
-        self.back_button = Button(f1, text ="Back", bg='white',command = self.switch_to_setexpref)
+        self.back_button = Button(f1, text ="Back", bg=buttcolor,command = self.switch_to_setexpref)
         self.back_button.place(in_= f1, relx = 0.5, rely = 0.4, anchor=CENTER)
         
         self.start_label = Label(f2, text="ENTER YOUR WEIGHT:", bg='white')
         self.start_label.config(font=subheadfont)
         self.start_label.place(in_=f2, relx = 0.5, rely = 0.36, anchor = CENTER)
 
-        wtentry = tk.Entry(f2) # Tkinter type Entry Box
+        v = IntVar()
+        v.set(userzero.Weight)
+        wtentry = tk.Entry(f2, text=v) # Tkinter type Entry Box
         wtentry.place(in_= f2, relx = 0.5, rely = 0.40, anchor = CENTER, width=50)
         wtentry.bind('<KeyRelease>', wton_keyrelease)
         
         # LBS vs KGS
-        var = StringVar()
-        R1 = Radiobutton(f3, text="Pounds/Lbs.", bg='white', variable=var, value="LB",
+        self.uvar = StringVar()
+        self.uvar.set(userzero.Units)
+        R1 = Radiobutton(f3, text="Pounds/Lbs.", bg=buttcolor, variable=self.uvar, value="LB",
                         command=unit_sel)
         R1.place(in_=f3, relx = 0.1, rely = 0.35, anchor = NW )
 
-        R2 = Radiobutton(f3, text="Kilograms/Kgs.", bg='white', variable=var, value="KG",
+        R2 = Radiobutton(f3, text="Kilograms/Kgs.", bg=buttcolor, variable=self.uvar, value="KG",
                         command=unit_sel)
         R2.place(in_=f3, relx = 0.1, rely = 0.40, anchor = NW )
 
         # Next button
-        self.wtnext_button = Button(f4, text ="Next", bg='white', command = self.switch_to_findfood)
+        self.wtnext_button = Button(f4, text ="Next", bg=buttcolor, command = self.switch_to_findfood)
         self.wtnext_button.place(in_= f4, relx = 0.5, rely = 0.4, anchor=CENTER)
 
     def switch_to_findfood(self):
@@ -461,15 +461,63 @@ class App(object):
         self.frame.pack(side = LEFT, fill= Y)
 
         # Add sub-frames
-        f1 = Frame(self.frame, background="white", width=appwidth/4, height=appheight)
-        f2 = Frame(self.frame, background="white", width=appwidth/4, height=appheight)
-        f3 = Frame(self.frame, background="white", width=appwidth/4, height=appheight)
-        f4 = Frame(self.frame, background="white", width=appwidth/4, height=appheight)
+        f1 = Frame(self.frame, background="white", width=appwidth*.2, height=appheight)
+        f2 = Frame(self.frame, background="white", width=appwidth*.3, height=appheight)
+        f3 = Frame(self.frame, background="white", width=appwidth*.3, height=appheight)
+        f4 = Frame(self.frame, background="white", width=appwidth*.2, height=appheight)
         f1.pack(side=LEFT)
         f2.pack(side=LEFT)
         f3.pack(side=LEFT)
         f4.pack(side=LEFT)
         
+        def foodbox_update(data):
+            # delete previous data
+            foodbox.delete(0, 'end')
+            # sorting data 
+            data = sorted(data, key=str.lower)
+            # put new data
+            for item in data:
+                foodbox.insert('end', item)
+
+        def ron_select(event):
+            # register restaurant and narrow list of food items
+            print('(event) previous:', event.widget.get('active'))
+            print('(event)  current:', event.widget.get(event.widget.curselection()))
+            print('---')
+            Foodbox.delete(0, END)
+            rcurrent_selection = event.widget.get(event.widget.curselection())
+            fdict = []
+            flist = []
+            fdict = food_dict.get(rcurrent_selection)
+            flist = list(fdict)
+            print (flist)
+            for d in flist:
+                Foodbox.insert('end',d)
+
+        def fon_select(fevent):
+            # display element selected on list
+            print('(event) previous:', fevent.widget.get('active'))
+            print('(event)  current:', fevent.widget.get(fevent.widget.curselection()))
+            print('---')
+            fcurrent_selection = fevent.widget.get(fevent.widget.curselection())
+
+        # Import Restaurant Database
+        food_dict = {}
+        with open(foodfile, 'r') as data_file:
+            data = csv.DictReader(data_file, delimiter=",")
+            for row in data:
+                item = food_dict.get(row["Restaurant"], dict())
+                item[row["Item"]] = int(row["Calories"])
+                food_dict[row["Restaurant"]] = item
+        restaurant_list = []
+        restaurant_list = list(food_dict)
+        
+        '''
+        for lines in food_dict:
+            dict_list.append(lines['Exercise'])
+        test_list = dict_list
+        print (new_data_dict)
+        '''
         print ("Find Food")
         print (userzero.Units)
         print (userzero.Weight)
@@ -484,24 +532,40 @@ class App(object):
         #f2subb.pack(side=BOTTOM)
 
         # put label in self.frame
-
-        self.back_button = Button(f1, text ="Back", bg='white',command = self.switch_to_weight)
+        self.back_button = Button(f1, text ="Back", bg=buttcolor,command = self.switch_to_weight)
         self.back_button.place(in_= f1, relx = 0.5, rely = 0.4, anchor=CENTER)
 
-        self.start_label = Label(f2, text="Find your favorite\nfast food restaurant\n and entree")
-        self.start_label.pack(side = LEFT, expand = False, padx=20, pady=20)
+        self.chooser_label = Label(f2, text="CHOOSE A RESTAURANT:", bg='white')
+        self.chooser_label.config(font=subheadfont)
+        self.chooser_label.place(in_=f2, relx = 0.5, rely = 0.25, anchor = CENTER)
 
-        self.sec_label = Label(f3, text="Find your favorite\nfast food restaurant\n and entree")
-        self.sec_label.pack(side = LEFT, expand = False, padx=20, pady=20)
-
-        self.sec_label2 = Label(f3, text=userzero.Pref1)
-        self.sec_label2.pack(side = LEFT, expand = False, padx=20, pady=20)
+        # Create Listbox of Restaurants
+        Rlistbox = tk.Listbox(f2, exportselection=False) # NOTE: need to have the exportselection = false feature when you have two listboxes otherwise it will have problems
+        Rlistbox.place(in_= f2, relx = 0.1, rely = 0.30, anchor=NW, height = 250, width = 180)
+        #listbox.bind('<Double-Button-1>', on_select) # Not sure what this is - look it up!
+        Rlistbox.bind('<<ListboxSelect>>', ron_select)
+        for d in restaurant_list:
+            Rlistbox.insert('end',d)
+        #foodbox_update(test_list)
         
-        self.sec_label3 = Label(f3, text=userzero.Units)
-        self.sec_label3.pack(side = LEFT, expand = False, padx=20, pady=20)
+        # Add scrollbar to listbox https://www.geeksforgeeks.org/scrollable-listbox-in-python-tkinter/
+        scrollbar = Scrollbar(f2)
+        scrollbar.place(in_=f2, relx = 0.95, rely = 0.30, anchor=NW, height=250)
+        Rlistbox.config(yscrollcommand = scrollbar.set)
+        scrollbar.config(command = Rlistbox.yview)
 
+        # Create Listbox of Food Items
+        Foodbox = tk.Listbox(f3, exportselection=False)
+        Foodbox.place(in_= f3, relx = 0.1, rely = 0.30, anchor=NW, height = 250, width = 180)
+        Foodbox.bind('<<ListboxSelect>>', fon_select)
 
-        self.fdnext_button = Button(f4, text ="Next", command = self.switch_to_result)
+        # Add scrollbar to listbox https://www.geeksforgeeks.org/scrollable-listbox-in-python-tkinter/
+        scrollbar = Scrollbar(f3)
+        scrollbar.place(in_=f3, relx = 0.95, rely = 0.30, anchor=NW, height=250)
+        Foodbox.config(yscrollcommand = scrollbar.set)
+        scrollbar.config(command = Foodbox.yview)
+
+        self.fdnext_button = Button(f4, text ="Next", bg=buttcolor, command = self.switch_to_result)
         self.fdnext_button.place(in_= f4, relx = 0.5, rely = 0.4, anchor=CENTER)
 
     def switch_to_result(self):
@@ -510,11 +574,28 @@ class App(object):
         self.frame = Frame(self.master, background="white", width=appwidth, height=appheight) 
         self.frame.pack(fill=BOTH)
         
-        print ("Result")
+        # Add sub-frames
+        f1 = Frame(self.frame, background="white", width=appwidth*.2, height=appheight)
+        f2 = Frame(self.frame, background="white", width=appwidth*.3, height=appheight)
+        f3 = Frame(self.frame, background="white", width=appwidth*.3, height=appheight)
+        f4 = Frame(self.frame, background="white", width=appwidth*.2, height=appheight)
+        f1.pack(side=LEFT)
+        f2.pack(side=LEFT)
+        f3.pack(side=LEFT)
+        f4.pack(side=LEFT)
 
         # put label in self.frame
-        self.start_label = Label(self.frame, text="Result")
-        self.start_label.pack()
+        self.back_button = Button(f1, text ="Back", bg=buttcolor,command = self.switch_to_findfood)
+        self.back_button.place(in_= f1, relx = 0.5, rely = 0.4, anchor=CENTER)
+
+        print ("Result")
+
+        self.chooser_label = Label(f2, text="RESULT:", bg='white')
+        self.chooser_label.config(font=subheadfont)
+        self.chooser_label.place(in_=f2, relx = 0.5, rely = 0.25, anchor = CENTER)
+
+        self.fdnext_button = Button(f4, text ="Save Settings", bg=buttcolor, command = self.switch_to_main)
+        self.fdnext_button.place(in_= f4, relx = 0.5, rely = 0.4, anchor=CENTER)
 
     def switch_to_main(self):
         if self.frame is not None:
@@ -535,13 +616,13 @@ class App(object):
         startimg = ImageTk.PhotoImage(Image.open(startimgpath))
         self.start_image = Label(f1, image = startimg)
         self.start_image.image = startimg # Had to add this to "anchor" image - don't know why
-        self.start_image.pack(side = LEFT, expand = FALSE)
+        self.start_image.place(in_= f1, relx = 0.5, rely = 0.4, anchor=CENTER)
 
         self.start_label = Label(f2, text="This program will show you\nwhat your favorite fast food\nequivalents are in terms of\nyour preferred physical activity.", bg="white")
-        self.start_label.pack(side = TOP, padx=20, pady=20)
+        self.start_label.place(in_= f2, relx = 0.5, rely = 0.4, anchor=CENTER)
 
-        self.start_button = Button(f3, text ="Start Now", command = self.switch_to_setexpref)
-        self.start_button.pack(padx=20, pady=20)
+        self.start_button = Button(f3, text ="Start Now", bg=buttcolor, command = self.switch_to_setexpref)
+        self.start_button.place(in_= f3, relx = 0.5, rely = 0.4, anchor=CENTER)
 
         #self.chosen_label = Label(f2, text="Choose your\n activity!", bg="white")
         #self.chosen_label.pack(padx=20, pady=20)

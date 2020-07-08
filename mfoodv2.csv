@@ -1,0 +1,308 @@
+Restaurant,Item,Calories
+Arby's,Angus 3 Cheese and Bacon no ranch,560
+Arby's,Angus Philly no mayo,460
+Arby's,Chicken Bacon Swiss,610
+Arby's,Chicken Cordon Bleu no mayo,540
+Arby's,Chicken Cordon Bleu no mayo,540
+Arby's,Chicken n Cheese Slider,290
+Arby's,Classic Beef n Cheddar no sauce or mayo,390
+Arby's,Classic Roast Beef no sauce/mayo,360
+Arby's,Corned Beef n Cheese Slider,220
+Arby's,Crispy Chicken Farmhouse Salad w/light Italian,440
+Arby's,Crispy Chicken no mayo,400
+Arby's,Crispy Fish Flatbread no sauce,480
+Arby's,Crispy Fish no sauce,450
+Arby's,French Dip n Swiss no au jus,490
+Arby's,Grand Turkey Club no mayo,480
+Arby's,Ham n Cheese Slider,230
+Arby's,Hamburger no ketchup,220
+Arby's,Jalapeno Roast Beef Slider,240
+Arby's,Jr Bacon Cheddar Melt,280
+Arby's,Jr Ham and Cheddar,230
+Arby's,Jr Roast Beef,210
+Arby's,King's Hawaiian Fish Deluxe no sauce,580
+Arby's,Loaded Italian,670
+Arby's,Max Roast Beef no sauce,560
+Arby's,Mid Beef n Cheddar no sauce/mayo,490
+Arby's,Mid Roast Beef no sauce,460
+Arby's,"Prime Cut Chicken Tenders, 3 no sauce",360
+Arby's,"Prime Cut Chicken Tenders, 5 no sauce",600
+Arby's,Reuben no spread,540
+Arby's,Roast Beef n Cheese Slider,240
+Arby's,Roast Turkey and Swiss no mayo,610
+Arby's,Roast Turkey and Swiss Wrap no mayo,410
+Arby's,Roast Turkey Farmhouse Salad w/light Italian,250
+Arby's,Roast Turkey Ranch and Bacon no ranch,660
+Arby's,Roast Turkey Ranch and Bacon Wrap no ranch,470
+Arby's,Smokehoues Brisket no mayon or onion strings,480
+Burger King,A1 Smokey Bacon Tendercrisp,600
+Burger King,A1 Ultimate Bacon Cheeseburger,810
+Burger King,Bacon and Cheese Tendercrisp no mayo,580
+Burger King,Bacon and Cheese Whopper no mayo,630
+Burger King,Bacon Double Cheeseburger no ketchup,380
+Burger King,"Bacon, Egg and Cheese Biscuit",450
+Burger King,"Bacon, Egg and Cheese Croissan'wich",340
+Burger King,Breakfast Burrito Junior,370
+Burger King,Cheeseburger no ketchup,250
+Burger King,Chicken Club Salad,610
+Burger King,"Chicken Fries, 9",290
+Burger King,Chicken Garden Salad,520
+Burger King,"Chicken Nuggets, 10",470
+Burger King,"Chicken Nuggets, 4",190
+Burger King,"Chicken Nuggets, 6",280
+Burger King,Crispy Chicken Jr no mayo,290
+Burger King,Double Whopper no mayo,740
+Burger King,Egg and Cheese Croissan'wich,300
+Burger King,Egg-normous Burrito,900
+Burger King,Extra Long Cheeseburger no ketchup/mayo,470
+Burger King,Extra Long Fish Sandwich no sauce,390
+Burger King,Fully Loaded Croissan'wich,570
+Burger King,Grilled Chicken Salad no dressing,320
+Burger King,Grilled Chicken Sandwich,470
+Burger King,"Ham, Egg and Cheese Croissan'wich",640
+Burger King,King Croissan'wich with Double Sausage,700
+Burger King,King Croissan'wich with Ham and Sausage,530
+Burger King,King Croissan'wich with Sausage and Bacon,570
+Burger King,Morningstar Veggie Burger no Ketchup,380
+Burger King,Morningstar Veggie Burger no ketchup/mayo,310
+Burger King,Original Chicken Sandwich no mayo,450
+Burger King,"Sausage, Egg and Cheese Biscuit",510
+Burger King,"Sausage, Egg and Cheese Croissan'wich",470
+Burger King,Spicy Crispy Chicken Jr no sauce,290
+Burger King,Supreme Breakfast Sandwich,880
+Burger King,Tendercrisp Chicken Salad no dressing,450
+Burger King,Tendercrisp Chicken Sandwich no mayo,440
+Burger King,Tendergrill Chicken Salad no dressing,320
+Burger King,Tendergrill Chicken Sandwich no Mayo,350
+Burger King,Tendergrill Chicken Sandwich no mayo,350
+Burger King,Triple Whopper no mayo,1020
+Burger King,Whopper Jr. Sandwich no Mayo,230
+Burger King,Whopper no ketchup/mayo,500
+Chick-fil-a,Asian Salad,330
+Chick-fil-a,Bacon Platter,610
+Chick-fil-a,Chicken Biscuit,440
+Chick-fil-a,Chicken Breakfast Burrito,460
+Chick-fil-a,Chicken Deluxe,500
+Chick-fil-a,"Chicken Nuggets, 6",200
+Chick-fil-a,Chicken Platter,680
+Chick-fil-a,"Chicken, Egg and Cheese bagel",480
+Chick-fil-a,Chick-n-Minis,370
+Chick-fil-a,"Chick-n-Strips, 4",470
+Chick-fil-a,Cobb Salad no dressing,500
+Chick-fil-a,Grilled Chicken Club,440
+Chick-fil-a,Grilled Chicken Club Sandwich,440
+Chick-fil-a,Grilled Chicken Cool Wrap,340
+Chick-fil-a,Grilled Chicken Sandwich,320
+Chick-fil-a,Grilled Market Salad,200
+Chick-fil-a,Grilled Market Salad,320
+Chick-fil-a,"Grilled Nuggets, 6",100
+Chick-fil-a,"Grilled Nuggets, 8",140
+Chick-fil-a,Light Balsamic Vinaigrette,80
+Chick-fil-a,Light Italian Dressing,25
+Chick-fil-a,Sausage Platter,810
+Chick-fil-a,Spicy Southwest Salad,420
+Dairy Queen,1/2 lb FlameThrower GrillBurger,1000
+Dairy Queen,"1/2 lb GrillBurger with Cheese, no mayo, no ketchup",740
+Dairy Queen,"1/2 lb GrillBurger, no mayo, no ketchup",640
+Dairy Queen,"1/4 lb Bacon Cheese Grillburger, no mayo, no ketchup",560
+Dairy Queen,"1/4 lb GrillBurger, no mayo, no ketchup",420
+Dairy Queen,"Bacon Biscuit Sandwich, no flavor oil",320
+Dairy Queen,"Bacon Cheeseburger, no mayo, no ketchup",440
+Dairy Queen,Barbecue Beef Sandwich,350
+Dairy Queen,Barbecue Pork Sandwich,310
+Dairy Queen,Beef Cheese Dog,340
+Dairy Queen,Beef Chili and Cheese Dog,380
+Dairy Queen,Beef Chili and Cheese Mega Dog,670
+Dairy Queen,"Beef Chili Dog, no ketchup",320
+Dairy Queen,"Beef Hot Dog, no ketchup",280
+Dairy Queen,"Beef Mega Hot Dog, no ketchup",550
+Dairy Queen,"BLT Salad with Crispy Chicken, no dressing",520
+Dairy Queen,"BLT Salad with Grilled Chicken, no dressing",380
+Dairy Queen,"Buffalo Chicken Snack Melt, no mayo",280
+Dairy Queen,"California GrillBurger, no mayo",420
+Dairy Queen,"Cheeseburger, no ketchup",390
+Dairy Queen,Chicken Bacon BBQ Snack Melt,270
+Dairy Queen,"Chicken Bacon Ranch Sandwich, no dressing",420
+Dairy Queen,Chicken Mozzarella Sandwich,630
+Dairy Queen,Chicken Quesadilla Snack Melt,270
+Dairy Queen,"Crispy Chicken Sandwich, no mayo",490
+Dairy Queen,"Crispy Chicken Wrap, no dressing",270
+Dairy Queen,"Deluxe Cheeseburger, no ketchup",390
+Dairy Queen,"Deluxe Double Cheeseburger, no ketchup",620
+Dairy Queen,"Deluxe Double Hamburger, no ketchup",540
+Dairy Queen,"Deluxe Hamburger, no ketchup",350
+Dairy Queen,"Double Cheeseburger, no ketchup",620
+Dairy Queen,Double Hamburger. no ketchup,520
+Dairy Queen,"DQ Ultimate Burger, no sauce",720
+Dairy Queen,"Fish Fillet Sandwich with Cheese, no tartar",420
+Dairy Queen,"Fish Fillet Sandwich, no tartar",370
+Dairy Queen,"Garden Greens Salad with Crispy Chicken, no dressing",280
+Dairy Queen,Garden Greens Salad with Grilled Chicken,150
+Dairy Queen,"Grilled Chicken Sandwich, no mayo",290
+Dairy Queen,Grilled Chicken Wrap,210
+Dairy Queen,"Ham Biscuit Sandwich, no flavor oil",290
+Dairy Queen,"Hamburger, no ketchup",340
+Dairy Queen,"Mushroom Swiss GrillBurger, no mayo",470
+Dairy Queen,"Sausage Biscuit Sandwich, no flavor oil",350
+Dairy Queen,Turkey BLT Sandwich,430
+Dairy Queen,Ultimate Breakfast Burrito,620
+Dairy Queen,White Cheese Curds,570
+In-n-Out,"Cheeseburger mustard and ketchup, no spread",400
+In-n-Out,Cheeseburger Protein Style,300
+In-n-Out,Double Double Protein Style,520
+In-n-Out,"Double Double, mustard and ketchup, no spread",590
+In-n-Out,Fiery Buffalo Hot Wings Go Cup,480
+In-n-Out,Hamburger Protein Style,240
+In-n-Out,"Hamburger with mustard and ketchup, no spread",310
+In-n-Out,HBBQ Hot Wings Go Cup,540
+McDonalds,Artisan Grilled Chicken Sandwich,360
+McDonalds,"Bacon Clubhouse Burger, no sauce",650
+McDonalds,"Bacon Ranch with Crispy Chicken, no dressing",490
+McDonalds,"Bacon Ranch with Grilled Chicken, no dressing",310
+McDonalds,"Bacon, Egg and Cheese Bagel",570
+McDonalds,"Bacon, Egg and Cheese Biscuit (reg)",450
+McDonalds,"Bacon, Egg and Cheese McGriddle",450
+McDonalds,Big Breakfast with Hotcakes,1050
+McDonalds,"Big Mac, no sauce",450
+McDonalds,Cheeseburger,300
+McDonalds,"Crispy Chicken Deluxe Sandwich, no mayo",530
+McDonalds,Double Cheeseburger,440
+McDonalds,Double Quarter Pounder w/Cheese no bun,580
+McDonalds,Double Quarter Pounder with Cheese,780
+McDonalds,Egg McMuffin,300
+McDonalds,Egg White Delight,250
+McDonalds,"Filet-O-Fish, no sauce",300
+McDonalds,Fruit and Maple Oatmeal,290
+McDonalds,Hamburger,250
+McDonalds,Hotcakes and Sausage,510
+McDonalds,"McChicken, no mayo",320
+McDonalds,McDouble,390
+McDonalds,McNuggets (10),470
+McDonalds,McNuggets (20),940
+McDonalds,McNuggets (4),190
+McDonalds,McNuggets (6),280
+McDonalds,"McRib, no sauce",430
+McDonalds,Newman's Own Creamy Balsamic Vinaigrette,35
+McDonalds,Newman's Own Creamy Southwest Dressing,120
+McDonalds,Newman's Own Low-fat Italian,50
+McDonalds,Newman's Own Ranch Dressing,200
+McDonalds,Quarter Pounder with Cheese,540
+McDonalds,Sausage Biscuit (reg),440
+McDonalds,Sausage Biscuit with Egg (reg),520
+McDonalds,Sausage Burrito,300
+McDonalds,Sausage McGriddle,440
+McDonalds,Sausage McMuffin,400
+McDonalds,Sausage McMuffin with Egg,470
+McDonalds,"Sausage, Egg and Cheese McGriddle",570
+McDonalds,"Southwest Salad with Crispy Chicken, no dressing",510
+McDonalds,Southwest Salad with Grilled Chicken. no dressing,330
+McDonalds,"Steak, Egg and Cheese Biscuit (reg)",530
+Wendy's,Apple Pecan Chicken Salad Full Size,590
+Wendy's,"Asiago Chicken Ranch Club, no sauce",580
+Wendy's,Asian Cashew Chicken Salad Full Size,380
+Wendy's,Bacon Cheese Baked Potato,480
+Wendy's,Baconator,930
+Wendy's,"BBQ Chicken Ranch Salad, full",590
+Wendy's,BBQ Ranch Chicken Salad Full Size,600
+Wendy's,Broccoli Cheese Baked Potato,430
+Wendy's,"Chicken Nuggets, 10",450
+Wendy's,"Chicken Nuggets, 4",180
+Wendy's,"Chicken Nuggets, 6",270
+Wendy's,"Crispy Chicken BLT, no mayo",170
+Wendy's,"Crispy Chicken Sandwich, no mayo",300
+Wendy's,"Dave's Double, no mayo / ketchup",740
+Wendy's,"Dave's Single, no mayo / ketchup",500
+Wendy's,Dave's Triple,1070
+Wendy's,"Dave's Triple, no mayo / ketchup",1020
+Wendy's,Double Stack,390
+Wendy's,"Double Stack, no ketchup",380
+Wendy's,Grilled Chicken Sandwich,350
+Wendy's,Grilled Chicken Wrap,270
+Wendy's,"Homestyle Chicken Sandwich, no mayo",460
+Wendy's,Jr. Bacon Cheeseburger,380
+Wendy's,Jr. Cheeseburger Deluxe,280
+Wendy's,"Jr. Cheeseburger, no ketchup",270
+Wendy's,"Jr. Hamburger, no ketchup",230
+Wendy's,Power Mediterranean Chicken Salad,430
+Wendy's,"Power Mediterranean Chicken Salad, full",450
+Wendy's,Small Rich and Meaty Chili,170
+Wendy's,"Son of Baconator, no mayo / ketchup",570
+Wendy's,Sour Cream and Chive Baked Potato,310
+Wendy's,Spicy Chicken Caesar Salad Full Size,460
+Wendy's,"Spicy Chicken Sandwich, no mayo",450
+Wendy's,"Spicy Chicken Wrap, no mayo",300
+Wendy's,Ultimate Chicken Grill,340
+Taco Bell,7-Layer Burrito,430
+Taco Bell,Bean Burrito,370
+Taco Bell,Beefy 5-Layer Burrito,500
+Taco Bell,Beefy Fritos Burrito,430
+Taco Bell,Beefy Mini Quesadilla,210
+Taco Bell,Beefy Nacho Loaded Griller,370
+Taco Bell,Beefy Pritos Burrito,430
+Taco Bell,Black Bean Burrito,380
+Taco Bell,Black Beans,80
+Taco Bell,Black Beans and Rice,180
+Taco Bell,Burrito Supreme,400
+Taco Bell,Cantina Power Bowl,480
+Taco Bell,"Cantina Power Bowl , Steak",500
+Taco Bell,"Cantina Power Bowl, Chicken",490
+Taco Bell,Cantina Power Burrito,450
+Taco Bell,Chalupa Extreme,360
+Taco Bell,Cheesy Bean and Rice,420
+Taco Bell,Cheesy Burrito,490
+Taco Bell,Cheesy Burrito - Steak and Egg,480
+Taco Bell,"Cheesy Burrito Bacon, Fresco",390
+Taco Bell,Cheesy Burrito Fiesta Potato,520
+Taco Bell,Cheesy Burrito Steak and Egg,480
+Taco Bell,Cheesy Potato Burrito,490
+Taco Bell,Chipotle Chicken Loaded Griller,340
+Taco Bell,Chips and Nacho Cheese,220
+Taco Bell,Combo Burrito,450
+Taco Bell,Cool Ranch Doritos Double Decker Taco,320
+Taco Bell,Cool Ranch Doritos Locos Taco,170
+Taco Bell,Cool Ranch Doritos Locos Taco Supreme,190
+Taco Bell,Crunchwrap California,630
+Taco Bell,"Crunchwrap, no sauce",600
+Taco Bell,Crunchy Taco,170
+Taco Bell,Crunchy Taco Supreme,190
+Taco Bell,Crynch Wrap Supreme,530
+Taco Bell,Double Decker taco,320
+Taco Bell,Double Decker taco Supreme,340
+Taco Bell,Double Tostada,270
+Taco Bell,"DoubleDilla, Chicken",660
+Taco Bell,"DoubleDilla, Steak",670
+Taco Bell,Fiery Doritos Double Decker Taco,320
+Taco Bell,Fiery Doritos Locos Tacos,170
+Taco Bell,Fiery Doritos Locos Tacos Supreme,190
+Taco Bell,Fiesta Taco Salad,770
+Taco Bell,Fresco Bean Burrito,350
+Taco Bell,Fresco Burrito Supreme - Steak,350
+Taco Bell,Fresco Burrito Supreme Chicken,340
+Taco Bell,Fresco Burrito Supreme Steak,340
+Taco Bell,"Fresco Crunchy Taco, Beef",140
+Taco Bell,"Fresco Soft Taco, Beef",160
+Taco Bell,"Fresco Soft Taco, Shredded Chicken",140
+Taco Bell,"Fresco Soft Taco, Steak",140
+Taco Bell,Gordita Supreme,280
+Taco Bell,Grande Scrambler Burrito,650
+Taco Bell,Grilled Breakfast Burrito Fiesta Potato,340
+Taco Bell,Grilled Breakfast Taco,240
+Taco Bell,Grilled Steak Soft Taco,200
+Taco Bell,Maximelt,250
+Taco Bell,Mexican Pizza,550
+Taco Bell,Mini Skillet Bowl,180
+Taco Bell,Nachos BellGrande,760
+Taco Bell,Nachos Supreme,440
+Taco Bell,Quesarito,640
+Taco Bell,Rice,100
+Taco Bell,Sausage Flatbread Quesadilla,330
+Taco Bell,Shredded Chicken Burrito,400
+Taco Bell,Shredded Chicken Mini Quesadilla,180
+Taco Bell,Smothered Burrito,690
+Taco Bell,Smothered Burrito - Shredded Chicken,640
+Taco Bell,Soft Taco,180
+Taco Bell,Soft Taco Supreme,210
+Taco Bell,Spicy Potato Soft Taco,230
+Taco Bell,Triple Layer Nachos,320
+Taco Bell,XXL Grilled Stuft Burrito,860
+Taco Bell,XXL Grilled Stuft Burrito - Steak,830
