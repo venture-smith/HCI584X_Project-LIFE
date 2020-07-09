@@ -29,6 +29,18 @@ from preferences import *
 # 2. SET UP DATA STRUCTURES
 # Data Hierarchy - Account - User - Preferences - Transaction history
 
+# Setup Restaurant-Food-Calorie Dictionary
+food_dict = {}
+with open(foodfile, 'r') as data_file:
+    data = csv.DictReader(data_file, delimiter=",")
+    for row in data:
+        item = food_dict.get(row["Restaurant"], dict())
+        item[row["Item"]] = int(row["Calories"])
+        food_dict[row["Restaurant"]] = item
+
+# Setup Exercise table from CSV file
+exertable=pull_csv(exfile,',') 
+
 # This function is a test item to write back out to the CSV - Delete or enhance as necessary
 def write_to_csv(accountfile,u_name):
     with open(accountfile, 'w', newline='') as file:
@@ -37,7 +49,7 @@ def write_to_csv(accountfile,u_name):
 
 class Account:
     # Create user account
-    def __init__(self, id, LoginId, Email, Password, FirstName, LastName, Pref1, Pref2, Pref3, Weight, Units):
+    def __init__(self, id, LoginId, Email, Password, FirstName, LastName, Pref1, Pref2, Pref3, Weight, Units, Item):
         self.id = id
         self.LoginId = LoginId
         self.Email = Email
@@ -49,6 +61,7 @@ class Account:
         self.Pref3 = Pref3
         self.Weight = Weight
         self.Units = Units
+        self.Item = Item
  
     def getId(self):
         return self.id
@@ -82,6 +95,26 @@ class Account:
 
     def getUnits(self):
         return self.Units
+
+    def getItem(self):
+        return self.Item
+
+class Item:
+        # Create user account
+    def __init__(self, Restaurant, Food, Calories):
+        self.id = id
+        self.Restaurant = Restaurant
+        self.Food = Food
+        self.Calories = Calories
+
+    def getRestaurant(self):
+        return self.Restaurant
+
+    def getFood(self):
+        return self.Food
+
+    def getCalories(self):
+        return self.Calories
 
 ''' # This is for a web app database - leave this here for now.
 def submit():
@@ -121,6 +154,17 @@ def login():
 
     #app.f_name.delete(0, END)
 '''
+
+def get_minutes(req_exercise, weight, src_calories, exertable):
+    for row in exertable:
+        Multiple = row["Multiplier"]
+        Exercise = row["Exercise"]
+        #print(Exercise," equals ",Multiple)
+        print("Checkpoint")
+        if Exercise == req_exercise:
+            MultiplierX = float(Multiple)
+            Minutes = (src_calories) / (weight * MultiplierX)
+            return Minutes
 
 # Application class 
 class App(object):
@@ -317,8 +361,7 @@ class App(object):
         #f2suba.pack(side=TOP)
         #f2subb.pack(side=BOTTOM)
 
-        #initialize exercise table from CSV file
-        exertable=pull_csv(fname,',') 
+        # Create list of Exercises from Exercise table
         dict_list = [] # Create list for dictionary
         for lines in exertable:
             dict_list.append(lines['Exercise'])
@@ -486,11 +529,13 @@ class App(object):
             print('---')
             Foodbox.delete(0, END)
             rcurrent_selection = event.widget.get(event.widget.curselection())
+            userzero.Item.Restaurant = rcurrent_selection
             fdict = []
             flist = []
             fdict = food_dict.get(rcurrent_selection)
             flist = list(fdict)
-            print (flist)
+            #print (flist)
+            print ("Selected:",userzero.Item.Restaurant)
             for d in flist:
                 Foodbox.insert('end',d)
 
@@ -500,24 +545,13 @@ class App(object):
             print('(event)  current:', fevent.widget.get(fevent.widget.curselection()))
             print('---')
             fcurrent_selection = fevent.widget.get(fevent.widget.curselection())
+            userzero.Item.Food = fcurrent_selection
+            print ("Food Selected:",userzero.Item.Food)
 
-        # Import Restaurant Database
-        food_dict = {}
-        with open(foodfile, 'r') as data_file:
-            data = csv.DictReader(data_file, delimiter=",")
-            for row in data:
-                item = food_dict.get(row["Restaurant"], dict())
-                item[row["Item"]] = int(row["Calories"])
-                food_dict[row["Restaurant"]] = item
+        # Pull restaurant list from Food Dictionary for use in Selection List
         restaurant_list = []
         restaurant_list = list(food_dict)
         
-        '''
-        for lines in food_dict:
-            dict_list.append(lines['Exercise'])
-        test_list = dict_list
-        print (new_data_dict)
-        '''
         print ("Find Food")
         print (userzero.Units)
         print (userzero.Weight)
@@ -594,6 +628,29 @@ class App(object):
         self.chooser_label.config(font=subheadfont)
         self.chooser_label.place(in_=f2, relx = 0.5, rely = 0.25, anchor = CENTER)
 
+        self.food_label = Label(f2, text= userzero.Item.Restaurant +" "+ userzero.Item.Food, bg='white')
+        self.food_label.config(font=subheadfont)
+        self.food_label.place(in_=f2, relx = 0.5, rely = 0.30, anchor = CENTER)
+
+        self.calories_label = Label(f2, text= "Calories="+str(food_dict[userzero.Item.Restaurant][userzero.Item.Food]), bg='white')
+        self.calories_label.config(font=subheadfont)
+        self.calories_label.place(in_=f2, relx = 0.5, rely = 0.35, anchor = CENTER)
+
+        self.ex1equivalent_label = Label(f3, text=get_minutes(userzero.Pref1, float(userzero.Weight), float(food_dict[userzero.Item.Restaurant][userzero.Item.Food]), exertable), bg='white')
+        self.ex1equivalent_label.config(font=subheadfont)
+        self.ex1equivalent_label.place(in_=f3, relx = 0.5, rely = 0.25, anchor = CENTER)
+
+        exer1 = userzero.Pref1
+        print("START DIAGNOSTIC")
+        print(exer1)
+        weight = float(userzero.Weight)
+        print(weight)
+        calories = float(food_dict[userzero.Item.Restaurant][userzero.Item.Food])
+        print(calories)
+        val=get_minutes(exer1, weight, calories, exertable)
+        print("Call get_minutes function RESULT:")
+        print(val)
+        print("END DIAGNOSTIC")
         self.fdnext_button = Button(f4, text ="Save Settings", bg=buttcolor, command = self.switch_to_main)
         self.fdnext_button.place(in_= f4, relx = 0.5, rely = 0.4, anchor=CENTER)
 
@@ -673,7 +730,8 @@ class App(object):
         #Labels
 
 # Initialize Account values
-userzero = Account(did, dLoginId, dEmail, dPassword, dFirstName, dLastName, dPref1, dPref2, dPref3, dWeight, dUnits)
+dItem = Item(dRestaurant, dFood, dCalories)
+userzero = Account(did, dLoginId, dEmail, dPassword, dFirstName, dLastName, dPref1, dPref2, dPref3, dWeight, dUnits, dItem)
 
 # Initialize Window
 root = Tk()

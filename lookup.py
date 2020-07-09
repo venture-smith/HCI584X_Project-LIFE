@@ -8,7 +8,7 @@
 #-------------------------------------------------------------------------------
 
 # importing module  
-import preferences
+from preferences import * 
 import csv 
 
 def pull_csv(file, delimiter=','):
@@ -16,20 +16,21 @@ def pull_csv(file, delimiter=','):
         delimiter = ','   # why not set delimiter=',' in function header (instead None?)
     readexertable = csv.DictReader(open(file), delimiter=delimiter)
     return readexertable
-
+'''
 def lookup_multiplier(req_exercise, weight, src_calories, exertable):
-    ''' add a doc string '''
+    # Add a doc string
     for row in exertable:
         Multiple = row["Multiplier"]
         Exercise = row["Exercise"]
-        #print(Exercise," equals ",Multiple)
-        if exercise == req_exercise:
+        print(Exercise," equals ",Multiple)
+        if Exercise == req_exercise:
             MultiplierX = float(Multiple)
             Minutes = (src_calories) / (weight * MultiplierX)
             return Minutes
-
-''' # Diagnostic - remove this
-exertable = pull_csv(fname)
+'''
+'''
+# Diagnostic - remove this
+exertable = pull_csv(exercisefile)
 myvar = lookup_multiplier(exercise, weight, src_calories, exertable)
 print ("Your exercise is: ", exercise, ".")
 print ("Your weight is: ", weight," lbs.")

@@ -12,11 +12,11 @@ accountfile = "HCI584X_Project-LIFE\maccount.csv"
 foodfile = "HCI584X_Project-LIFE\mfoodv2.csv"
 startimgpath = "HCI584X_Project-LIFE\main.jpg"
 searchimgpath = "HCI584X_Project-LIFE\search.jpg"
-fname="HCI584X_Project-LIFE\exercise.csv"
+exfile = "HCI584X_Project-LIFE\exercise.csv"
 
 # Default Test Values
-exercise="Water polo" # CREATE A FUNCTION TO SELECT/RANK TOP 3 ACTIVITIES
-weight=200
+exercise="Golf, pulling/carrying clubs" # CREATE A FUNCTION TO SELECT/RANK TOP 3 ACTIVITIES
+weight=150
 src_calories=550
 
 did = ""
@@ -30,7 +30,9 @@ dPref2 = "NA"
 dPref3 = "NA"
 dWeight = ""
 dUnits = "LB"
-
+dRestaurant = ""
+dFood = ""
+dCalories = ""
 
 # App Settings
 #Fonts
