@@ -38,8 +38,14 @@ with open(foodfile, 'r') as data_file:
         item[row["Item"]] = int(row["Calories"])
         food_dict[row["Restaurant"]] = item
 
-# Setup Exercise table from CSV file
-exertable=pull_csv(exfile,',') 
+# Setup Exercise table with Conversion Weight Calorie Burn rates
+exertable = {}
+with open(exfile, 'r') as data_file:
+    data = csv.DictReader(data_file, delimiter=",")
+    for row in data:
+        exertable.update({row["Exercise"]:row["Multiplier"]})
+# print(exertable) # Diagnostics DELETE
+# print("breakpoint") # Diagnostics DELETE
 
 # This function is a test item to write back out to the CSV - Delete or enhance as necessary
 def write_to_csv(accountfile,u_name):
@@ -154,17 +160,19 @@ def login():
 
     #app.f_name.delete(0, END)
 '''
-
-def get_minutes(req_exercise, weight, src_calories, exertable):
-    for row in exertable:
-        Multiple = row["Multiplier"]
-        Exercise = row["Exercise"]
-        #print(Exercise," equals ",Multiple)
-        print("Checkpoint")
-        if Exercise == req_exercise:
-            MultiplierX = float(Multiple)
-            Minutes = (src_calories) / (weight * MultiplierX)
-            return Minutes
+# Main Calculation
+def get_minutes(req_exercise, weight, units, src_calories, exertable):
+    if units == "LB":
+        wconv = 1
+    elif units == "KG":
+        wconv = 2.20462262
+    else: 
+        print("ERROR: NO ACCEPTABLE WEIGHT UNIT CONVERSION PASSED")
+    Multiple = exertable.get(req_exercise)
+    MultiplierX = float(Multiple)
+    Minutes = (src_calories) / (weight * wconv * MultiplierX)
+    return Minutes
+    # Original using Dictreader
 
 # Application class 
 class App(object):
@@ -252,13 +260,6 @@ class App(object):
         self.start_label = Label(self.frame, text="Set Exercise Preferences")
         self.start_label.pack()
 
-    # This function possibly deprecated - bring this back as necessary
-    '''
-    def refresh(self):
-        self.destroy()
-        self.__init__()
-    '''
-
     def switch_to_submitted(self):
         if self.frame is not None:
             self.frame.destroy() # remove current frame
@@ -309,8 +310,9 @@ class App(object):
             print('(event)  current:', event.widget.get(event.widget.curselection()))
             print('---')
             current_selection = event.widget.get(event.widget.curselection())
+           
             # If this is the first time running and not reset STATE 0, look for the first empty slot to add one - indicate the slot just filled STATE X (slot just filled)
-            # 
+            
             if userzero.Pref1 == "NA":  # Look for the first open slot starting with the first slot
                 self.fa1.set(current_selection)
                 userzero.Pref1 = current_selection
@@ -339,7 +341,6 @@ class App(object):
                 self.fa1.set(current_selection)
                 userzero.Pref1 = current_selection
                 self.fss = 1 
-            #print (fss) # Diagnostic
 
         # Add sub-frames - note the %s for appwidth need to add to 1.
         f1 = Frame(self.frame, background="white", width=appwidth*0.4, height=appheight)
@@ -362,10 +363,11 @@ class App(object):
         #f2subb.pack(side=BOTTOM)
 
         # Create list of Exercises from Exercise table
-        dict_list = [] # Create list for dictionary
-        for lines in exertable:
-            dict_list.append(lines['Exercise'])
-        test_list = dict_list
+        exercise_list = [] # Create list for dictionary
+        
+        exercise_list = list(exertable.keys())
+        print(exercise_list)
+        print("breakpoint")
 
         #faselectstate = 0 # Initialize selection state
 
@@ -377,12 +379,7 @@ class App(object):
         self.fa2.set(userzero.Pref2)
         self.fa3.set(userzero.Pref3)
 
-        # put label in self.frame
-        #self.start_label = Label(f1suba, text="Choose your top 3\n Physical Activites:")
-        #self.start_label.pack(side = LEFT, expand = False)
-
         # COLUMN1
-
         self.start_label = Label(f1, text="Choose your top 3\nPREFERRED Physical Activites:",bg='white')
         self.start_label.config(font=headfont)
         self.start_label.place(in_= f1, relx = 0.5, rely = 0.05, anchor=CENTER)
@@ -405,16 +402,12 @@ class App(object):
         listbox.place(in_= f1, relx = 0.1, rely = 0.30, anchor=NW, height = 250, width = 250)
         #listbox.bind('<Double-Button-1>', on_select) # Not sure what this is - look it up!
         listbox.bind('<<ListboxSelect>>', on_select)
-        listbox_update(test_list)
+        listbox_update(exercise_list)
         # Add scrollbar to listbox https://www.geeksforgeeks.org/scrollable-listbox-in-python-tkinter/
         scrollbar = Scrollbar(f1)
         scrollbar.place(in_=f1, relx = 0.9, rely = 0.30, anchor=NW, height=250)
         listbox.config(yscrollcommand = scrollbar.set)
         scrollbar.config(command = listbox.yview)
-
-        #self.start_button = Button(f2, text ="Select", command = self.switch_to_setexpref)
-        #self.start_button.place(in_=f2, relx = 0.5, rely = 0.40, anchor = CENTER)
-        #self.start_button.pack(padx=20, pady=20)
 
         # COLUMN 2
         self.fav1a_label = Label(f2, text="FAVORITE ACTIVITY #1",bg='white')
@@ -448,6 +441,7 @@ class App(object):
             print( "You selected the option " + str(self.uvar.get()))
             unitwt = str(self.uvar.get())
             userzero.Units = unitwt
+
         def wton_keyrelease(event):
             # get text from entry
             value = event.widget.get()
@@ -622,8 +616,6 @@ class App(object):
         self.back_button = Button(f1, text ="Back", bg=buttcolor,command = self.switch_to_findfood)
         self.back_button.place(in_= f1, relx = 0.5, rely = 0.4, anchor=CENTER)
 
-        print ("Result")
-
         self.chooser_label = Label(f2, text="RESULT:", bg='white')
         self.chooser_label.config(font=subheadfont)
         self.chooser_label.place(in_=f2, relx = 0.5, rely = 0.25, anchor = CENTER)
@@ -636,10 +628,29 @@ class App(object):
         self.calories_label.config(font=subheadfont)
         self.calories_label.place(in_=f2, relx = 0.5, rely = 0.35, anchor = CENTER)
 
-        self.ex1equivalent_label = Label(f3, text=get_minutes(userzero.Pref1, float(userzero.Weight), float(food_dict[userzero.Item.Restaurant][userzero.Item.Food]), exertable), bg='white')
+        # Get the total number of minutes
+        Exer1_minutes = get_minutes(userzero.Pref1, float(userzero.Weight), userzero.Units, float(food_dict[userzero.Item.Restaurant][userzero.Item.Food]), exertable)
+        Exer2_minutes = get_minutes(userzero.Pref2, float(userzero.Weight), userzero.Units, float(food_dict[userzero.Item.Restaurant][userzero.Item.Food]), exertable)
+        Exer3_minutes = get_minutes(userzero.Pref3, float(userzero.Weight), userzero.Units, float(food_dict[userzero.Item.Restaurant][userzero.Item.Food]), exertable)
+
+        # Convert the minutes to a readable string
+        Exer1_string = convert_time_string(Exer1_minutes)
+        Exer2_string = convert_time_string(Exer2_minutes)
+        Exer3_string = convert_time_string(Exer3_minutes)
+
+        self.ex1equivalent_label = Label(f3, text=Exer1_string +"\n of "+userzero.Pref1, bg='white')
         self.ex1equivalent_label.config(font=subheadfont)
         self.ex1equivalent_label.place(in_=f3, relx = 0.5, rely = 0.25, anchor = CENTER)
+        
+        self.ex2equivalent_label = Label(f3, text=Exer2_string +"\n of "+userzero.Pref2, bg='white')
+        self.ex2equivalent_label.config(font=subheadfont)
+        self.ex2equivalent_label.place(in_=f3, relx = 0.5, rely = 0.35, anchor = CENTER)
 
+        self.ex3equivalent_label = Label(f3, text=Exer3_string + "\n of "+userzero.Pref1, bg='white')
+        self.ex3equivalent_label.config(font=subheadfont)
+        self.ex3equivalent_label.place(in_=f3, relx = 0.5, rely = 0.45, anchor = CENTER)
+
+        # DIAGNOSTIC - DELETE THIS
         exer1 = userzero.Pref1
         print("START DIAGNOSTIC")
         print(exer1)
