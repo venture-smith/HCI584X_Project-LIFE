@@ -3,7 +3,7 @@
 # Purpose:   Program preferences/settings
 # Author(s): Vincent Lin
 # Created:   06/10/2020
-# TODO:      XXX YYY ZZZ
+# TODO:      Cleanup and remove test data. Add additional styles to control fonts, windows, etc. 
 # Note:      
 #-------------------------------------------------------------------------------
 
@@ -14,11 +14,7 @@ startimgpath = "HCI584X_Project-LIFE\main.jpg"
 searchimgpath = "HCI584X_Project-LIFE\search.jpg"
 exfile = "HCI584X_Project-LIFE\exercise.csv"
 
-# Default Test Values
-exercise="Golf, pulling/carrying clubs" # CREATE A FUNCTION TO SELECT/RANK TOP 3 ACTIVITIES
-weight=150
-src_calories=550
-
+# Default Values
 did = ""
 dLoginId = ""
 dEmail = ""
