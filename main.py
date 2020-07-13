@@ -26,6 +26,12 @@ from lookup import *
 # Preferences
 from preferences import *
 
+# CH testing: where is the current folder for me?
+from os import getcwd, chdir
+print("cwd", getcwd())
+# CH go to parent so that the settings work for me
+chdir("..")
+
 # 2. SET UP DATA STRUCTURES
 # Data Hierarchy - Account - User - Preferences - Transaction history
 
@@ -48,10 +54,10 @@ with open(exfile, 'r') as data_file:
 # print("breakpoint") # Diagnostics DELETE
 
 # This function is a test item to write back out to the CSV - Delete or enhance as necessary
-def write_to_csv(accountfile,u_name):
+def write_to_csv(accountfile, u_name):
     with open(accountfile, 'w', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow([u_name])
+        writer.writerow([u_name]) # CH I assume this needs to be writer.writerow(u_name) ???
 
 class Account:
     # Create user account
@@ -222,14 +228,15 @@ class App(object):
         self.frame = Frame(self.master, background="white", width=640, height=480) # B
         self.frame.pack(fill=BOTH)
 
-        global u_name
+        # as you are inside the App class, it's better to make these into attributes, rather than globals
+        #global u_name
         global f_name
         global l_name
         global email
         global pw
 
-        u_name = Entry(self.frame, width=30)
-        u_name.grid(row=0, column=1, padx=20)
+        self.u_name = Entry(self.frame, width=30) # make/overwrite attribute
+        self.u_name.grid(row=0, column=1, padx=20)
         f_name = Entry(self.frame, width=30)
         f_name.grid(row=1, column=1, padx=20)
         l_name = Entry(self.frame, width=30)
@@ -265,7 +272,7 @@ class App(object):
             self.frame.destroy() # remove current frame
         self.frame = Frame(self.master, background="white", width=appwidth, height=appheight) # C
         self.frame.pack(fill=BOTH)
-        write_to_csv(accountfile, u_name) 
+        write_to_csv(accountfile, self.u_name) 
         # put C label in self.frame
         self.start_label = Label(self.frame, text="Submitted")
         self.start_label.pack()
@@ -280,12 +287,12 @@ class App(object):
         def on_keyrelease(event):
 
             # get text from entry
-            value = event.widget.get()
-            value = value.strip().lower()
+            entry_widget = event.widget.get()   # CH: make clear what the class/type is
+            value = entry_widget.strip().lower()
 
             # get data from test_list
             if value == '':
-                data = test_list
+                data = test_list # CH test_list is not defined here
             else:
                 data = []
                 for item in test_list:
