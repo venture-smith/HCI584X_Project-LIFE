@@ -26,11 +26,13 @@ from lookup import *
 # Preferences
 from preferences import *
 
+
 # CH testing: where is the current folder for me?
 from os import getcwd, chdir
 print("cwd", getcwd())
 # CH go to parent so that the settings work for me
-chdir("..")
+#chdir("..")
+
 
 # 2. SET UP DATA STRUCTURES
 # Data Hierarchy - Account - User - Preferences - Transaction history
@@ -43,7 +45,7 @@ with open(foodfile, 'r') as data_file:
         item = food_dict.get(row["Restaurant"], dict())
         item[row["Item"]] = int(row["Calories"])
         food_dict[row["Restaurant"]] = item
-
+print (exfile)
 # Setup Exercise table with Conversion Weight Calorie Burn rates
 exertable = {}
 with open(exfile, 'r') as data_file:
@@ -292,10 +294,10 @@ class App(object):
 
             # get data from test_list
             if value == '':
-                data = test_list # CH test_list is not defined here
+                data = self.exercise_list # CH test_list is not defined here
             else:
                 data = []
-                for item in test_list:
+                for item in self.exercise_list:
                     if value in item.lower():
                         data.append(item)                
 
@@ -370,10 +372,10 @@ class App(object):
         #f2subb.pack(side=BOTTOM)
 
         # Create list of Exercises from Exercise table
-        exercise_list = [] # Create list for dictionary
+        self.exercise_list = [] # Create list for dictionary
         
-        exercise_list = list(exertable.keys())
-        print(exercise_list)
+        self.exercise_list = list(exertable.keys())
+        print(self.exercise_list)
         print("breakpoint")
 
         #faselectstate = 0 # Initialize selection state
@@ -409,7 +411,7 @@ class App(object):
         listbox.place(in_= f1, relx = 0.1, rely = 0.30, anchor=NW, height = 250, width = 250)
         #listbox.bind('<Double-Button-1>', on_select) # Not sure what this is - look it up!
         listbox.bind('<<ListboxSelect>>', on_select)
-        listbox_update(exercise_list)
+        listbox_update(self.exercise_list)
         # Add scrollbar to listbox https://www.geeksforgeeks.org/scrollable-listbox-in-python-tkinter/
         scrollbar = Scrollbar(f1)
         scrollbar.place(in_=f1, relx = 0.9, rely = 0.30, anchor=NW, height=250)
@@ -653,7 +655,7 @@ class App(object):
         self.ex2equivalent_label.config(font=subheadfont)
         self.ex2equivalent_label.place(in_=f3, relx = 0.5, rely = 0.35, anchor = CENTER)
 
-        self.ex3equivalent_label = Label(f3, text=Exer3_string + "\n of "+userzero.Pref1, bg='white')
+        self.ex3equivalent_label = Label(f3, text=Exer3_string + "\n of "+userzero.Pref3, bg='white')
         self.ex3equivalent_label.config(font=subheadfont)
         self.ex3equivalent_label.place(in_=f3, relx = 0.5, rely = 0.45, anchor = CENTER)
 
@@ -665,7 +667,9 @@ class App(object):
         print(weight)
         calories = float(food_dict[userzero.Item.Restaurant][userzero.Item.Food])
         print(calories)
-        val=get_minutes(exer1, weight, calories, exertable)
+        units = userzero.Units
+        print(units)
+        val=get_minutes(exer1, weight, units, calories, exertable)
         print("Call get_minutes function RESULT:")
         print(val)
         print("END DIAGNOSTIC")

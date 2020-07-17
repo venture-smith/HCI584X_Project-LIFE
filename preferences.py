@@ -8,11 +8,11 @@
 #-------------------------------------------------------------------------------
 
 # Files
-accountfile = "HCI584X_Project-LIFE\maccount.csv"
-foodfile = "HCI584X_Project-LIFE\mfoodv2.csv"
-startimgpath = "HCI584X_Project-LIFE\main.jpg"
-searchimgpath = "HCI584X_Project-LIFE\search.jpg"
-exfile = "HCI584X_Project-LIFE\exercise.csv"
+accountfile = "db\maccount.csv"
+foodfile = "db\mfoodv2.csv"
+startimgpath = "images\main.jpg"
+searchimgpath = "images\search.jpg"
+exfile = 'db\exercise.csv'
 
 # Default Values
 did = ""
