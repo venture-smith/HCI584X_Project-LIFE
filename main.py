@@ -26,14 +26,6 @@ from lookup import *
 # Preferences
 from preferences import *
 
-
-# CH testing: where is the current folder for me?
-from os import getcwd, chdir
-print("cwd", getcwd())
-# CH go to parent so that the settings work for me
-#chdir("..")
-
-
 # 2. SET UP DATA STRUCTURES
 # Data Hierarchy - Account - User - Preferences - Transaction history
 
@@ -43,27 +35,21 @@ with open(foodfile, 'r') as data_file:
     data = csv.DictReader(data_file, delimiter=",")
     for row in data:
         item = food_dict.get(row["Restaurant"], dict())
-        item[row["Item"]] = int(row["Calories"])
+        item[row["Item"]] = (int(row["Calories"]),row["Image"])
+        #item[row["Item"]] = int(row["Calories"]) # This is from an older version with fewer columns
         food_dict[row["Restaurant"]] = item
-print (exfile)
+
 # Setup Exercise table with Conversion Weight Calorie Burn rates
 exertable = {}
 with open(exfile, 'r') as data_file:
     data = csv.DictReader(data_file, delimiter=",")
     for row in data:
-        exertable.update({row["Exercise"]:row["Multiplier"]})
-# print(exertable) # Diagnostics DELETE
-# print("breakpoint") # Diagnostics DELETE
-
-# This function is a test item to write back out to the CSV - Delete or enhance as necessary
-def write_to_csv(accountfile, u_name):
-    with open(accountfile, 'w', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow([u_name]) # CH I assume this needs to be writer.writerow(u_name) ???
+        #exertable.update({row["Exercise"]:row["Multiplier"]}) # This version only assumes two columns
+        exertable.update({row["Exercise"]:[row["Multiplier"],row["Phrase"]]}) # This version assumes three columns, but the "value" is a list of two items.
 
 class Account:
     # Create user account
-    def __init__(self, id, LoginId, Email, Password, FirstName, LastName, Pref1, Pref2, Pref3, Weight, Units, Item):
+    def __init__(self, id, LoginId, Email, Password, FirstName, LastName, Pref1, Pref2, Pref3, Weight, Units, Item, MinEquiv1, MinEquiv2, MinEquiv3):
         self.id = id
         self.LoginId = LoginId
         self.Email = Email
@@ -76,6 +62,9 @@ class Account:
         self.Weight = Weight
         self.Units = Units
         self.Item = Item
+        self.MinEquiv1 = MinEquiv1
+        self.MinEquiv2 = MinEquiv2
+        self.MinEquiv3 = MinEquiv3
  
     def getId(self):
         return self.id
@@ -113,6 +102,15 @@ class Account:
     def getItem(self):
         return self.Item
 
+    def getMinEquiv1(self):
+        return self.MinEquiv1
+
+    def getMinEquiv2(self):
+        return self.MinEquiv2
+
+    def getMinEquiv3(self):
+        return self.MinEquiv3
+
 class Item:
         # Create user account
     def __init__(self, Restaurant, Food, Calories):
@@ -130,44 +128,6 @@ class Item:
     def getCalories(self):
         return self.Calories
 
-''' # This is for a web app database - leave this here for now.
-def submit():
-    # Database functions
-        
-    conn = sqlite3.connect('LIFE_MemberDB.db')
-    c= conn.cursor()
-    c.execute("INSERT INTO MemberDb VALUES (:u_name, :f_name, :l_name, :email, :pw)",
-        {
-            'u_name': u_name.get(),
-            'f_name': f_name.get(),
-            'l_name': l_name.get(),
-            'email': email.get(),
-            'pw': pw.get()
-        })
-    conn.commit()
-    conn.close()
-'''
-
-# This section placeholder for loading account/previously saved preferences
-'''
-def login():
-    userlvl = Label(win, text = "Username :")
-    passwdlvl = Label(win, text = "Password  :")
-
-    user1 = Entry(win, textvariable = StringVar())
-    passwd1 = Entry(win, textvariable = IntVar().set(""))
-
-    enter = Button(win, text = "Enter", command = lambda: login(), bd = 0)
-    enter.configure(bg = "pink")
-
-    user1.place(x = 200, y = 220)
-    passwd1.place(x = 200, y = 270)
-    userlvl.place(x = 130, y = 220)
-    passwdlvl.place(x = 130, y = 270)
-    enter.place(x = 238, y = 325)
-
-    #app.f_name.delete(0, END)
-'''
 # Main Calculation
 def get_minutes(req_exercise, weight, units, src_calories, exertable):
     if units == "LB":
@@ -176,7 +136,8 @@ def get_minutes(req_exercise, weight, units, src_calories, exertable):
         wconv = 2.20462262
     else: 
         print("ERROR: NO ACCEPTABLE WEIGHT UNIT CONVERSION PASSED")
-    Multiple = exertable.get(req_exercise)
+    #Multiple = exertable.get(req_exercise)
+    Multiple = exertable[req_exercise][0] # Note the second item is the number of the item in the exertable list - in this case the first item starts with 0
     MultiplierX = float(Multiple)
     Minutes = (src_calories) / (weight * wconv * MultiplierX)
     return Minutes
@@ -355,13 +316,11 @@ class App(object):
         f1 = Frame(self.frame, background="white", width=appwidth*0.4, height=appheight)
         f2 = Frame(self.frame, background="white", width=appwidth*0.4, height=appheight)
         f3 = Frame(self.frame, background="white", width=appwidth*0.2, height=appheight)
-        #f4 = Frame(self.frame, background="white", width=appwidth*0.1, height=appheight)
         f1.pack(side=LEFT)
         f2.pack(side=LEFT)
         f3.pack(side=LEFT)
-        #f4.pack(side=LEFT)
         
-        # Add sub-sub-frames
+        # Add sub-sub-frames - THIS IS AN EXAMPLE IF WE WANT TO GET FANCY
         #f1suba = Frame(f1, background="white")
         #f1subb = Frame(f1, background="white")
         #f1suba.pack(side=TOP, padx=20, pady=20)
@@ -371,14 +330,9 @@ class App(object):
         #f2suba.pack(side=TOP)
         #f2subb.pack(side=BOTTOM)
 
-        # Create list of Exercises from Exercise table
-        self.exercise_list = [] # Create list for dictionary
-        
+        # Create list of Exercises from Exercise table to use in the list box
+        self.exercise_list = [] # Create list for dictionary        
         self.exercise_list = list(exertable.keys())
-        print(self.exercise_list)
-        print("breakpoint")
-
-        #faselectstate = 0 # Initialize selection state
 
         # Initialize Favorite Activity Tk state var that automatically update
         self.fa1 = StringVar()
@@ -462,6 +416,9 @@ class App(object):
         self.frame = Frame(self.master, background="white", width=appwidth, height=appheight) 
         self.frame.pack(side = LEFT, fill= Y)
 
+        # Reset current meme to 1
+        memeCount = 1
+
         # Add sub-frames
         f1 = Frame(self.frame, background="white", width=appwidth*.2, height=appheight)
         f2 = Frame(self.frame, background="white", width=appwidth*.4, height=appheight)
@@ -506,6 +463,9 @@ class App(object):
         self.frame = Frame(self.master, background="white", width=appwidth, height=appheight) 
         self.frame.pack(side = LEFT, fill= Y)
 
+        # Reset current meme to 1
+        memeCount = 1
+
         # Add sub-frames
         f1 = Frame(self.frame, background="white", width=appwidth*.2, height=appheight)
         f2 = Frame(self.frame, background="white", width=appwidth*.3, height=appheight)
@@ -537,7 +497,7 @@ class App(object):
             flist = []
             fdict = food_dict.get(rcurrent_selection)
             flist = list(fdict)
-            #print (flist)
+            print (flist)
             print ("Selected:",userzero.Item.Restaurant)
             for d in flist:
                 Foodbox.insert('end',d)
@@ -555,20 +515,7 @@ class App(object):
         restaurant_list = []
         restaurant_list = list(food_dict)
         
-        print ("Find Food")
-        print (userzero.Units)
-        print (userzero.Weight)
-        # Add sub-sub-frames
-        #f1suba = Frame(f1, background="white")
-        #f1subb = Frame(f1, background="white")
-        #f1suba.pack(side=TOP, padx=20, pady=20)
-        #f1subb.pack(side=BOTTOM)
-        #f2suba = Frame(f2, background="white")
-        #f2subb = Frame(f2, background="white")
-        #f2suba.pack(side=TOP)
-        #f2subb.pack(side=BOTTOM)
-
-        # put label in self.frame
+         # put label in self.frame
         self.back_button = Button(f1, text ="Back", bg=buttcolor,command = self.switch_to_weight)
         self.back_button.place(in_= f1, relx = 0.5, rely = 0.4, anchor=CENTER)
 
@@ -611,20 +558,22 @@ class App(object):
         self.frame = Frame(self.master, background="white", width=appwidth, height=appheight) 
         self.frame.pack(fill=BOTH)
         
+        # Reset current meme to 1
+        memeCount = 1
+
         # Add sub-frames
         f1 = Frame(self.frame, background="white", width=appwidth*.2, height=appheight)
-        f2 = Frame(self.frame, background="white", width=appwidth*.3, height=appheight)
-        f3 = Frame(self.frame, background="white", width=appwidth*.3, height=appheight)
-        f4 = Frame(self.frame, background="white", width=appwidth*.2, height=appheight)
+        f2 = Frame(self.frame, background="white", width=appwidth*.6, height=appheight)
+        f3 = Frame(self.frame, background="white", width=appwidth*.2, height=appheight)
         f1.pack(side=LEFT)
         f2.pack(side=LEFT)
         f3.pack(side=LEFT)
-        f4.pack(side=LEFT)
 
-        # put label in self.frame
+        # COLUMN ONE
         self.back_button = Button(f1, text ="Back", bg=buttcolor,command = self.switch_to_findfood)
         self.back_button.place(in_= f1, relx = 0.5, rely = 0.4, anchor=CENTER)
 
+        # COLUMN TWO
         self.chooser_label = Label(f2, text="RESULT:", bg='white')
         self.chooser_label.config(font=subheadfont)
         self.chooser_label.place(in_=f2, relx = 0.5, rely = 0.25, anchor = CENTER)
@@ -633,48 +582,116 @@ class App(object):
         self.food_label.config(font=subheadfont)
         self.food_label.place(in_=f2, relx = 0.5, rely = 0.30, anchor = CENTER)
 
-        self.calories_label = Label(f2, text= "Calories="+str(food_dict[userzero.Item.Restaurant][userzero.Item.Food]), bg='white')
+        self.calories_label = Label(f2, text= "Calories="+str(food_dict[userzero.Item.Restaurant][userzero.Item.Food][0]), bg='white')
         self.calories_label.config(font=subheadfont)
         self.calories_label.place(in_=f2, relx = 0.5, rely = 0.35, anchor = CENTER)
 
-        # Get the total number of minutes
-        Exer1_minutes = get_minutes(userzero.Pref1, float(userzero.Weight), userzero.Units, float(food_dict[userzero.Item.Restaurant][userzero.Item.Food]), exertable)
-        Exer2_minutes = get_minutes(userzero.Pref2, float(userzero.Weight), userzero.Units, float(food_dict[userzero.Item.Restaurant][userzero.Item.Food]), exertable)
-        Exer3_minutes = get_minutes(userzero.Pref3, float(userzero.Weight), userzero.Units, float(food_dict[userzero.Item.Restaurant][userzero.Item.Food]), exertable)
-
-        # Convert the minutes to a readable string
-        Exer1_string = convert_time_string(Exer1_minutes)
-        Exer2_string = convert_time_string(Exer2_minutes)
-        Exer3_string = convert_time_string(Exer3_minutes)
-
-        self.ex1equivalent_label = Label(f3, text=Exer1_string +"\n of "+userzero.Pref1, bg='white')
-        self.ex1equivalent_label.config(font=subheadfont)
-        self.ex1equivalent_label.place(in_=f3, relx = 0.5, rely = 0.25, anchor = CENTER)
+        # Add an if statement in case they only pick one preferred exercise (note that theoretically there should always be at least one exercise chosen)
+        if userzero.Pref1 != "NA":
+            userzero.MinEquiv1 = get_minutes(userzero.Pref1, float(userzero.Weight), userzero.Units, float(food_dict[userzero.Item.Restaurant][userzero.Item.Food][0]), exertable) # Get the total numbeer of minutes
+            Exer1_string = convert_time_string(userzero.MinEquiv1) # Convert integer minutes to a string that makes sense
+            self.ex1equivalent_label = Label(f2, text=Exer1_string +" "+userzero.Pref1, bg='white')
+            self.ex1equivalent_label.config(font=subheadfont)
+            self.ex1equivalent_label.place(in_=f2, relx = 0.5, rely = 0.40, anchor = CENTER)
+        if userzero.Pref2 != "NA":
+            userzero.MinEquiv2 = get_minutes(userzero.Pref2, float(userzero.Weight), userzero.Units, float(food_dict[userzero.Item.Restaurant][userzero.Item.Food][0]), exertable)
+            Exer2_string = convert_time_string(userzero.MinEquiv2)
+            self.ex2equivalent_label = Label(f2, text=Exer2_string +" "+userzero.Pref2, bg='white')
+            self.ex2equivalent_label.config(font=subheadfont)
+            self.ex2equivalent_label.place(in_=f2, relx = 0.5, rely = 0.45, anchor = CENTER)
+        if userzero.Pref3 != "NA":
+            userzero.MinEquiv3 = get_minutes(userzero.Pref3, float(userzero.Weight), userzero.Units, float(food_dict[userzero.Item.Restaurant][userzero.Item.Food][0]), exertable)
+            Exer3_string = convert_time_string(userzero.MinEquiv3)
+            self.ex3equivalent_label = Label(f2, text=Exer3_string +" "+userzero.Pref3, bg='white')
+            self.ex3equivalent_label.config(font=subheadfont)
+            self.ex3equivalent_label.place(in_=f2, relx = 0.5, rely = 0.50, anchor = CENTER)
         
-        self.ex2equivalent_label = Label(f3, text=Exer2_string +"\n of "+userzero.Pref2, bg='white')
-        self.ex2equivalent_label.config(font=subheadfont)
-        self.ex2equivalent_label.place(in_=f3, relx = 0.5, rely = 0.35, anchor = CENTER)
+        # COLUMN THREE
+        # Right hand side button to show the first card.
+        self.fdnext_button = Button(f3, text ="Show Meme Cards", bg=buttcolor, command = self.show_memes)
+        self.fdnext_button.place(in_= f3, relx = 0.5, rely = 0.4, anchor=CENTER)
 
-        self.ex3equivalent_label = Label(f3, text=Exer3_string + "\n of "+userzero.Pref3, bg='white')
-        self.ex3equivalent_label.config(font=subheadfont)
-        self.ex3equivalent_label.place(in_=f3, relx = 0.5, rely = 0.45, anchor = CENTER)
+    def show_memes(self):
+        if self.frame is not None:
+            self.frame.destroy() # remove current frame
+        self.frame = Frame(self.master, background="white", width=appwidth, height=appheight) # A
+        self.frame.pack(fill=BOTH)
 
-        # DIAGNOSTIC - DELETE THIS
-        exer1 = userzero.Pref1
-        print("START DIAGNOSTIC")
-        print(exer1)
-        weight = float(userzero.Weight)
-        print(weight)
-        calories = float(food_dict[userzero.Item.Restaurant][userzero.Item.Food])
-        print(calories)
-        units = userzero.Units
-        print(units)
-        val=get_minutes(exer1, weight, units, calories, exertable)
-        print("Call get_minutes function RESULT:")
-        print(val)
-        print("END DIAGNOSTIC")
-        self.fdnext_button = Button(f4, text ="Save Settings", bg=buttcolor, command = self.switch_to_main)
-        self.fdnext_button.place(in_= f4, relx = 0.5, rely = 0.4, anchor=CENTER)
+        f1 = Frame(self.frame, background="white", width=appwidth * 0.2, height=appheight)
+        f2 = Frame(self.frame, background="white", width=appwidth * 0.6, height=appheight)
+        f3 = Frame(self.frame, background="white", width=appwidth * 0.2, height=appheight)
+        f1.pack(side=LEFT)
+        f2.pack(side=LEFT)
+        f3.pack(side=LEFT)
+        food=userzero.Item
+        if memeCount == 1: # Depending on which meme currently being shown, set the exercise and minutes string to the correct one. 
+            exercise=exertable[userzero.Pref1][1]
+            minutes=convert_time_string(userzero.MinEquiv1)
+        elif memeCount == 2:
+            exercise=exertable[userzero.Pref2][1]
+            minutes=convert_time_string(userzero.MinEquiv2)
+        elif memeCount == 3:
+            exercise=exertable[userzero.Pref3][1]
+            minutes=convert_time_string(userzero.MinEquiv3)
+
+        # Add code to change command button based on which meme page you're on
+        self.start_button = Button(f1, text ="Previous", bg=buttcolor, command = self.switch_to_main)
+        self.start_button.place(in_= f1, relx = 0.5, rely = 0.4, anchor=CENTER)
+
+        # COLUMN 2 MAIN IMAGE
+        startimg = get_meme_image(food_dict, food, exercise, minutes)
+        self.start_image = Label(f2, image = startimg)
+        self.start_image.image = startimg # Had to add this to "anchor" image - don't know why
+        self.start_image.place(in_= f2, relx = 0.5, rely = 0.4, anchor=CENTER)
+
+        # COLUMN 3 Next button
+        self.start_button = Button(f3, text ="Next", bg=buttcolor, command = self.show_meme2)
+        self.start_button.place(in_= f3, relx = 0.5, rely = 0.4, anchor=CENTER)
+
+    def show_meme2(self):
+        if self.frame is not None:
+            self.frame.destroy() # remove current frame
+        self.frame = Frame(self.master, background="white", width=appwidth, height=appheight) # A
+        self.frame.pack(fill=BOTH)
+
+        f1 = Frame(self.frame, background="white", width=appwidth * 0.1, height=appheight)
+        f2 = Frame(self.frame, background="white", width=appwidth * 0.8, height=appheight)
+        f3 = Frame(self.frame, background="white", width=appwidth * 0.1, height=appheight)
+        f1.pack(side=LEFT)
+        f2.pack(side=LEFT)
+        f3.pack(side=LEFT)
+        food=userzero.Item
+        exercise=exertable[userzero.Pref2][1]
+        minutes=convert_time_string(userzero.MinEquiv2)
+
+        # Add code to change command button based on which meme page you're on
+        self.start_button = Button(f1, text ="Previous", bg=buttcolor, command = self.switch_to_main)
+        self.start_button.place(in_= f1, relx = 0.5, rely = 0.4, anchor=CENTER)
+
+        # COLUMN 2 MAIN IMAGE
+        startimg2 = get_meme_image(food, exercise, minutes)
+        self.start_image2 = Label(f2, image = startimg2)
+        self.start_image2.image = startimg2 # Had to add this to "anchor" image - don't know why
+        self.start_image2.place(in_= f2, relx = 0.5, rely = 0.4, anchor=CENTER)
+
+        # COLUMN 3 Next button
+        self.start_button = Button(f3, text ="Next", bg=buttcolor, command = self.next_meme)
+        self.start_button.place(in_= f3, relx = 0.5, rely = 0.4, anchor=CENTER)
+
+    def next_meme(self):
+            global memeCount
+            #self.frame.destroy()
+            print("Memcount before=",memeCount)
+            if memeCount == 1:
+                memeCount += 1
+                self.show_meme2
+            elif memeCount == 2:
+                memeCount += 1
+                self.show_meme3
+            elif memeCount == 3:
+                memeCount = 1
+                self.switch_to_main # Start over
+            print("Memecount after=",memeCount)
 
     def switch_to_main(self):
         if self.frame is not None:
@@ -753,7 +770,8 @@ class App(object):
 
 # Initialize Account values
 dItem = Item(dRestaurant, dFood, dCalories)
-userzero = Account(did, dLoginId, dEmail, dPassword, dFirstName, dLastName, dPref1, dPref2, dPref3, dWeight, dUnits, dItem)
+userzero = Account(did, dLoginId, dEmail, dPassword, dFirstName, dLastName, dPref1, dPref2, dPref3, dWeight, dUnits, dItem, dMinEquiv1, dMinEquiv2, dMinEquiv3)
+memeCount = 1
 
 # Initialize Window
 root = Tk()

@@ -1,83 +1,83 @@
-Restaurant,Item,Calories,
-Arby's,Angus 3 Cheese and Bacon no ranch,560,
-Arby's,Angus Philly no mayo,460,
-Arby's,Chicken Bacon Swiss,610,
-Arby's,Chicken Cordon Bleu no mayo,540,
-Arby's,Chicken Cordon Bleu no mayo,540,
-Arby's,Chicken n Cheese Slider,290,
-Arby's,Classic Beef n Cheddar no sauce or mayo,390,
-Arby's,Classic Roast Beef no sauce/mayo,360,
-Arby's,Corned Beef n Cheese Slider,220,
-Arby's,Crispy Chicken Farmhouse Salad w/light Italian,440,
-Arby's,Crispy Chicken no mayo,400,
-Arby's,Crispy Fish Flatbread no sauce,480,
-Arby's,Crispy Fish no sauce,450,
-Arby's,French Dip n Swiss no au jus,490,
-Arby's,Grand Turkey Club no mayo,480,
-Arby's,Ham n Cheese Slider,230,
-Arby's,Hamburger no ketchup,220,
-Arby's,Jalapeno Roast Beef Slider,240,
-Arby's,Jr Bacon Cheddar Melt,280,
-Arby's,Jr Ham and Cheddar,230,
-Arby's,Jr Roast Beef,210,
-Arby's,King's Hawaiian Fish Deluxe no sauce,580,
-Arby's,Loaded Italian,670,
-Arby's,Max Roast Beef no sauce,560,
-Arby's,Mid Beef n Cheddar no sauce/mayo,490,
-Arby's,Mid Roast Beef no sauce,460,
-Arby's,"Prime Cut Chicken Tenders, 3 no sauce",360,
-Arby's,"Prime Cut Chicken Tenders, 5 no sauce",600,
-Arby's,Reuben no spread,540,
-Arby's,Roast Beef n Cheese Slider,240,
-Arby's,Roast Turkey and Swiss no mayo,610,
-Arby's,Roast Turkey and Swiss Wrap no mayo,410,
-Arby's,Roast Turkey Farmhouse Salad w/light Italian,250,
-Arby's,Roast Turkey Ranch and Bacon no ranch,660,
-Arby's,Roast Turkey Ranch and Bacon Wrap no ranch,470,
-Arby's,Smokehoues Brisket no mayon or onion strings,480,
-Burger King,A1 Smokey Bacon Tendercrisp,600,
-Burger King,A1 Ultimate Bacon Cheeseburger,810,
-Burger King,Bacon and Cheese Tendercrisp no mayo,580,
-Burger King,Bacon and Cheese Whopper no mayo,630,
-Burger King,Bacon Double Cheeseburger no ketchup,380,
-Burger King,"Bacon, Egg and Cheese Biscuit",450,
-Burger King,"Bacon, Egg and Cheese Croissan'wich",340,
-Burger King,Breakfast Burrito Junior,370,
-Burger King,Cheeseburger no ketchup,250,
-Burger King,Chicken Club Salad,610,
-Burger King,"Chicken Fries, 9",290,
-Burger King,Chicken Garden Salad,520,
-Burger King,"Chicken Nuggets, 10",470,
-Burger King,"Chicken Nuggets, 4",190,
-Burger King,"Chicken Nuggets, 6",280,
-Burger King,Crispy Chicken Jr no mayo,290,
-Burger King,Double Whopper no mayo,740,
-Burger King,Egg and Cheese Croissan'wich,300,
-Burger King,Egg-normous Burrito,900,
-Burger King,Extra Long Cheeseburger no ketchup/mayo,470,
-Burger King,Extra Long Fish Sandwich no sauce,390,
-Burger King,Fully Loaded Croissan'wich,570,
-Burger King,Grilled Chicken Salad no dressing,320,
-Burger King,Grilled Chicken Sandwich,470,
-Burger King,"Ham, Egg and Cheese Croissan'wich",640,
-Burger King,King Croissan'wich with Double Sausage,700,
-Burger King,King Croissan'wich with Ham and Sausage,530,
-Burger King,King Croissan'wich with Sausage and Bacon,570,
-Burger King,Morningstar Veggie Burger no Ketchup,380,
-Burger King,Morningstar Veggie Burger no ketchup/mayo,310,
-Burger King,Original Chicken Sandwich no mayo,450,
-Burger King,"Sausage, Egg and Cheese Biscuit",510,
-Burger King,"Sausage, Egg and Cheese Croissan'wich",470,
-Burger King,Spicy Crispy Chicken Jr no sauce,290,
-Burger King,Supreme Breakfast Sandwich,880,
-Burger King,Tendercrisp Chicken Salad no dressing,450,
-Burger King,Tendercrisp Chicken Sandwich no mayo,440,
-Burger King,Tendergrill Chicken Salad no dressing,320,
-Burger King,Tendergrill Chicken Sandwich no Mayo,350,
-Burger King,Tendergrill Chicken Sandwich no mayo,350,
-Burger King,Triple Whopper no mayo,1020,
-Burger King,Whopper Jr. Sandwich no Mayo,230,
-Burger King,Whopper no ketchup/mayo,500,
+Restaurant,Item,Calories,Image
+Arby's,Angus 3 Cheese and Bacon no ranch,560,default_item.png
+Arby's,Fire Roasted Philly,630,FireRoastedPhilly_18_tile_Desktop_1024x557.png
+Arby's,Chicken Bacon Swiss,610,default_item.png
+Arby's,Chicken Cordon Bleu no mayo,540,default_item.png
+Arby's,Chicken Cordon Bleu no mayo,540,default_item.png
+Arby's,Chicken n Cheese Slider,290,Chicken-Slider_20_tile_Desktop_1024x557.png
+Arby's,Classic Beef n Cheddar no sauce or mayo,390,ClassicBnC_18_tile_Desktop_1024x557.png
+Arby's,Classic Roast Beef no sauce/mayo,360,ClassicRB_18_tile_Desktop_1024x557.png
+Arby's,Corned Beef n Cheese Slider,220,default_item.png
+Arby's,Crispy Chicken Farmhouse Salad w/light Italian,440,default_item.png
+Arby's,Crispy Chicken no mayo,400,CrispyChicken_18_tile_Desktop_1024x557.png
+Arby's,Crispy Fish Flatbread no sauce,480,default_item.png
+Arby's,Crispy Fish no sauce,450,default_item.png
+Arby's,French Dip n Swiss no au jus,490,FrenchDip_18_tile_Desktop_1024x557_v2.png
+Arby's,Grand Turkey Club no mayo,480,default_item.png
+Arby's,Ham n Cheese Slider,230,Ham-Slider_20_tile_Desktop_1024x557.png
+Arby's,Hamburger no ketchup,220,default_item.png
+Arby's,Jalapeno Roast Beef Slider,240,JalapenoRB-Slider_20_tile_Desktop_1024x557.png
+Arby's,Jr Bacon Cheddar Melt,280,default_item.png
+Arby's,Jr Ham and Cheddar,230,default_item.png
+Arby's,Jr Roast Beef,210,default_item.png
+Arby's,King's Hawaiian Fish Deluxe no sauce,580,default_item.png
+Arby's,Loaded Italian,670,LoadedItalian_18_tile_Desktop_1024x557.png
+Arby's,Max Roast Beef no sauce,560,ClassicRB_18_tile_Desktop_1024x557.png
+Arby's,Mid Beef n Cheddar no sauce/mayo,490,ClassicBnC_18_tile_Desktop_1024x557.png
+Arby's,Mid Roast Beef no sauce,460,ClassicRB_18_tile_Desktop_1024x557.png
+Arby's,"Prime Cut Chicken Tenders, 3 no sauce",360,ChickenTenders_3pc_18_tile_Desktop_1024x557.png
+Arby's,"Prime Cut Chicken Tenders, 5 no sauce",600,ChickenTenders_3pc_18_tile_Desktop_1024x557.png
+Arby's,Reuben no spread,540,Reuben_18_tile_Desktop_1024x557.png
+Arby's,Roast Beef n Cheese Slider,240,RoastBeef-Slider_20_tile_Desktop_1024x557.png
+Arby's,Roast Turkey and Swiss no mayo,610,RoastTurkeySwiss_18_tile_Desktop_1024x557.png
+Arby's,Roast Turkey and Swiss Wrap no mayo,410,TRB-Wrap_20_tile_Desktop_1024x557.png
+Arby's,Roast Turkey Farmhouse Salad w/light Italian,250,default_item.png
+Arby's,Roast Turkey Ranch and Bacon no ranch,660,TurkeyBaconRanch_18_tile_Desktop_1024x557.png
+Arby's,Roast Turkey Ranch and Bacon Wrap no ranch,470,default_item.png
+Arby's,Smokehoues Brisket no mayon or onion strings,480,SmokeHouseBrisket_18_tile_Desktop_1024x557.png
+Burger King,A1 Smokey Bacon Tendercrisp,600,default_item.png
+Burger King,A1 Ultimate Bacon Cheeseburger,810,default_item.png
+Burger King,Bacon and Cheese Tendercrisp no mayo,580,default_item.png
+Burger King,Bacon and Cheese Whopper no mayo,630,33d6f14492cfd584a1671fb39e3275362fa51c43-400x266.png
+Burger King,Bacon Double Cheeseburger no ketchup,380,3d1b8bfcf86f970151e8f7020e6a395e666e2e09-592x344.png
+Burger King,"Bacon, Egg and Cheese Biscuit",450,a73168cca799f9ff5bec303938117c0045d83217-400x266.png
+Burger King,"Bacon, Egg and Cheese Croissan'wich",340,932eedf07b738b450fb3c96894830cfc380bb103-400x266.png
+Burger King,Breakfast Burrito Junior,370,default_item.png
+Burger King,Cheeseburger no ketchup,250,default_item.png
+Burger King,Chicken Club Salad,610,bcf57f8b9969f05bfabe44da3e42198213336c3f-400x266.png
+Burger King,"Chicken Fries, 9",290,833fe1247051e9b8fd02624aceb3465069b7c13d-400x266.png
+Burger King,Chicken Garden Salad,520,default_item.png
+Burger King,"Chicken Nuggets, 10",470,0ca059b6b202484acd1f74301091951e94595b4a-400x266.png
+Burger King,"Chicken Nuggets, 4",190,0ca059b6b202484acd1f74301091951e94595b4a-400x266.png
+Burger King,"Chicken Nuggets, 6",280,0ca059b6b202484acd1f74301091951e94595b4a-400x266.png
+Burger King,Crispy Chicken Jr no mayo,290,0df2b1047c801f865db6d9f7f21407ef0a9f232e-400x266.png
+Burger King,Double Whopper no mayo,740,7f9dfb65fee737b14ff1767725f3d3e3e6eb0512-400x266.png
+Burger King,Egg and Cheese Croissan'wich,300,546c4446da94eb6ddbee72f5f28f9d031d003993-400x266.png
+Burger King,Egg-normous Burrito,900,default_item.png
+Burger King,Extra Long Cheeseburger no ketchup/mayo,470,default_item.png
+Burger King,Extra Long Fish Sandwich no sauce,390,d9ade26c553f32e775828e85bbc36c87b11267c7-400x266.png
+Burger King,Fully Loaded Croissan'wich,570,default_item.png
+Burger King,Grilled Chicken Salad no dressing,320,default_item.png
+Burger King,Grilled Chicken Sandwich,470,default_item.png
+Burger King,"Ham, Egg and Cheese Croissan'wich",640,default_item.png
+Burger King,King Croissan'wich with Double Sausage,700,b9e13a667e09b403ae65821265711338ad22a748-400x266.png
+Burger King,King Croissan'wich with Ham and Sausage,530,13a55b75cb2763c2f905bdf1563c69347fb83504-400x266.png
+Burger King,King Croissan'wich with Sausage and Bacon,570,932eedf07b738b450fb3c96894830cfc380bb103-400x266.png
+Burger King,Morningstar Veggie Burger no Ketchup,380,default_item.png
+Burger King,Morningstar Veggie Burger no ketchup/mayo,310,default_item.png
+Burger King,Original Chicken Sandwich no mayo,450,0df2b1047c801f865db6d9f7f21407ef0a9f232e-400x266.png
+Burger King,"Sausage, Egg and Cheese Biscuit",510,ea6c181c2aaa701494d595ad581961284bc25def-400x266.png
+Burger King,"Sausage, Egg and Cheese Croissan'wich",470,546c4446da94eb6ddbee72f5f28f9d031d003993-400x266.png
+Burger King,Spicy Crispy Chicken Jr no sauce,290,default_item.png
+Burger King,Supreme Breakfast Sandwich,880,default_item.png
+Burger King,Tendercrisp Chicken Salad no dressing,450,default_item.png
+Burger King,Tendercrisp Chicken Sandwich no mayo,440,c5160b84f374bdb22d3dbd1c7585be56e3263c1e-400x266.png
+Burger King,Tendergrill Chicken Salad no dressing,320,default_item.png
+Burger King,Tendergrill Chicken Sandwich no Mayo,350,c5160b84f374bdb22d3dbd1c7585be56e3263c1e-400x266.png
+Burger King,Tendergrill Chicken Sandwich no mayo,350,c5160b84f374bdb22d3dbd1c7585be56e3263c1e-400x266.png
+Burger King,Triple Whopper no mayo,1020,ccfadaf0383a241cd972af84daab901113dae81c-400x266.webp
+Burger King,Whopper Jr. Sandwich no Mayo,230,2f82c53b868df2fe462a9fa76f596633d72dae77-592x344.png
+Burger King,Whopper no ketchup/mayo,500,bc1de9d5b571a315f9d75c881c548c2519825458-400x266.png
 Chick-fil-a,Chicken Biscuit,460,_0000s_0000_Stack620_0000_CFA_1605_60_Biscuit_Chicken_PROD_2155_1240px.png
 Chick-fil-a,Chicken Breakfast Burrito,460,_0000s_0004_ChickenSausageBurrito-pdp_1797v2_2880px_resize2.png
 Chick-fil-a,Chicken Deluxe,500,_0000s_0004_NEWStack6200001CFAPDPDeluxeSandwich1085png.png
@@ -95,204 +95,204 @@ Chick-fil-a,Grilled Market Salad,320,marketSalad_grilled_pdp.png
 Chick-fil-a,"Grilled Nuggets, 6",100,grilledNuggets_8ct_PDP.png
 Chick-fil-a,"Grilled Nuggets, 8",140,grilledNuggets_8ct_PDP.png
 Chick-fil-a,Spicy Southwest Salad,420,sswSalad_spicyGrilled_pdp.png
-Dairy Queen,1/2 lb FlameThrower GrillBurger,1000,
-Dairy Queen,"1/2 lb GrillBurger with Cheese, no mayo, no ketchup",740,
-Dairy Queen,"1/2 lb GrillBurger, no mayo, no ketchup",640,
-Dairy Queen,"1/4 lb Bacon Cheese Grillburger, no mayo, no ketchup",560,
-Dairy Queen,"1/4 lb GrillBurger, no mayo, no ketchup",420,
-Dairy Queen,"Bacon Biscuit Sandwich, no flavor oil",320,
-Dairy Queen,"Bacon Cheeseburger, no mayo, no ketchup",440,
-Dairy Queen,Barbecue Beef Sandwich,350,
-Dairy Queen,Barbecue Pork Sandwich,310,
-Dairy Queen,Beef Cheese Dog,340,
-Dairy Queen,Beef Chili and Cheese Dog,380,
-Dairy Queen,Beef Chili and Cheese Mega Dog,670,
-Dairy Queen,"Beef Chili Dog, no ketchup",320,
-Dairy Queen,"Beef Hot Dog, no ketchup",280,
-Dairy Queen,"Beef Mega Hot Dog, no ketchup",550,
-Dairy Queen,"BLT Salad with Crispy Chicken, no dressing",520,
-Dairy Queen,"BLT Salad with Grilled Chicken, no dressing",380,
-Dairy Queen,"Buffalo Chicken Snack Melt, no mayo",280,
-Dairy Queen,"California GrillBurger, no mayo",420,
-Dairy Queen,"Cheeseburger, no ketchup",390,
-Dairy Queen,Chicken Bacon BBQ Snack Melt,270,
-Dairy Queen,"Chicken Bacon Ranch Sandwich, no dressing",420,
-Dairy Queen,Chicken Mozzarella Sandwich,630,
-Dairy Queen,Chicken Quesadilla Snack Melt,270,
-Dairy Queen,"Crispy Chicken Sandwich, no mayo",490,
-Dairy Queen,"Crispy Chicken Wrap, no dressing",270,
-Dairy Queen,"Deluxe Cheeseburger, no ketchup",390,
-Dairy Queen,"Deluxe Double Cheeseburger, no ketchup",620,
-Dairy Queen,"Deluxe Double Hamburger, no ketchup",540,
-Dairy Queen,"Deluxe Hamburger, no ketchup",350,
-Dairy Queen,"Double Cheeseburger, no ketchup",620,
-Dairy Queen,Double Hamburger. no ketchup,520,
-Dairy Queen,"DQ Ultimate Burger, no sauce",720,
-Dairy Queen,"Fish Fillet Sandwich with Cheese, no tartar",420,
-Dairy Queen,"Fish Fillet Sandwich, no tartar",370,
-Dairy Queen,"Garden Greens Salad with Crispy Chicken, no dressing",280,
-Dairy Queen,Garden Greens Salad with Grilled Chicken,150,
-Dairy Queen,"Grilled Chicken Sandwich, no mayo",290,
-Dairy Queen,Grilled Chicken Wrap,210,
-Dairy Queen,"Ham Biscuit Sandwich, no flavor oil",290,
-Dairy Queen,"Hamburger, no ketchup",340,
-Dairy Queen,"Mushroom Swiss GrillBurger, no mayo",470,
-Dairy Queen,"Sausage Biscuit Sandwich, no flavor oil",350,
-Dairy Queen,Turkey BLT Sandwich,430,
-Dairy Queen,Ultimate Breakfast Burrito,620,
-Dairy Queen,White Cheese Curds,570,
-In-n-Out,"Cheeseburger mustard and ketchup, no spread",400,
-In-n-Out,Cheeseburger Protein Style,300,
-In-n-Out,Double Double Protein Style,520,
-In-n-Out,"Double Double, mustard and ketchup, no spread",590,
-In-n-Out,Fiery Buffalo Hot Wings Go Cup,480,
-In-n-Out,Hamburger Protein Style,240,
-In-n-Out,"Hamburger with mustard and ketchup, no spread",310,
-In-n-Out,HBBQ Hot Wings Go Cup,540,
-McDonalds,Artisan Grilled Chicken Sandwich,360,
-McDonalds,"Bacon Clubhouse Burger, no sauce",650,
-McDonalds,"Bacon Ranch with Crispy Chicken, no dressing",490,
-McDonalds,"Bacon Ranch with Grilled Chicken, no dressing",310,
-McDonalds,"Bacon, Egg and Cheese Bagel",570,
-McDonalds,"Bacon, Egg and Cheese Biscuit (reg)",450,
-McDonalds,"Bacon, Egg and Cheese McGriddle",450,
-McDonalds,Big Breakfast with Hotcakes,1050,
-McDonalds,"Big Mac, no sauce",450,
-McDonalds,Cheeseburger,300,
-McDonalds,"Crispy Chicken Deluxe Sandwich, no mayo",530,
-McDonalds,Double Cheeseburger,440,
-McDonalds,Double Quarter Pounder w/Cheese no bun,580,
-McDonalds,Double Quarter Pounder with Cheese,780,
-McDonalds,Egg McMuffin,300,
-McDonalds,Egg White Delight,250,
-McDonalds,"Filet-O-Fish, no sauce",300,
-McDonalds,Fruit and Maple Oatmeal,290,
-McDonalds,Hamburger,250,
-McDonalds,Hotcakes and Sausage,510,
-McDonalds,"McChicken, no mayo",320,
-McDonalds,McDouble,390,
-McDonalds,McNuggets (10),470,
-McDonalds,McNuggets (20),940,
-McDonalds,McNuggets (4),190,
-McDonalds,McNuggets (6),280,
-McDonalds,"McRib, no sauce",430,
-McDonalds,Quarter Pounder with Cheese,540,
-McDonalds,Sausage Biscuit (reg),440,
-McDonalds,Sausage Biscuit with Egg (reg),520,
-McDonalds,Sausage Burrito,300,
-McDonalds,Sausage McGriddle,440,
-McDonalds,Sausage McMuffin,400,
-McDonalds,Sausage McMuffin with Egg,470,
-McDonalds,"Sausage, Egg and Cheese McGriddle",570,
-McDonalds,"Southwest Salad with Crispy Chicken, no dressing",510,
-McDonalds,Southwest Salad with Grilled Chicken. no dressing,330,
-McDonalds,"Steak, Egg and Cheese Biscuit (reg)",530,
-Wendy's,Apple Pecan Chicken Salad Full Size,590,
-Wendy's,"Asiago Chicken Ranch Club, no sauce",580,
-Wendy's,Asian Cashew Chicken Salad Full Size,380,
-Wendy's,Bacon Cheese Baked Potato,480,
-Wendy's,Baconator,930,
-Wendy's,"BBQ Chicken Ranch Salad, full",590,
-Wendy's,BBQ Ranch Chicken Salad Full Size,600,
-Wendy's,Broccoli Cheese Baked Potato,430,
-Wendy's,"Chicken Nuggets, 10",450,
-Wendy's,"Chicken Nuggets, 4",180,
-Wendy's,"Chicken Nuggets, 6",270,
-Wendy's,"Crispy Chicken BLT, no mayo",170,
-Wendy's,"Crispy Chicken Sandwich, no mayo",300,
-Wendy's,"Dave's Double, no mayo / ketchup",740,
-Wendy's,"Dave's Single, no mayo / ketchup",500,
-Wendy's,Dave's Triple,1070,
-Wendy's,"Dave's Triple, no mayo / ketchup",1020,
-Wendy's,Double Stack,390,
-Wendy's,"Double Stack, no ketchup",380,
-Wendy's,Grilled Chicken Sandwich,350,
-Wendy's,Grilled Chicken Wrap,270,
-Wendy's,"Homestyle Chicken Sandwich, no mayo",460,
-Wendy's,Jr. Bacon Cheeseburger,380,
-Wendy's,Jr. Cheeseburger Deluxe,280,
-Wendy's,"Jr. Cheeseburger, no ketchup",270,
-Wendy's,"Jr. Hamburger, no ketchup",230,
-Wendy's,Power Mediterranean Chicken Salad,430,
-Wendy's,"Power Mediterranean Chicken Salad, full",450,
-Wendy's,Small Rich and Meaty Chili,170,
-Wendy's,"Son of Baconator, no mayo / ketchup",570,
-Wendy's,Sour Cream and Chive Baked Potato,310,
-Wendy's,Spicy Chicken Caesar Salad Full Size,460,
-Wendy's,"Spicy Chicken Sandwich, no mayo",450,
-Wendy's,"Spicy Chicken Wrap, no mayo",300,
-Wendy's,Ultimate Chicken Grill,340,
-Taco Bell,7-Layer Burrito,430,
-Taco Bell,Bean Burrito,370,
-Taco Bell,Beefy 5-Layer Burrito,500,
-Taco Bell,Beefy Fritos Burrito,430,
-Taco Bell,Beefy Mini Quesadilla,210,
-Taco Bell,Beefy Nacho Loaded Griller,370,
-Taco Bell,Beefy Pritos Burrito,430,
-Taco Bell,Black Bean Burrito,380,
-Taco Bell,Black Beans,80,
-Taco Bell,Black Beans and Rice,180,
-Taco Bell,Burrito Supreme,400,
-Taco Bell,Cantina Power Bowl,480,
-Taco Bell,"Cantina Power Bowl , Steak",500,
-Taco Bell,"Cantina Power Bowl, Chicken",490,
-Taco Bell,Cantina Power Burrito,450,
-Taco Bell,Chalupa Extreme,360,
-Taco Bell,Cheesy Bean and Rice,420,
-Taco Bell,Cheesy Burrito,490,
-Taco Bell,Cheesy Burrito - Steak and Egg,480,
-Taco Bell,"Cheesy Burrito Bacon, Fresco",390,
-Taco Bell,Cheesy Burrito Fiesta Potato,520,
-Taco Bell,Cheesy Burrito Steak and Egg,480,
-Taco Bell,Cheesy Potato Burrito,490,
-Taco Bell,Chipotle Chicken Loaded Griller,340,
-Taco Bell,Chips and Nacho Cheese,220,
-Taco Bell,Combo Burrito,450,
-Taco Bell,Cool Ranch Doritos Double Decker Taco,320,
-Taco Bell,Cool Ranch Doritos Locos Taco,170,
-Taco Bell,Cool Ranch Doritos Locos Taco Supreme,190,
-Taco Bell,Crunchwrap California,630,
-Taco Bell,"Crunchwrap, no sauce",600,
-Taco Bell,Crunchy Taco,170,
-Taco Bell,Crunchy Taco Supreme,190,
-Taco Bell,Crynch Wrap Supreme,530,
-Taco Bell,Double Decker taco,320,
-Taco Bell,Double Decker taco Supreme,340,
-Taco Bell,Double Tostada,270,
-Taco Bell,"DoubleDilla, Chicken",660,
-Taco Bell,"DoubleDilla, Steak",670,
-Taco Bell,Fiery Doritos Double Decker Taco,320,
-Taco Bell,Fiery Doritos Locos Tacos,170,
-Taco Bell,Fiery Doritos Locos Tacos Supreme,190,
-Taco Bell,Fiesta Taco Salad,770,
-Taco Bell,Fresco Bean Burrito,350,
-Taco Bell,Fresco Burrito Supreme - Steak,350,
-Taco Bell,Fresco Burrito Supreme Chicken,340,
-Taco Bell,Fresco Burrito Supreme Steak,340,
-Taco Bell,"Fresco Crunchy Taco, Beef",140,
-Taco Bell,"Fresco Soft Taco, Beef",160,
-Taco Bell,"Fresco Soft Taco, Shredded Chicken",140,
-Taco Bell,"Fresco Soft Taco, Steak",140,
-Taco Bell,Gordita Supreme,280,
-Taco Bell,Grande Scrambler Burrito,650,
-Taco Bell,Grilled Breakfast Burrito Fiesta Potato,340,
-Taco Bell,Grilled Breakfast Taco,240,
-Taco Bell,Grilled Steak Soft Taco,200,
-Taco Bell,Maximelt,250,
-Taco Bell,Mexican Pizza,550,
-Taco Bell,Mini Skillet Bowl,180,
-Taco Bell,Nachos BellGrande,760,
-Taco Bell,Nachos Supreme,440,
-Taco Bell,Quesarito,640,
-Taco Bell,Rice,100,
-Taco Bell,Sausage Flatbread Quesadilla,330,
-Taco Bell,Shredded Chicken Burrito,400,
-Taco Bell,Shredded Chicken Mini Quesadilla,180,
-Taco Bell,Smothered Burrito,690,
-Taco Bell,Smothered Burrito - Shredded Chicken,640,
-Taco Bell,Soft Taco,180,
-Taco Bell,Soft Taco Supreme,210,
-Taco Bell,Spicy Potato Soft Taco,230,
-Taco Bell,Triple Layer Nachos,320,
-Taco Bell,XXL Grilled Stuft Burrito,860,
-Taco Bell,XXL Grilled Stuft Burrito - Steak,830,
+Dairy Queen,1/2 lb FlameThrower GrillBurger,1000,Burger_GrillBurger_Half-Flamethrower.jpg
+Dairy Queen,"1/2 lb GrillBurger with Cheese, no mayo, no ketchup",740,Burger_GrillBurger_Qtr-Cheese.jpg
+Dairy Queen,"1/2 lb GrillBurger, no mayo, no ketchup",640,default_item.png
+Dairy Queen,"1/4 lb Bacon Cheese Grillburger, no mayo, no ketchup",560,Burger_GrillBurger_BaconCheese.jpg
+Dairy Queen,"1/4 lb GrillBurger, no mayo, no ketchup",420,default_item.png
+Dairy Queen,"Bacon Biscuit Sandwich, no flavor oil",320,default_item.png
+Dairy Queen,"Bacon Cheeseburger, no mayo, no ketchup",440,default_item.png
+Dairy Queen,Barbecue Beef Sandwich,350,default_item.png
+Dairy Queen,Barbecue Pork Sandwich,310,default_item.png
+Dairy Queen,Beef Cheese Dog,340,default_item.png
+Dairy Queen,Beef Chili and Cheese Dog,380,Hot-Dogs_Chili-Cheese_470x500.jpg
+Dairy Queen,Beef Chili and Cheese Mega Dog,670,Chili_Dog_lg_470x500.png
+Dairy Queen,"Beef Chili Dog, no ketchup",320,Chili_Dog_lg_470x500.png
+Dairy Queen,"Beef Hot Dog, no ketchup",280,Hot-Dogs_8-to-1_470x500.jpg
+Dairy Queen,"Beef Mega Hot Dog, no ketchup",550,Hot-Dogs_8-to-1_470x500.jpg
+Dairy Queen,"BLT Salad with Crispy Chicken, no dressing",520,default_item.png
+Dairy Queen,"BLT Salad with Grilled Chicken, no dressing",380,default_item.png
+Dairy Queen,"Buffalo Chicken Snack Melt, no mayo",280,default_item.png
+Dairy Queen,"California GrillBurger, no mayo",420,default_item.png
+Dairy Queen,"Cheeseburger, no ketchup",390,Burger_Original-Cheeseburger.jpg
+Dairy Queen,Chicken Bacon BBQ Snack Melt,270,default_item.png
+Dairy Queen,"Chicken Bacon Ranch Sandwich, no dressing",420,DQBakes_Sandwich_Chicken-Bacon-Ranch_17-04_470x500.jpg
+Dairy Queen,Chicken Mozzarella Sandwich,630,default_item.png
+Dairy Queen,Chicken Quesadilla Snack Melt,270,default_item.png
+Dairy Queen,"Crispy Chicken Sandwich, no mayo",490,CrispyChicSand_MB_ShinyBun_Q219_f.psd.r72.jpg
+Dairy Queen,"Crispy Chicken Wrap, no dressing",270,default_item.png
+Dairy Queen,"Deluxe Cheeseburger, no ketchup",390,Burger_GrillBurger_Qtr-Cheese.jpg
+Dairy Queen,"Deluxe Double Cheeseburger, no ketchup",620,Burger_GrillBurger_Qtr-Cheese.jpg
+Dairy Queen,"Deluxe Double Hamburger, no ketchup",540,default_item.png
+Dairy Queen,"Deluxe Hamburger, no ketchup",350,default_item.png
+Dairy Queen,"Double Cheeseburger, no ketchup",620,default_item.png
+Dairy Queen,Double Hamburger. no ketchup,520,default_item.png
+Dairy Queen,"DQ Ultimate Burger, no sauce",720,default_item.png
+Dairy Queen,"Fish Fillet Sandwich with Cheese, no tartar",420,default_item.png
+Dairy Queen,"Fish Fillet Sandwich, no tartar",370,default_item.png
+Dairy Queen,"Garden Greens Salad with Crispy Chicken, no dressing",280,default_item.png
+Dairy Queen,Garden Greens Salad with Grilled Chicken,150,default_item.png
+Dairy Queen,"Grilled Chicken Sandwich, no mayo",290,GrilledChicSand_MB_ShinyBun_Q219_f.psd.r72.jpg
+Dairy Queen,Grilled Chicken Wrap,210,default_item.png
+Dairy Queen,"Ham Biscuit Sandwich, no flavor oil",290,default_item.png
+Dairy Queen,"Hamburger, no ketchup",340,default_item.png
+Dairy Queen,"Mushroom Swiss GrillBurger, no mayo",470,default_item.png
+Dairy Queen,"Sausage Biscuit Sandwich, no flavor oil",350,default_item.png
+Dairy Queen,Turkey BLT Sandwich,430,DQBakes_Sandwich_Turkey-BLT_470x500.jpg
+Dairy Queen,Ultimate Breakfast Burrito,620,default_item.png
+Dairy Queen,White Cheese Curds,570,FOOD_CheeseCurds_870x810.png
+In-n-Out,"Cheeseburger mustard and ketchup, no spread",400,default_item.png
+In-n-Out,Cheeseburger Protein Style,300,default_item.png
+In-n-Out,Double Double Protein Style,520,default_item.png
+In-n-Out,"Double Double, mustard and ketchup, no spread",590,default_item.png
+In-n-Out,Fiery Buffalo Hot Wings Go Cup,480,default_item.png
+In-n-Out,Hamburger Protein Style,240,default_item.png
+In-n-Out,"Hamburger with mustard and ketchup, no spread",310,default_item.png
+In-n-Out,HBBQ Hot Wings Go Cup,540,default_item.png
+McDonalds,Artisan Grilled Chicken Sandwich,360,default_item.png
+McDonalds,"Bacon Clubhouse Burger, no sauce",650,default_item.png
+McDonalds,"Bacon Ranch with Crispy Chicken, no dressing",490,default_item.png
+McDonalds,"Bacon Ranch with Grilled Chicken, no dressing",310,default_item.png
+McDonalds,"Bacon, Egg and Cheese Bagel",570,t-mcdonalds-Bacon-Egg-Cheese-Bagel.png
+McDonalds,"Bacon, Egg and Cheese Biscuit (reg)",450,t-mcdonalds-Bacon-Egg-Cheese-Biscuit-Regular-Size-Biscuit.png
+McDonalds,"Bacon, Egg and Cheese McGriddle",450,t-mcdonalds-Bacon-Egg-Cheese-McGriddles.png
+McDonalds,Big Breakfast with Hotcakes,1050,t-mcdonalds-Big-Breakfast-with-Hotcakes-Regular-Size-Biscuit.png
+McDonalds,"Big Mac, no sauce",450,t-mcdonalds-Big-Mac.png
+McDonalds,Cheeseburger,300,t-mcdonalds-Cheeseburger.png
+McDonalds,"Crispy Chicken Deluxe Sandwich, no mayo",530,t-mcdonalds-Premium-Buttermilk-Crispy-Chicken-Deluxe-Sandwich.png
+McDonalds,Double Cheeseburger,440,t-mcdonalds-Double-Cheeseburger.png
+McDonalds,Double Quarter Pounder w/Cheese no bun,580,t-mcdonalds-Double-Quarter-Pounder-with-Cheese.png
+McDonalds,Double Quarter Pounder with Cheese,780,t-mcdonalds-Double-Quarter-Pounder-with-Cheese.png
+McDonalds,Egg McMuffin,300,t-mcdonalds-Egg-McMuffin.png
+McDonalds,Egg White Delight,250,default_item.png
+McDonalds,"Filet-O-Fish, no sauce",300,t-mcdonalds-Filet-O-Fish.png
+McDonalds,Fruit and Maple Oatmeal,290,t-mcdonalds-Fruit-Maple-Oatmeal.png
+McDonalds,Hamburger,250,t-mcdonalds-Hamburger.png
+McDonalds,Hotcakes and Sausage,510,default_item.png
+McDonalds,"McChicken, no mayo",320,t-mcdonalds-McChicken.png
+McDonalds,McDouble,390,t-mcdonalds-McDouble.png
+McDonalds,McNuggets (10),470,t-mcdonalds-Chicken-McNuggets-4pc.png
+McDonalds,McNuggets (20),940,t-mcdonalds-Chicken-McNuggets-4pc.png
+McDonalds,McNuggets (4),190,t-mcdonalds-Chicken-McNuggets-4pc.png
+McDonalds,McNuggets (6),280,t-mcdonalds-Chicken-McNuggets-4pc.png
+McDonalds,"McRib, no sauce",430,default_item.png
+McDonalds,Quarter Pounder with Cheese,540,t-mcdonalds-Quarter-Pounder-with-Cheese.png
+McDonalds,Sausage Biscuit (reg),440,default_item.png
+McDonalds,Sausage Biscuit with Egg (reg),520,default_item.png
+McDonalds,Sausage Burrito,300,t-mcdonalds-Sausage-Burrito.png
+McDonalds,Sausage McGriddle,440,default_item.png
+McDonalds,Sausage McMuffin,400,t-mcdonalds-Sausage-McMuffin.png
+McDonalds,Sausage McMuffin with Egg,470,t-mcdonalds-Sausage-McMuffin-with-Egg.png
+McDonalds,"Sausage, Egg and Cheese McGriddle",570,t-mcdonalds-Sausage-Egg-Cheese-McGriddles.png
+McDonalds,"Southwest Salad with Crispy Chicken, no dressing",510,default_item.png
+McDonalds,Southwest Salad with Grilled Chicken. no dressing,330,default_item.png
+McDonalds,"Steak, Egg and Cheese Biscuit (reg)",530,default_item.png
+Wendy's,Apple Pecan Chicken Salad Full Size,590,default_item.png
+Wendy's,"Asiago Chicken Ranch Club, no sauce",580,default_item.png
+Wendy's,Asian Cashew Chicken Salad Full Size,380,default_item.png
+Wendy's,Bacon Cheese Baked Potato,480,default_item.png
+Wendy's,Baconator,930,default_item.png
+Wendy's,"BBQ Chicken Ranch Salad, full",590,default_item.png
+Wendy's,BBQ Ranch Chicken Salad Full Size,600,default_item.png
+Wendy's,Broccoli Cheese Baked Potato,430,default_item.png
+Wendy's,"Chicken Nuggets, 10",450,default_item.png
+Wendy's,"Chicken Nuggets, 4",180,default_item.png
+Wendy's,"Chicken Nuggets, 6",270,default_item.png
+Wendy's,"Crispy Chicken BLT, no mayo",170,default_item.png
+Wendy's,"Crispy Chicken Sandwich, no mayo",300,default_item.png
+Wendy's,"Dave's Double, no mayo / ketchup",740,default_item.png
+Wendy's,"Dave's Single, no mayo / ketchup",500,default_item.png
+Wendy's,Dave's Triple,1070,default_item.png
+Wendy's,"Dave's Triple, no mayo / ketchup",1020,default_item.png
+Wendy's,Double Stack,390,default_item.png
+Wendy's,"Double Stack, no ketchup",380,default_item.png
+Wendy's,Grilled Chicken Sandwich,350,default_item.png
+Wendy's,Grilled Chicken Wrap,270,default_item.png
+Wendy's,"Homestyle Chicken Sandwich, no mayo",460,default_item.png
+Wendy's,Jr. Bacon Cheeseburger,380,default_item.png
+Wendy's,Jr. Cheeseburger Deluxe,280,default_item.png
+Wendy's,"Jr. Cheeseburger, no ketchup",270,default_item.png
+Wendy's,"Jr. Hamburger, no ketchup",230,default_item.png
+Wendy's,Power Mediterranean Chicken Salad,430,default_item.png
+Wendy's,"Power Mediterranean Chicken Salad, full",450,default_item.png
+Wendy's,Small Rich and Meaty Chili,170,default_item.png
+Wendy's,"Son of Baconator, no mayo / ketchup",570,default_item.png
+Wendy's,Sour Cream and Chive Baked Potato,310,default_item.png
+Wendy's,Spicy Chicken Caesar Salad Full Size,460,default_item.png
+Wendy's,"Spicy Chicken Sandwich, no mayo",450,default_item.png
+Wendy's,"Spicy Chicken Wrap, no mayo",300,default_item.png
+Wendy's,Ultimate Chicken Grill,340,default_item.png
+Taco Bell,7-Layer Burrito,430,default_item.png
+Taco Bell,Bean Burrito,370,default_item.png
+Taco Bell,Beefy 5-Layer Burrito,500,default_item.png
+Taco Bell,Beefy Fritos Burrito,430,default_item.png
+Taco Bell,Beefy Mini Quesadilla,210,default_item.png
+Taco Bell,Beefy Nacho Loaded Griller,370,default_item.png
+Taco Bell,Beefy Pritos Burrito,430,default_item.png
+Taco Bell,Black Bean Burrito,380,default_item.png
+Taco Bell,Black Beans,80,default_item.png
+Taco Bell,Black Beans and Rice,180,default_item.png
+Taco Bell,Burrito Supreme,400,default_item.png
+Taco Bell,Cantina Power Bowl,480,default_item.png
+Taco Bell,"Cantina Power Bowl , Steak",500,default_item.png
+Taco Bell,"Cantina Power Bowl, Chicken",490,default_item.png
+Taco Bell,Cantina Power Burrito,450,default_item.png
+Taco Bell,Chalupa Extreme,360,default_item.png
+Taco Bell,Cheesy Bean and Rice,420,default_item.png
+Taco Bell,Cheesy Burrito,490,default_item.png
+Taco Bell,Cheesy Burrito - Steak and Egg,480,default_item.png
+Taco Bell,"Cheesy Burrito Bacon, Fresco",390,default_item.png
+Taco Bell,Cheesy Burrito Fiesta Potato,520,default_item.png
+Taco Bell,Cheesy Burrito Steak and Egg,480,default_item.png
+Taco Bell,Cheesy Potato Burrito,490,default_item.png
+Taco Bell,Chipotle Chicken Loaded Griller,340,default_item.png
+Taco Bell,Chips and Nacho Cheese,220,default_item.png
+Taco Bell,Combo Burrito,450,default_item.png
+Taco Bell,Cool Ranch Doritos Double Decker Taco,320,default_item.png
+Taco Bell,Cool Ranch Doritos Locos Taco,170,default_item.png
+Taco Bell,Cool Ranch Doritos Locos Taco Supreme,190,default_item.png
+Taco Bell,Crunchwrap California,630,default_item.png
+Taco Bell,"Crunchwrap, no sauce",600,default_item.png
+Taco Bell,Crunchy Taco,170,default_item.png
+Taco Bell,Crunchy Taco Supreme,190,default_item.png
+Taco Bell,Crynch Wrap Supreme,530,default_item.png
+Taco Bell,Double Decker taco,320,default_item.png
+Taco Bell,Double Decker taco Supreme,340,default_item.png
+Taco Bell,Double Tostada,270,default_item.png
+Taco Bell,"DoubleDilla, Chicken",660,default_item.png
+Taco Bell,"DoubleDilla, Steak",670,default_item.png
+Taco Bell,Fiery Doritos Double Decker Taco,320,default_item.png
+Taco Bell,Fiery Doritos Locos Tacos,170,default_item.png
+Taco Bell,Fiery Doritos Locos Tacos Supreme,190,default_item.png
+Taco Bell,Fiesta Taco Salad,770,default_item.png
+Taco Bell,Fresco Bean Burrito,350,default_item.png
+Taco Bell,Fresco Burrito Supreme - Steak,350,default_item.png
+Taco Bell,Fresco Burrito Supreme Chicken,340,default_item.png
+Taco Bell,Fresco Burrito Supreme Steak,340,default_item.png
+Taco Bell,"Fresco Crunchy Taco, Beef",140,default_item.png
+Taco Bell,"Fresco Soft Taco, Beef",160,default_item.png
+Taco Bell,"Fresco Soft Taco, Shredded Chicken",140,default_item.png
+Taco Bell,"Fresco Soft Taco, Steak",140,default_item.png
+Taco Bell,Gordita Supreme,280,default_item.png
+Taco Bell,Grande Scrambler Burrito,650,default_item.png
+Taco Bell,Grilled Breakfast Burrito Fiesta Potato,340,default_item.png
+Taco Bell,Grilled Breakfast Taco,240,default_item.png
+Taco Bell,Grilled Steak Soft Taco,200,default_item.png
+Taco Bell,Maximelt,250,default_item.png
+Taco Bell,Mexican Pizza,550,default_item.png
+Taco Bell,Mini Skillet Bowl,180,default_item.png
+Taco Bell,Nachos BellGrande,760,default_item.png
+Taco Bell,Nachos Supreme,440,default_item.png
+Taco Bell,Quesarito,640,default_item.png
+Taco Bell,Rice,100,default_item.png
+Taco Bell,Sausage Flatbread Quesadilla,330,default_item.png
+Taco Bell,Shredded Chicken Burrito,400,default_item.png
+Taco Bell,Shredded Chicken Mini Quesadilla,180,default_item.png
+Taco Bell,Smothered Burrito,690,default_item.png
+Taco Bell,Smothered Burrito - Shredded Chicken,640,default_item.png
+Taco Bell,Soft Taco,180,default_item.png
+Taco Bell,Soft Taco Supreme,210,default_item.png
+Taco Bell,Spicy Potato Soft Taco,230,default_item.png
+Taco Bell,Triple Layer Nachos,320,default_item.png
+Taco Bell,XXL Grilled Stuft Burrito,860,default_item.png
+Taco Bell,XXL Grilled Stuft Burrito - Steak,830,default_item.png

@@ -9,9 +9,10 @@
 
 # Files
 accountfile = "db\maccount.csv"
-foodfile = "db\mfoodv2.csv"
+foodfile = "db\mfoodv3.csv"
 startimgpath = "images\main.jpg"
 searchimgpath = "images\search.jpg"
+imagepath = "images\\"
 exfile = 'db\exercise.csv'
 
 # Default Values
@@ -29,6 +30,24 @@ dUnits = "LB"
 dRestaurant = ""
 dFood = ""
 dCalories = ""
+dMinEquiv1 = ""
+dMinEquiv2 = ""
+dMinEquiv3 = ""
+
+memeCount = 1
+memeTotal = 1
+
+# Meme Card Settings
+MemeHt = 500
+MemeWt = 500
+ImagepadX = 10
+TextpadY = 10
+MemeLinespacing = 1.1
+MemeTextShadowOn = "NA"
+MemeTextFillColor = "red"
+MemeTextShadowColor = "black"
+defaultFdImg = "images\\t-mcdonalds-Big-Mac.jpg"
+defaultBG = "images\WhiteBG.png"
 
 # App Settings
 #Fonts
