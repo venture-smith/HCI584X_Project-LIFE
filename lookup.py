@@ -49,6 +49,7 @@ def get_meme_image(food_dict, food, exercise, minutes):
     #global food_dict 
     Fdfilepath = imagepath + food_dict[food.Restaurant][food.Food][1]
     Fdimage = Image.open(Fdfilepath)
+    #Fdimage.convert('RGBA')
     Bgimage = Image.open(defaultBG)
 
     # Calculate the desired size of the Food image by removing the horizontal padding
@@ -175,7 +176,7 @@ def get_meme_image(food_dict, food, exercise, minutes):
         imageBd.text((((MemeWt - M4Wt)/2)+thickness,((int(MemeHt * 0.75)+(M1Ht * MemeLinespacing)+thickness))), Mstr4, font=myFont, fill =MemeTextShadowColor)
     
     imageBd.text(((MemeWt - M4Wt)/2,(int(MemeHt * 0.75)+(M1Ht * MemeLinespacing))), Mstr4, font=myFont, fill =(255, 0, 0))
-    Bgimage.save("memecard0"+memeCount + ".thumbnail", "PNG")
+    Bgimage.save("MemeCard0"+str(memeCount) + ".jpg", "JPEG")
 
     # Move image to frame
     MemeCard = ImageTk.PhotoImage(Bgimage)

@@ -497,19 +497,19 @@ class App(object):
             flist = []
             fdict = food_dict.get(rcurrent_selection)
             flist = list(fdict)
-            print (flist)
+            # print (flist) # DIAGNOSTIC
             print ("Selected:",userzero.Item.Restaurant)
             for d in flist:
                 Foodbox.insert('end',d)
 
         def fon_select(fevent):
             # display element selected on list
-            print('(event) previous:', fevent.widget.get('active'))
-            print('(event)  current:', fevent.widget.get(fevent.widget.curselection()))
-            print('---')
+            # print('(event) previous:', fevent.widget.get('active')) # DIAGNOSTIC
+            # print('(event)  current:', fevent.widget.get(fevent.widget.curselection()))
+            # print('---')
             fcurrent_selection = fevent.widget.get(fevent.widget.curselection())
             userzero.Item.Food = fcurrent_selection
-            print ("Food Selected:",userzero.Item.Food)
+            print ("Food Selected:",userzero.Item.Food) # DIAGNOSTIC
 
         # Pull restaurant list from Food Dictionary for use in Selection List
         restaurant_list = []
@@ -530,7 +530,6 @@ class App(object):
         Rlistbox.bind('<<ListboxSelect>>', ron_select)
         for d in restaurant_list:
             Rlistbox.insert('end',d)
-        #foodbox_update(test_list)
         
         # Add scrollbar to listbox https://www.geeksforgeeks.org/scrollable-listbox-in-python-tkinter/
         scrollbar = Scrollbar(f2)
@@ -616,7 +615,7 @@ class App(object):
             self.frame.destroy() # remove current frame
         self.frame = Frame(self.master, background="white", width=appwidth, height=appheight) # A
         self.frame.pack(fill=BOTH)
-
+        print("Meme1")
         f1 = Frame(self.frame, background="white", width=appwidth * 0.2, height=appheight)
         f2 = Frame(self.frame, background="white", width=appwidth * 0.6, height=appheight)
         f3 = Frame(self.frame, background="white", width=appwidth * 0.2, height=appheight)
@@ -635,7 +634,7 @@ class App(object):
             minutes=convert_time_string(userzero.MinEquiv3)
 
         # Add code to change command button based on which meme page you're on
-        self.start_button = Button(f1, text ="Previous", bg=buttcolor, command = self.switch_to_main)
+        self.start_button = Button(f1, text ="Previous", bg=buttcolor, command = self.prev_meme)
         self.start_button.place(in_= f1, relx = 0.5, rely = 0.4, anchor=CENTER)
 
         # COLUMN 2 MAIN IMAGE
@@ -645,52 +644,44 @@ class App(object):
         self.start_image.place(in_= f2, relx = 0.5, rely = 0.4, anchor=CENTER)
 
         # COLUMN 3 Next button
-        self.start_button = Button(f3, text ="Next", bg=buttcolor, command = self.show_meme2)
-        self.start_button.place(in_= f3, relx = 0.5, rely = 0.4, anchor=CENTER)
-
-    def show_meme2(self):
-        if self.frame is not None:
-            self.frame.destroy() # remove current frame
-        self.frame = Frame(self.master, background="white", width=appwidth, height=appheight) # A
-        self.frame.pack(fill=BOTH)
-
-        f1 = Frame(self.frame, background="white", width=appwidth * 0.1, height=appheight)
-        f2 = Frame(self.frame, background="white", width=appwidth * 0.8, height=appheight)
-        f3 = Frame(self.frame, background="white", width=appwidth * 0.1, height=appheight)
-        f1.pack(side=LEFT)
-        f2.pack(side=LEFT)
-        f3.pack(side=LEFT)
-        food=userzero.Item
-        exercise=exertable[userzero.Pref2][1]
-        minutes=convert_time_string(userzero.MinEquiv2)
-
-        # Add code to change command button based on which meme page you're on
-        self.start_button = Button(f1, text ="Previous", bg=buttcolor, command = self.switch_to_main)
-        self.start_button.place(in_= f1, relx = 0.5, rely = 0.4, anchor=CENTER)
-
-        # COLUMN 2 MAIN IMAGE
-        startimg2 = get_meme_image(food, exercise, minutes)
-        self.start_image2 = Label(f2, image = startimg2)
-        self.start_image2.image = startimg2 # Had to add this to "anchor" image - don't know why
-        self.start_image2.place(in_= f2, relx = 0.5, rely = 0.4, anchor=CENTER)
-
-        # COLUMN 3 Next button
         self.start_button = Button(f3, text ="Next", bg=buttcolor, command = self.next_meme)
         self.start_button.place(in_= f3, relx = 0.5, rely = 0.4, anchor=CENTER)
 
+    # This function is meant to determine which meme card you are currently on, correctly route back to the function if necessary on the correct meme
+    def prev_meme(self):
+            global memeCount
+            #self.frame.destroy() # Thought this might work to refresh the frame - but it only succeeds in destroying it - it doesn't come back.
+            print("Memcount before=",memeCount)
+            if memeCount == 1:
+                print ("going to back to result")
+                self.switch_to_result # I don't think this is correctly calling the prior function
+            elif memeCount == 2:
+                memeCount -= 1
+                print ("going to meme1")
+                self.show_meme
+            elif memeCount == 3:
+                memeCount -=1
+                print ("going to meme2")
+                self.show_meme # Start over
+            print("Memecount after=",memeCount)
+
+    # This function is meant to determine which meme card you are currently on, correctly route back to the function if necessary on the correct meme
     def next_meme(self):
             global memeCount
-            #self.frame.destroy()
+            #self.frame.destroy() # Thought this might work to refresh the frame - but it only succeeds in destroying it - it doesn't come back.
             print("Memcount before=",memeCount)
             if memeCount == 1:
                 memeCount += 1
-                self.show_meme2
+                print ("going to meme1")
+                show_meme # I don't think this is correctly calling the meme
             elif memeCount == 2:
                 memeCount += 1
-                self.show_meme3
+                print ("going to meme2")
+                show_meme
             elif memeCount == 3:
                 memeCount = 1
-                self.switch_to_main # Start over
+                print ("starting over")
+                switch_to_main # Start over
             print("Memecount after=",memeCount)
 
     def switch_to_main(self):
