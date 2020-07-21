@@ -23,23 +23,23 @@ def convert_time_string(minutes):
     time_s = ""
     hours = minutes / 60
     rhours = minutes // 60
-    mhours = minutes%60
+    mhours = minutes % 60
     days = hours / 24
     rdays = hours // 24
-    mdays = hours%24
+    mdays = hours % 24
 
     if days > 2:
         if mdays == 0:
-            time_s = (str(int(rdays))+" days of ")
+            time_s = (str(int(rdays)) + " days of ")
         elif mhours == 0:
-            time_s = (str(int(rdays))+" days " + str(int(rhours))+" hours of")        
+            time_s = (str(int(rdays)) + " days " + str(int(rhours))+" hours of")        
         else:
-            time_s = (str(int(rdays))+" days " + str(int(mdays))+" hours "+str(int(mhours))+" minutes of")
+            time_s = (str(int(rdays)) + " days " + str(int(mdays))+" hours " + str(int(mhours)) + " minutes of")
     elif hours > 2:
         if mhours == 0:
-            time_s = (str(int(rhours))+" hours of")
+            time_s = (str(int(rhours)) + " hours of")
         else:
-            time_s = (str(int(rhours))+" hours "+str(int(minutes%60))+" minutes of")
+            time_s = (str(int(rhours)) + " hours "+str(int(minutes%60))+" minutes of")
     else:
         time_s = (str(int(minutes))+" minutes of")
     return time_s
@@ -105,10 +105,13 @@ def get_meme_image(food_dict, food, exercise, minutes, meme_count):
     #Generate shadow
     if MemeTextShadowOn == "thin":
         thickness = 1
-        imageBd.text((((MemeWt - M2Wt)/2)-thickness,(TextpadY + int(M1Ht * MemeLinespacing))), Mstr2, font=myFont, fill =MemeTextShadowColor)
-        imageBd.text((((MemeWt - M2Wt)/2)+thickness,(TextpadY + int(M1Ht * MemeLinespacing))), Mstr2, font=myFont, fill =MemeTextShadowColor)
-        imageBd.text(((MemeWt - M2Wt)/2,(TextpadY + int(M1Ht * MemeLinespacing))-thickness), Mstr2, font=myFont, fill =MemeTextShadowColor)
-        imageBd.text(((MemeWt - M2Wt)/2,(TextpadY + int(M1Ht * MemeLinespacing))+thickness), Mstr2, font=myFont, fill =MemeTextShadowColor)
+        imageBd.text((((MemeWt - M2Wt)/2)-thickness,(TextpadY + int(M1Ht * MemeLinespacing))), 
+                        Mstr2, 
+                        #font=myFont, 
+                        fill=MemeTextShadowColor)
+        imageBd.text((((MemeWt - M2Wt)/2)+thickness,(TextpadY + int(M1Ht * MemeLinespacing))), Mstr2, font=myFont, fill=MemeTextShadowColor)
+        imageBd.text(((MemeWt - M2Wt)/2,(TextpadY + int(M1Ht * MemeLinespacing))-thickness), Mstr2, font=myFont, fill=MemeTextShadowColor)
+        imageBd.text(((MemeWt - M2Wt)/2,(TextpadY + int(M1Ht * MemeLinespacing))+thickness), Mstr2, font=myFont, fill=MemeTextShadowColor)
     elif MemeTextShadowOn == "thick":
         thickness = 2
         imageBd.text((((MemeWt - M2Wt)/2)-thickness,(TextpadY + int(M1Ht * MemeLinespacing)-thickness)), Mstr2, font=myFont, fill =MemeTextShadowColor)
