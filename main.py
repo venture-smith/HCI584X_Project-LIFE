@@ -615,7 +615,7 @@ class App(object):
             self.frame.destroy() # remove current frame
         self.frame = Frame(self.master, background="white", width=appwidth, height=appheight) # A
         self.frame.pack(fill=BOTH)
-        print("Meme1")
+        print("--Showing Memes--")
         f1 = Frame(self.frame, background="white", width=appwidth * 0.2, height=appheight)
         f2 = Frame(self.frame, background="white", width=appwidth * 0.6, height=appheight)
         f3 = Frame(self.frame, background="white", width=appwidth * 0.2, height=appheight)
@@ -649,40 +649,62 @@ class App(object):
 
     # This function is meant to determine which meme card you are currently on, correctly route back to the function if necessary on the correct meme
     def prev_meme(self):
-            global memeCount
-            #self.frame.destroy() # Thought this might work to refresh the frame - but it only succeeds in destroying it - it doesn't come back.
-            print("Memcount before=",memeCount)
-            if memeCount == 1:
-                print ("going to back to result")
-                self.switch_to_result # I don't think this is correctly calling the prior function
-            elif memeCount == 2:
-                memeCount -= 1
-                print ("going to meme1")
-                self.show_meme
-            elif memeCount == 3:
-                memeCount -=1
-                print ("going to meme2")
-                self.switch_to_main # Start over
-            print("Memecount after=",memeCount)
+        global memeCount
+        if self.frame is not None:
+            self.frame.destroy() # remove current frame
+        self.frame = Frame(self.master, background="white", width=appwidth, height=appheight) 
+        self.frame.pack(fill=BOTH)
+
+        #self.frame.destroy() # Thought this might work to refresh the frame - but it only succeeds in destroying it - it doesn't come back.
+        print("Memcount before=",memeCount)
+        if memeCount == 1:
+            print ("going to back to result")
+            self.switch_to_result # I don't think this is correctly calling the prior function
+        elif memeCount == 2:
+            memeCount -= 1
+            print ("going to meme1")
+            self.show_memes
+        elif memeCount == 3:
+            memeCount -=1
+            print ("going to meme2")
+            self.show_memes # Start over
+        print("Memecount after=",memeCount)
 
     # This function is meant to determine which meme card you are currently on, correctly route back to the function if necessary on the correct meme
     def next_meme(self):
-            global memeCount
-            #self.frame.destroy() # Thought this might work to refresh the frame - but it only succeeds in destroying it - it doesn't come back.
-            print("Memcount before=",memeCount)
-            if memeCount == 1:
-                memeCount += 1
-                print ("going to meme1")
-                self.show_meme # I don't think this is correctly calling the meme
-            elif memeCount == 2:
-                memeCount += 1
-                print ("going to meme2")
-                self.show_meme
-            elif memeCount == 3:
-                memeCount = 1
-                print ("starting over")
-                self.switch_to_main # Start over
-            print("Memecount after=",memeCount)
+        global memeCount
+        if self.frame is not None:
+            self.frame.destroy() # remove current frame
+        #self.frame = Frame(self.master, background="white", width=appwidth, height=appheight) 
+        #self.frame.pack(fill=BOTH)
+            
+        #self.frame.destroy() # Thought this might work to refresh the frame - but it only succeeds in destroying it - it doesn't come back.
+        print("Memcount before=",memeCount)
+        if memeCount == 1:
+            memeCount += 1
+            print ("going to meme1")
+            '''
+            self.frame = Frame(self.master, background="white", width=appwidth, height=appheight) # A
+            self.frame.pack(fill=BOTH)
+            f1 = Frame(self.frame, background="white", width=appwidth / 3, height=appheight)
+            f2 = Frame(self.frame, background="white", width=appwidth / 3, height=appheight)
+            f1.pack(side=LEFT)
+            f2.pack(side=LEFT)
+            startimg = ImageTk.PhotoImage(Image.open(startimgpath))
+            self.start_image = Label(f1, image = startimg)
+            self.start_image.image = startimg # Had to add this to "anchor" image - don't know why
+            self.start_image.place(in_= f1, relx = 0.5, rely = 0.4, anchor=CENTER)
+            '''
+            print ("TEST DONE")
+        elif memeCount == 2:
+            memeCount += 1
+            print ("going to meme2")
+            meme3 = self.show_memes
+        elif memeCount == 3:
+            memeCount = 1
+            print ("starting over")
+            self.switch_to_main # Start over
+        print("Memecount after=",memeCount)
 
     def switch_to_main(self):
         if self.frame is not None:
