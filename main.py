@@ -662,7 +662,7 @@ class App(object):
             elif memeCount == 3:
                 memeCount -=1
                 print ("going to meme2")
-                self.show_meme # Start over
+                self.switch_to_main # Start over
             print("Memecount after=",memeCount)
 
     # This function is meant to determine which meme card you are currently on, correctly route back to the function if necessary on the correct meme
@@ -673,15 +673,15 @@ class App(object):
             if memeCount == 1:
                 memeCount += 1
                 print ("going to meme1")
-                show_meme # I don't think this is correctly calling the meme
+                self.show_meme # I don't think this is correctly calling the meme
             elif memeCount == 2:
                 memeCount += 1
                 print ("going to meme2")
-                show_meme
+                self.show_meme
             elif memeCount == 3:
                 memeCount = 1
                 print ("starting over")
-                switch_to_main # Start over
+                self.switch_to_main # Start over
             print("Memecount after=",memeCount)
 
     def switch_to_main(self):
