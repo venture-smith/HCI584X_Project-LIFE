@@ -678,18 +678,14 @@ class App(object):
 
     # This function is meant to determine which meme card you are currently on, correctly route back to the function if necessary on the correct meme
     def next_meme(self):
-        '''
-        if self.frame is not None:
-            self.frame.destroy() # remove current frame
-        #self.frame = Frame(self.master, background="white", width=appwidth, height=appheight) 
-        #self.frame.pack(fill=BOTH)
         '''    
         #self.frame.destroy() # Thought this might work to refresh the frame - but it only succeeds in destroying it - it doesn't come back.
+    
         print("Memcount before=",self.meme_count)
         if self.meme_count == 1:
             self.meme_count += 1
             print ("going to meme1")
-            '''
+
             self.frame = Frame(self.master, background="white", width=appwidth, height=appheight) # A
             self.frame.pack(fill=BOTH)
             f1 = Frame(self.frame, background="white", width=appwidth / 3, height=appheight)
@@ -700,7 +696,6 @@ class App(object):
             self.start_image = Label(f1, image = startimg)
             self.start_image.image = startimg # Had to add this to "anchor" image - don't know why
             self.start_image.place(in_= f1, relx = 0.5, rely = 0.4, anchor=CENTER)
-            '''
             print ("TEST DONE")
         elif self.meme_count == 2:
             self.meme_count += 1
@@ -711,8 +706,15 @@ class App(object):
             print ("starting over")
             self.switch_to_main # Start over
         print("Memecount after=",self.meme_count)
+        '''
 
-        self.show_memes()
+        # CH
+        self.meme_count += 1
+        if self.meme_count > 3:
+            self.meme_count == 1
+            self.switch_to_main()
+        else:
+            self.show_memes()
 
     def switch_to_main(self):
         if self.frame is not None:
