@@ -153,6 +153,7 @@ class App(object):
         self.frame = None
         self.switch_to_main() # start with frame "A" Main
         self.fss = 0
+        self.meme_count = 1 # CH: Which meme are we showing?
 
         # Create menu bar
         menu = Menu(self.master) 
@@ -417,7 +418,10 @@ class App(object):
         self.frame.pack(side = LEFT, fill= Y)
 
         # Reset current meme to 1
-        memeCount = 1
+        self.meme_count = 1  # CH why is this done here?
+
+
+
 
         # Add sub-frames
         f1 = Frame(self.frame, background="white", width=appwidth*.2, height=appheight)
@@ -464,7 +468,7 @@ class App(object):
         self.frame.pack(side = LEFT, fill= Y)
 
         # Reset current meme to 1
-        memeCount = 1
+        self.meme_count = 1
 
         # Add sub-frames
         f1 = Frame(self.frame, background="white", width=appwidth*.2, height=appheight)
@@ -558,7 +562,7 @@ class App(object):
         self.frame.pack(fill=BOTH)
         
         # Reset current meme to 1
-        memeCount = 1
+        self.meme_count = 1
 
         # Add sub-frames
         f1 = Frame(self.frame, background="white", width=appwidth*.2, height=appheight)
@@ -623,13 +627,13 @@ class App(object):
         f2.pack(side=LEFT)
         f3.pack(side=LEFT)
         food=userzero.Item
-        if memeCount == 1: # Depending on which meme currently being shown, set the exercise and minutes string to the correct one. 
+        if self.meme_count == 1: # Depending on which meme currently being shown, set the exercise and minutes string to the correct one. 
             exercise=exertable[userzero.Pref1][1]
             minutes=convert_time_string(userzero.MinEquiv1)
-        elif memeCount == 2:
+        elif self.meme_count == 2:
             exercise=exertable[userzero.Pref2][1]
             minutes=convert_time_string(userzero.MinEquiv2)
-        elif memeCount == 3:
+        elif self.meme_count == 3:
             exercise=exertable[userzero.Pref3][1]
             minutes=convert_time_string(userzero.MinEquiv3)
 
@@ -638,7 +642,7 @@ class App(object):
         self.start_button.place(in_= f1, relx = 0.5, rely = 0.4, anchor=CENTER)
 
         # COLUMN 2 MAIN IMAGE
-        startimg = get_meme_image(food_dict, food, exercise, minutes)
+        startimg = get_meme_image(food_dict, food, exercise, minutes, self.meme_count)
         self.start_image = Label(f2, image = startimg)
         self.start_image.image = startimg # Had to add this to "anchor" image - don't know why
         self.start_image.place(in_= f2, relx = 0.5, rely = 0.4, anchor=CENTER)
@@ -649,39 +653,41 @@ class App(object):
 
     # This function is meant to determine which meme card you are currently on, correctly route back to the function if necessary on the correct meme
     def prev_meme(self):
-        global memeCount
+        '''
         if self.frame is not None:
             self.frame.destroy() # remove current frame
         self.frame = Frame(self.master, background="white", width=appwidth, height=appheight) 
         self.frame.pack(fill=BOTH)
-
+        '''
         #self.frame.destroy() # Thought this might work to refresh the frame - but it only succeeds in destroying it - it doesn't come back.
-        print("Memcount before=",memeCount)
-        if memeCount == 1:
+        print("Memcount before=", self.meme_count)
+        if self.meme_count == 1:
             print ("going to back to result")
             self.switch_to_result # I don't think this is correctly calling the prior function
-        elif memeCount == 2:
-            memeCount -= 1
+        elif self.meme_count == 2:
+            self.meme_count -= 1
             print ("going to meme1")
             self.show_memes
-        elif memeCount == 3:
-            memeCount -=1
+        elif self.meme_count == 3:
+            self.meme_count -=1
             print ("going to meme2")
             self.show_memes # Start over
-        print("Memecount after=",memeCount)
+        print("Memecount after=",self.meme_count)
+
+        self.show_memes()
 
     # This function is meant to determine which meme card you are currently on, correctly route back to the function if necessary on the correct meme
     def next_meme(self):
-        global memeCount
+        '''
         if self.frame is not None:
             self.frame.destroy() # remove current frame
         #self.frame = Frame(self.master, background="white", width=appwidth, height=appheight) 
         #self.frame.pack(fill=BOTH)
-            
+        '''    
         #self.frame.destroy() # Thought this might work to refresh the frame - but it only succeeds in destroying it - it doesn't come back.
-        print("Memcount before=",memeCount)
-        if memeCount == 1:
-            memeCount += 1
+        print("Memcount before=",self.meme_count)
+        if self.meme_count == 1:
+            self.meme_count += 1
             print ("going to meme1")
             '''
             self.frame = Frame(self.master, background="white", width=appwidth, height=appheight) # A
@@ -696,15 +702,17 @@ class App(object):
             self.start_image.place(in_= f1, relx = 0.5, rely = 0.4, anchor=CENTER)
             '''
             print ("TEST DONE")
-        elif memeCount == 2:
-            memeCount += 1
+        elif self.meme_count == 2:
+            self.meme_count += 1
             print ("going to meme2")
             meme3 = self.show_memes
-        elif memeCount == 3:
-            memeCount = 1
+        elif self.meme_count == 3:
+            self.meme_count = 1
             print ("starting over")
             self.switch_to_main # Start over
-        print("Memecount after=",memeCount)
+        print("Memecount after=",self.meme_count)
+
+        self.show_memes()
 
     def switch_to_main(self):
         if self.frame is not None:
@@ -784,7 +792,7 @@ class App(object):
 # Initialize Account values
 dItem = Item(dRestaurant, dFood, dCalories)
 userzero = Account(did, dLoginId, dEmail, dPassword, dFirstName, dLastName, dPref1, dPref2, dPref3, dWeight, dUnits, dItem, dMinEquiv1, dMinEquiv2, dMinEquiv3)
-memeCount = 1
+
 
 # Initialize Window
 root = Tk()

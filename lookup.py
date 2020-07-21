@@ -44,7 +44,7 @@ def convert_time_string(minutes):
         time_s = (str(int(minutes))+" minutes of")
     return time_s
 
-def get_meme_image(food_dict, food, exercise, minutes):
+def get_meme_image(food_dict, food, exercise, minutes, meme_count):
     #weirdly won't pick up food_dict as a global variable - try passing it.
     #global food_dict 
     Fdfilepath = imagepath + food_dict[food.Restaurant][food.Food][1]
@@ -176,7 +176,7 @@ def get_meme_image(food_dict, food, exercise, minutes):
         imageBd.text((((MemeWt - M4Wt)/2)+thickness,((int(MemeHt * 0.75)+(M1Ht * MemeLinespacing)+thickness))), Mstr4, font=myFont, fill =MemeTextShadowColor)
     
     imageBd.text(((MemeWt - M4Wt)/2,(int(MemeHt * 0.75)+(M1Ht * MemeLinespacing))), Mstr4, font=myFont, fill =(255, 0, 0))
-    Bgimage.save("MemeCard0"+str(memeCount) + ".jpg", "JPEG")
+    Bgimage.save("MemeCard0"+str(meme_count) + ".jpg", "JPEG")
 
     # Move image to frame
     MemeCard = ImageTk.PhotoImage(Bgimage)
