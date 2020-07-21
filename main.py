@@ -143,6 +143,8 @@ def get_minutes(req_exercise, weight, units, src_calories, exertable):
     return Minutes
     # Original using Dictreader
 
+from app_class_def import App
+
 # Application class 
 class App(object):
     def __init__(self, master):

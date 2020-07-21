@@ -34,7 +34,6 @@ dMinEquiv1 = ""
 dMinEquiv2 = ""
 dMinEquiv3 = ""
 
-memeCount = 1
 memeTotal = 1
 
 # Meme Card Settings
