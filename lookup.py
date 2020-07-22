@@ -48,7 +48,10 @@ def get_meme_image(food_dict, food, exercise, minutes, meme_count):
     #weirdly won't pick up food_dict as a global variable - try passing it.
     #global food_dict 
     Fdfilepath = imagepath + food_dict[food.Restaurant][food.Food][1]
-    Fdimage = Image.open(Fdfilepath)
+    FdimageA = Image.open(Fdfilepath).convert('RGBA')
+    background = Image.new('RGBA', FdimageA.size, (255,255,255))
+    Fdimage = Image.alpha_composite(background, FdimageA)
+    #Fdimage = Image.open(Fdfilepath)
     #Fdimage.convert('RGBA')
     Bgimage = Image.open(defaultBG)
 

@@ -95,51 +95,32 @@ Chick-fil-a,Grilled Market Salad,320,marketSalad_grilled_pdp.png
 Chick-fil-a,"Grilled Nuggets, 6",100,grilledNuggets_8ct_PDP.png
 Chick-fil-a,"Grilled Nuggets, 8",140,grilledNuggets_8ct_PDP.png
 Chick-fil-a,Spicy Southwest Salad,420,sswSalad_spicyGrilled_pdp.png
+Dairy Queen,Applesauce,45,apple sauce.png
 Dairy Queen,1/2 lb FlameThrower GrillBurger,1000,Burger_GrillBurger_Half-Flamethrower.jpg
 Dairy Queen,"1/2 lb GrillBurger with Cheese, no mayo, no ketchup",740,Burger_GrillBurger_Qtr-Cheese.jpg
-Dairy Queen,"1/2 lb GrillBurger, no mayo, no ketchup",640,default_item.png
+Dairy Queen,"1/2 lb GrillBurger, no mayo, no ketchup",640,burger_grillburger_qtr-cheese
 Dairy Queen,"1/4 lb Bacon Cheese Grillburger, no mayo, no ketchup",560,Burger_GrillBurger_BaconCheese.jpg
-Dairy Queen,"1/4 lb GrillBurger, no mayo, no ketchup",420,default_item.png
-Dairy Queen,"Bacon Biscuit Sandwich, no flavor oil",320,default_item.png
-Dairy Queen,"Bacon Cheeseburger, no mayo, no ketchup",440,default_item.png
-Dairy Queen,Barbecue Beef Sandwich,350,default_item.png
-Dairy Queen,Barbecue Pork Sandwich,310,default_item.png
-Dairy Queen,Beef Cheese Dog,340,default_item.png
+Dairy Queen,"1/4 lb GrillBurger, no mayo, no ketchup",420,burger_grillburger_qtr-cheese
 Dairy Queen,Beef Chili and Cheese Dog,380,Hot-Dogs_Chili-Cheese_470x500.jpg
 Dairy Queen,Beef Chili and Cheese Mega Dog,670,Chili_Dog_lg_470x500.png
 Dairy Queen,"Beef Chili Dog, no ketchup",320,Chili_Dog_lg_470x500.png
 Dairy Queen,"Beef Hot Dog, no ketchup",280,Hot-Dogs_8-to-1_470x500.jpg
 Dairy Queen,"Beef Mega Hot Dog, no ketchup",550,Hot-Dogs_8-to-1_470x500.jpg
-Dairy Queen,"BLT Salad with Crispy Chicken, no dressing",520,default_item.png
-Dairy Queen,"BLT Salad with Grilled Chicken, no dressing",380,default_item.png
-Dairy Queen,"Buffalo Chicken Snack Melt, no mayo",280,default_item.png
-Dairy Queen,"California GrillBurger, no mayo",420,default_item.png
+Dairy Queen,"BLT Salad with Crispy Chicken, no dressing",520,Salads_Grilled-Chicken_180x191.png
+Dairy Queen,"BLT Salad with Grilled Chicken, no dressing",380,Salads_Grilled-Chicken_180x191.png
 Dairy Queen,"Cheeseburger, no ketchup",390,Burger_Original-Cheeseburger.jpg
-Dairy Queen,Chicken Bacon BBQ Snack Melt,270,default_item.png
 Dairy Queen,"Chicken Bacon Ranch Sandwich, no dressing",420,DQBakes_Sandwich_Chicken-Bacon-Ranch_17-04_470x500.jpg
-Dairy Queen,Chicken Mozzarella Sandwich,630,default_item.png
-Dairy Queen,Chicken Quesadilla Snack Melt,270,default_item.png
 Dairy Queen,"Crispy Chicken Sandwich, no mayo",490,CrispyChicSand_MB_ShinyBun_Q219_f.psd.r72.jpg
-Dairy Queen,"Crispy Chicken Wrap, no dressing",270,default_item.png
 Dairy Queen,"Deluxe Cheeseburger, no ketchup",390,Burger_GrillBurger_Qtr-Cheese.jpg
 Dairy Queen,"Deluxe Double Cheeseburger, no ketchup",620,Burger_GrillBurger_Qtr-Cheese.jpg
-Dairy Queen,"Deluxe Double Hamburger, no ketchup",540,default_item.png
-Dairy Queen,"Deluxe Hamburger, no ketchup",350,default_item.png
-Dairy Queen,"Double Cheeseburger, no ketchup",620,default_item.png
-Dairy Queen,Double Hamburger. no ketchup,520,default_item.png
-Dairy Queen,"DQ Ultimate Burger, no sauce",720,default_item.png
-Dairy Queen,"Fish Fillet Sandwich with Cheese, no tartar",420,default_item.png
-Dairy Queen,"Fish Fillet Sandwich, no tartar",370,default_item.png
-Dairy Queen,"Garden Greens Salad with Crispy Chicken, no dressing",280,default_item.png
-Dairy Queen,Garden Greens Salad with Grilled Chicken,150,default_item.png
+Dairy Queen,"Deluxe Double Hamburger, no ketchup",540,Burger_Original-Double_1-Cheese-Slice_470x500.jpg
+Dairy Queen,"Deluxe Hamburger, no ketchup",350,Burger_Original-Double_1-Cheese-Slice_470x500.jpg
+Dairy Queen,"Double Cheeseburger, no ketchup",620,Burger_Original-Double_1-Cheese-Slice_470x500.jpg
+Dairy Queen,Double Hamburger. no ketchup,520,Burger_Original-Double_1-Cheese-Slice_470x500.jpg
+Dairy Queen,"DQ Ultimate Burger, no sauce",720,Burger_GrillBurger_Qtr-Cheese.jpg
 Dairy Queen,"Grilled Chicken Sandwich, no mayo",290,GrilledChicSand_MB_ShinyBun_Q219_f.psd.r72.jpg
-Dairy Queen,Grilled Chicken Wrap,210,default_item.png
-Dairy Queen,"Ham Biscuit Sandwich, no flavor oil",290,default_item.png
-Dairy Queen,"Hamburger, no ketchup",340,default_item.png
-Dairy Queen,"Mushroom Swiss GrillBurger, no mayo",470,default_item.png
-Dairy Queen,"Sausage Biscuit Sandwich, no flavor oil",350,default_item.png
+Dairy Queen,"Hamburger, no ketchup",340,Burger_Original-Hamburger.jpg
 Dairy Queen,Turkey BLT Sandwich,430,DQBakes_Sandwich_Turkey-BLT_470x500.jpg
-Dairy Queen,Ultimate Breakfast Burrito,620,default_item.png
 Dairy Queen,White Cheese Curds,570,FOOD_CheeseCurds_870x810.png
 In-n-Out,"Cheeseburger mustard and ketchup, no spread",400,default_item.png
 In-n-Out,Cheeseburger Protein Style,300,default_item.png

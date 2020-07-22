@@ -25,7 +25,7 @@ dLastName = ""
 dPref1 = "NA"
 dPref2 = "NA"
 dPref3 = "NA"
-dWeight = ""
+dWeight = 150
 dUnits = "LB"
 dRestaurant = ""
 dFood = ""
@@ -58,5 +58,5 @@ buttcolor = 'white'
 #Window Size
 appwidth=800
 appheight=600
-appresolution = str(appwidth)+'x'+str(appheight)
+appresolution = str(appwidth) + 'x' + str(appheight)
 
