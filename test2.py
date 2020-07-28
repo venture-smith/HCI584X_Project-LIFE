@@ -32,6 +32,25 @@ class SampleApp(tk.Tk):
 class StartPage(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
+        '''
+        f1 = Frame(self.frame, background="white")
+        f2 = Frame(self.frame, background="white")
+        #f3 = Frame(self.frame, background="white")
+        #f4 = Frame(self.frame, background="white")
+        f1.pack(side=LEFT)
+        f2.pack(side=LEFT)
+        #f3.pack(side=LEFT)
+        #f4.pack(side=LEFT)
+        # Add sub-sub-frames
+        f1suba = Frame(f1, background="white")
+        f1subb = Frame(f1, background="white")
+        f1suba.pack(side=TOP, padx=20, pady=20)
+        f1subb.pack(side=BOTTOM)
+        f2suba = Frame(f2, background="white")
+        f2subb = Frame(f2, background="white")
+        f2suba.pack(side=TOP)
+        f2subb.pack(side=BOTTOM)
+        '''
         tk.Label(self, text="This is the start page").pack(side="top", fill="x", pady=10)
         tk.Label(self, text="Count").pack(side="top", fill="x", pady=10)
         tk.Button(self, text="Open page one",
@@ -40,7 +59,7 @@ class StartPage(tk.Frame):
                   command=lambda: master.switch_frame(PageTwo)).pack()
         tk.Button(self, text="Open page three",
                   command=lambda: master.switch_frame(PageThree)).pack()
-
+        
 class PageOne(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
@@ -81,3 +100,4 @@ class PageThree(tk.Frame):
 if __name__ == "__main__":
     app = SampleApp()
     app.mainloop()
+

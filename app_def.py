@@ -52,6 +52,13 @@ class App(object):
                     dPref1, dPref2, dPref3, dWeight, dUnits, dItem, dMinEquiv1, dMinEquiv2, dMinEquiv3)
 
     def get_food_dict(self):
+        '''
+        OUTPUT: food_dict - Dictionary
+        Gets the Food table from foodfile from Preferences.py. Uses csv Dictreader to convert into an orderedred dictionary of DictReader type.
+        Converts the DictReader to a nested Dictionary, with the outer Dictionary with the "Restaurant" as key, and the Food "Item" as the value.
+        In the nested dictionary, the Food "Item" is the key, and each item has a tuple as the value, with the "Calories" being the first item, and the
+        "Image" path being the second item.
+        '''
         food_dict = {}
         with open(foodfile, 'r') as data_file:
             data = csv.DictReader(data_file, delimiter=",")
@@ -63,6 +70,12 @@ class App(object):
 
     # Setup Exercise table with Conversion Weight Calorie Burn rates
     def get_exertable(self):
+        '''
+        OUTPUT: exertable - Dictionary
+        Gets Exercise table from exfile path from Preferences.py. Uses csv Dictreader to convert into an ordered dictionary of DictReader type.
+        Converts the DictReader to a Dictionary with the string value 'Exercise' as the key. The Values are tuples with the 'Multiplier' as the first 
+        item, and the 'Phrase' - a shorthand version of the exercise as the second item in the list.
+        '''
         exertable = {}
         with open(exfile, 'r') as data_file:
             data = csv.DictReader(data_file, delimiter=",")
@@ -91,17 +104,12 @@ class App(object):
         Minutes = (src_calories) / (weight * wconv * MultiplierX)
         return Minutes
 
-    def switch_to_submitted(self):
-        if self.frame is not None:
-            self.frame.destroy() # remove current frame
-        self.frame = Frame(self.master, background="white", width=appwidth, height=appheight) # C
-        self.frame.pack(fill=BOTH)
-        write_to_csv(accountfile, self.u_name) 
-        # put C label in self.frame
-        self.start_label = Label(self.frame, text="Submitted")
-        self.start_label.pack()
-
+    # STEP 1: Set Exercise Preference
     def switch_to_setexpref(self):
+        '''
+        This function shows a scrollable list of exercises/physical activities, and allows the user to select up to 3 preferred exercises.
+        Stores the 3 preferred activities as Pref1, Pref2, Pref3.
+        '''
         if self.frame is not None:
             self.frame.destroy() # remove current frame
         self.frame = Frame(self.master, background="white", width=appwidth, height=appheight) 
@@ -116,7 +124,7 @@ class App(object):
 
             # get data from test_list
             if value == '':
-                data = self.exercise_list # CH test_list is not defined here
+                data = self.exercise_list
             else:
                 data = []
                 for item in self.exercise_list:
@@ -173,14 +181,20 @@ class App(object):
                 userzero.Pref1 = current_selection
                 self.fss = 1 
 
-        # Add sub-frames - note the %s for appwidth need to add to 1.
-        f1 = Frame(self.frame, background="white", width=appwidth*0.4, height=appheight)
-        f2 = Frame(self.frame, background="white", width=appwidth*0.4, height=appheight)
-        f3 = Frame(self.frame, background="white", width=appwidth*0.2, height=appheight)
-        f1.pack(side=LEFT)
-        f2.pack(side=LEFT)
-        f3.pack(side=LEFT)
-    
+        # CREATE FRAMES
+        # Create two primary rows
+        f1 = Frame(self.frame, background="white", width=appwidth, height=appheight*0.1)
+        f2 = Frame(self.frame, background="white", width=appwidth, height=appheight*0.9)
+        f1.pack(side=TOP)
+        f2.pack(side=BOTTOM)
+        # Create sub-columns within the second row
+        f2suba = Frame(f2, background="white", width=appwidth * 0.4, height=appheight*0.9)
+        f2subb = Frame(f2, background="white", width=appwidth * 0.4, height=appheight*0.9)
+        f2subc = Frame(f2, background="white", width=appwidth * 0.2, height=appheight*0.9)
+        f2suba.pack(side=LEFT)
+        f2subb.pack(side=LEFT)
+        f2subc.pack(side=RIGHT)
+
         # Create list of Exercises from Exercise table to use in the list box
         self.exercise_list = [] # Create list for dictionary 
         exertable = self.get_exertable()       
@@ -195,65 +209,73 @@ class App(object):
         self.fa3.set(userzero.Pref3)
 
         # COLUMN1
-        self.start_label = Label(f1, text="Choose your top 3\nPREFERRED Physical Activites:",bg='white')
+        self.start_label = Label(f1, text="STEP 1: Choose your TOP 3 PREFERRED Physical Activites:",bg='white')
         self.start_label.config(font=headfont)
-        self.start_label.place(in_= f1, relx = 0.5, rely = 0.05, anchor=CENTER)
+        self.start_label.place(in_= f1, relx = 0.5, rely = 0.5, anchor=CENTER)
 
-        self.exer_instruct_label = Label(f1, text="Scroll down the list to find your activity\nof interest. Select the activity by clicking on it.\n\nTry typing the first few characters describing\nyour activity to filter the list.",justify=LEFT,bg='white')
-        self.exer_instruct_label.place(in_= f1, relx = 0.1, rely = 0.10, anchor=NW)
+        self.exer_instruct_label = Label(f2suba, text="Scroll down the list to find your activity\nof interest. Select the activity by clicking on it.\n\nTry typing the first few characters describing\nyour activity to filter the list.",justify=LEFT,bg='white')
+        self.exer_instruct_label.place(in_= f2suba, relx = 0.1, rely = 0.05, anchor=NW)
 
-        entry = tk.Entry(f1) # Tkinter type Entry Box
-        entry.place(in_= f1, relx = 0.1, rely = 0.25, anchor = NW, width=220)
+        entry = tk.Entry(f2suba) # Tkinter type Entry Box
+        entry.place(in_= f2suba, relx = 0.1, rely = 0.25, anchor = NW, width=220)
         #entry.pack(side = LEFT, expand = True, fill = Y)
         entry.bind('<KeyRelease>', on_keyrelease)
 
         searchimg = ImageTk.PhotoImage(Image.open(searchimgpath))
-        self.search_image = Label(f1, image = searchimg)
+        self.search_image = Label(f2suba, image = searchimg)
         self.search_image.image = searchimg # Had to add this to "anchor" image - don't know why
-        self.search_image.place(in_=f1, relx = 0.9, rely=0.265, anchor = CENTER)
+        self.search_image.place(in_=f2suba, relx = 0.9, rely=0.265, anchor = CENTER)
 
         # Create Listbox of Exercises
-        listbox = tk.Listbox(f1)
-        listbox.place(in_= f1, relx = 0.1, rely = 0.30, anchor=NW, height = 250, width = 250)
+        listbox = tk.Listbox(f2suba)
+        listbox.place(in_= f2suba, relx = 0.1, rely = 0.30, anchor=NW, height = 250, width = 250)
         #listbox.bind('<Double-Button-1>', on_select) # Not sure what this is - look it up!
         listbox.bind('<<ListboxSelect>>', on_select)
         listbox_update(self.exercise_list)
         # Add scrollbar to listbox https://www.geeksforgeeks.org/scrollable-listbox-in-python-tkinter/
-        scrollbar = Scrollbar(f1)
-        scrollbar.place(in_=f1, relx = 0.9, rely = 0.30, anchor=NW, height=250)
+        scrollbar = Scrollbar(f2suba)
+        scrollbar.place(in_=f2suba, relx = 0.9, rely = 0.30, anchor=NW, height=250)
         listbox.config(yscrollcommand = scrollbar.set)
         scrollbar.config(command = listbox.yview)
 
         # COLUMN 2
-        self.fav1a_label = Label(f2, text="FAVORITE ACTIVITY #1",bg='white')
+        self.fav1a_label = Label(f2subb, text="FAVORITE ACTIVITY #1",bg='white')
         self.fav1a_label.config(font=subheadfont)
-        self.fav1a_label.place(in_= f2, relx = 0.5, rely = 0.22, anchor=N)
+        self.fav1a_label.place(in_= f2subb, relx = 0.5, rely = 0.22, anchor=N)
 
-        self.fav1b_label = Label(f2, textvariable = self.fa1,bg='white')
-        self.fav1b_label.place(in_= f2, relx = 0.5, rely = 0.28, anchor=N)
+        self.fav1b_label = Label(f2subb, textvariable = self.fa1,bg='white')
+        self.fav1b_label.place(in_= f2subb, relx = 0.5, rely = 0.28, anchor=N)
 
-        self.fav2a_label = Label(f2, text="FAVORITE ACTIVITY #2",bg='white')
+        self.fav2a_label = Label(f2subb, text="FAVORITE ACTIVITY #2",bg='white')
         self.fav2a_label.config(font=subheadfont)
-        self.fav2a_label.place(in_= f2, relx = 0.5, rely = 0.37, anchor=N)
+        self.fav2a_label.place(in_= f2subb, relx = 0.5, rely = 0.37, anchor=N)
 
-        self.fav2b_label = Label(f2, textvariable = self.fa2,bg='white')
-        self.fav2b_label.place(in_= f2, relx = 0.5, rely = 0.43, anchor=N)
+        self.fav2b_label = Label(f2subb, textvariable = self.fa2,bg='white')
+        self.fav2b_label.place(in_= f2subb, relx = 0.5, rely = 0.43, anchor=N)
 
-        self.fav3a_label = Label(f2, text="FAVORITE ACTIVITY #3",bg='white')
+        self.fav3a_label = Label(f2subb, text="FAVORITE ACTIVITY #3",bg='white')
         self.fav3a_label.config(font=subheadfont)
-        self.fav3a_label.place(in_= f2, relx = 0.5, rely = 0.52, anchor=N)
+        self.fav3a_label.place(in_= f2subb, relx = 0.5, rely = 0.52, anchor=N)
 
-        self.fav3b_label = Label(f2, textvariable = self.fa3,bg='white')
-        self.fav3b_label.place(in_= f2, relx = 0.5, rely = 0.58, anchor=N)
+        self.fav3b_label = Label(f2subb, textvariable = self.fa3,bg='white')
+        self.fav3b_label.place(in_= f2subb, relx = 0.5, rely = 0.58, anchor=N)
 
-        # COLUMN 3
-        self.exnext_button = Button(f3, text ="Next", bg=buttcolor, command = self.switch_to_weight)
-        self.exnext_button.place(in_= f3, relx = 0.5, rely = 0.4, anchor=CENTER)
-
-    def switch_to_weight(self):
+        # COLUMN 3: NEXT BUTTON
         
+        self.exnext_button = Button(f2subc, text ="Next", bg=buttcolor, command = self.switch_to_weight)
+        self.exnext_button.place(in_= f2subc, relx = 0.5, rely = 0.4, anchor=CENTER)
+        '''
+        self.exnext_button = Button(f3, text ="Next", command = self.switch_to_weight)
+        img = PhotoImage(file="images/Next.png") # make sure to add "/" not "\"
+        self.exnext_button.config(image=img)
+        self.exnext_button.place(in_= f3, relx = 0.5, rely = 0.4, anchor=CENTER)
+        '''
+    def switch_to_weight(self):
+        '''
+        This function gets the weight in pounds or kilograms and also allows the user to select the preferred unit (LB/KG).
+        '''
         def unit_sel():
-            print( "You selected the option " + str(self.uvar.get()))
+            print( "You selected the option " + str(self.uvar.get())) # This is a diagnostic
             unitwt = str(self.uvar.get())
             userzero.Units = unitwt
 
@@ -271,45 +293,60 @@ class App(object):
         # Reset current meme to 1
         self.meme_count = 1  # CH why is this done here?
 
-        # Add sub-frames
-        f1 = Frame(self.frame, background="white", width=appwidth*.2, height=appheight)
-        f2 = Frame(self.frame, background="white", width=appwidth*.4, height=appheight)
-        f3 = Frame(self.frame, background="white", width=appwidth*.2, height=appheight)
-        f4 = Frame(self.frame, background="white", width=appwidth*.2, height=appheight)
-        f1.pack(side=LEFT)
-        f2.pack(side=LEFT)
-        f3.pack(side=LEFT)
-        f4.pack(side=LEFT)
+        # CREATE FRAMES
+        # Create two primary rows
+        f1 = Frame(self.frame, background="white", width=appwidth, height=appheight*0.1)
+        f2 = Frame(self.frame, background="white", width=appwidth, height=appheight*0.9)
+        f1.pack(side=TOP)
+        f2.pack(side=BOTTOM)
+        # Create sub-columns within the second row
+        f2suba = Frame(f2, background="white", width=appwidth * 0.2, height=appheight*0.9) # Use a multiplier in app width to allocate column width
+        f2subb = Frame(f2, background="white", width=appwidth * 0.4, height=appheight*0.9)
+        f2subc = Frame(f2, background="white", width=appwidth * 0.2, height=appheight*0.9)
+        f2subd = Frame(f2, background="white", width=appwidth * 0.2, height=appheight*0.9)
+        f2suba.pack(side=LEFT)
+        f2subb.pack(side=LEFT)
+        f2subc.pack(side=LEFT)
+        f2subd.pack(side=LEFT)
 
-        self.back_button = Button(f1, text ="Back", bg=buttcolor,command = self.switch_to_setexpref)
-        self.back_button.place(in_= f1, relx = 0.5, rely = 0.4, anchor=CENTER)
+        # HEADING
+        self.weight_label = Label(f1, text="STEP 2: ENTER YOUR WEIGHT (in Pounds or Kilograms):",bg='white')
+        self.weight_label.config(font=headfont)
+        self.weight_label.place(in_= f1, relx = 0.5, rely = 0.5, anchor=CENTER)
         
-        self.start_label = Label(f2, text="ENTER YOUR WEIGHT:", bg='white')
+        # COLUMN 1
+        self.back_button = Button(f2suba, text ="Back", bg=buttcolor,command = self.switch_to_setexpref)
+        self.back_button.place(in_= f2suba, relx = 0.5, rely = 0.4, anchor=CENTER)
+        
+        # COLUMN 2
+        self.start_label = Label(f2subb, text="WEIGHT:", bg='white')
         self.start_label.config(font=subheadfont)
-        self.start_label.place(in_=f2, relx = 0.5, rely = 0.36, anchor = CENTER)
+        self.start_label.place(in_=f2subb, relx = 0.5, rely = 0.36, anchor = CENTER)
 
         v = IntVar()
-        v.set(userzero.Weight)
-        wtentry = tk.Entry(f2, text=v) # Tkinter type Entry Box
-        wtentry.place(in_= f2, relx = 0.5, rely = 0.40, anchor = CENTER, width=50)
-        wtentry.bind('<KeyRelease>', wton_keyrelease)
+        v.set(userzero.Weight) # Set the default value, or store the last value
+        wtentry = tk.Entry(f2subb, text=v) # Tkinter type Entry Box
+        wtentry.place(in_= f2subb, relx = 0.5, rely = 0.40, anchor = CENTER, width=50)
+        wtentry.bind('<KeyRelease>', wton_keyrelease) # allows the user to enter the value without hitting enter
         
         # LBS vs KGS
         self.uvar = StringVar()
-        self.uvar.set(userzero.Units)
-        R1 = Radiobutton(f3, text="Pounds/Lbs.", bg=buttcolor, variable=self.uvar, value="LB",
+        self.uvar.set(userzero.Units) # Set the default value, or store the last value
+        R1 = Radiobutton(f2subc, text="Pounds/Lbs.", bg=buttcolor, variable=self.uvar, value="LB",
                         command=unit_sel)
-        R1.place(in_=f3, relx = 0.1, rely = 0.35, anchor = NW )
+        R1.place(in_=f2subc, relx = 0.1, rely = 0.35, anchor = NW )
 
-        R2 = Radiobutton(f3, text="Kilograms/Kgs.", bg=buttcolor, variable=self.uvar, value="KG",
+        R2 = Radiobutton(f2subc, text="Kilograms/Kgs.", bg=buttcolor, variable=self.uvar, value="KG",
                         command=unit_sel)
-        R2.place(in_=f3, relx = 0.1, rely = 0.40, anchor = NW )
+        R2.place(in_=f2subc, relx = 0.1, rely = 0.40, anchor = NW )
 
         # Next button
-        self.wtnext_button = Button(f4, text ="Next", bg=buttcolor, command = self.switch_to_findfood)
-        self.wtnext_button.place(in_= f4, relx = 0.5, rely = 0.4, anchor=CENTER)
+        self.wtnext_button = Button(f2subd, text ="Next", bg=buttcolor, command = self.switch_to_findfood)
+        self.wtnext_button.place(in_= f2subd, relx = 0.5, rely = 0.4, anchor=CENTER)
 
     def switch_to_findfood(self):
+        '''
+        '''
         if self.frame is not None:
             self.frame.destroy() # remove current frame
         self.frame = Frame(self.master, background="white", width=appwidth, height=appheight) 
@@ -318,16 +355,22 @@ class App(object):
         # Reset current meme to 1
         self.meme_count = 1
 
-        # Add sub-frames
-        f1 = Frame(self.frame, background="white", width=appwidth*.2, height=appheight)
-        f2 = Frame(self.frame, background="white", width=appwidth*.3, height=appheight)
-        f3 = Frame(self.frame, background="white", width=appwidth*.3, height=appheight)
-        f4 = Frame(self.frame, background="white", width=appwidth*.2, height=appheight)
-        f1.pack(side=LEFT)
-        f2.pack(side=LEFT)
-        f3.pack(side=LEFT)
-        f4.pack(side=LEFT)
-        
+        # CREATE FRAMES
+        # Create two primary rows
+        f1 = Frame(self.frame, background="white", width=appwidth, height=appheight*0.1)
+        f2 = Frame(self.frame, background="white", width=appwidth, height=appheight*0.9)
+        f1.pack(side=TOP)
+        f2.pack(side=BOTTOM)
+        # Create columns within the second row
+        f2suba = Frame(f2, background="white", width=appwidth * 0.2, height=appheight*0.9) # Use a multiplier in app width to allocate column width
+        f2subb = Frame(f2, background="white", width=appwidth * 0.3, height=appheight*0.9)
+        f2subc = Frame(f2, background="white", width=appwidth * 0.3, height=appheight*0.9)
+        f2subd = Frame(f2, background="white", width=appwidth * 0.2, height=appheight*0.9)
+        f2suba.pack(side=LEFT)
+        f2subb.pack(side=LEFT)
+        f2subc.pack(side=LEFT)
+        f2subd.pack(side=LEFT)
+
         def foodbox_update(data):
             # delete previous data
             foodbox.delete(0, 'end')
@@ -366,41 +409,48 @@ class App(object):
         food_dict = self.get_food_dict() # Retrieve Food dictionary
         restaurant_list = list(food_dict) # Convert dictionary to just a list of restaurants for use in the first selection list
         
-         # put label in self.frame
-        self.back_button = Button(f1, text ="Back", bg=buttcolor,command = self.switch_to_weight)
-        self.back_button.place(in_= f1, relx = 0.5, rely = 0.4, anchor=CENTER)
+        self.weight_label = Label(f1, text="STEP 3: SELECT A RESTAURANT AND FOOD ITEM/ENTREE",bg='white')
+        self.weight_label.config(font=headfont)
+        self.weight_label.place(in_= f1, relx = 0.5, rely = 0.5, anchor=CENTER)
 
-        self.chooser_label = Label(f2, text="CHOOSE A RESTAURANT:", bg='white')
+        # COLUMN 1
+        self.back_button = Button(f2suba, text ="Back", bg=buttcolor,command = self.switch_to_weight)
+        self.back_button.place(in_= f2suba, relx = 0.5, rely = 0.4, anchor=CENTER)
+
+        self.chooser_label = Label(f2subb, text="CHOOSE A RESTAURANT:", bg='white')
         self.chooser_label.config(font=subheadfont)
-        self.chooser_label.place(in_=f2, relx = 0.5, rely = 0.25, anchor = CENTER)
+        self.chooser_label.place(in_=f2subb, relx = 0.5, rely = 0.25, anchor = CENTER)
 
+        # COLUMN 2
         # Create Listbox of Restaurants
-        Rlistbox = tk.Listbox(f2, exportselection=False) # NOTE: need to have the exportselection = false feature when you have two listboxes otherwise it will have problems
-        Rlistbox.place(in_= f2, relx = 0.1, rely = 0.30, anchor=NW, height = 250, width = 180)
+        Rlistbox = tk.Listbox(f2subb, exportselection=False) # NOTE: need to have the exportselection = false feature when you have two listboxes otherwise it will have problems
+        Rlistbox.place(in_= f2subb, relx = 0.1, rely = 0.30, anchor=NW, height = 250, width = 180)
         #listbox.bind('<Double-Button-1>', on_select) # Not sure what this is - look it up!
         Rlistbox.bind('<<ListboxSelect>>', ron_select)
         for d in restaurant_list:
             Rlistbox.insert('end',d)
         
         # Add scrollbar to listbox https://www.geeksforgeeks.org/scrollable-listbox-in-python-tkinter/
-        scrollbar = Scrollbar(f2)
-        scrollbar.place(in_=f2, relx = 0.95, rely = 0.30, anchor=NW, height=250)
+        scrollbar = Scrollbar(f2subb)
+        scrollbar.place(in_=f2subb, relx = 0.95, rely = 0.30, anchor=NW, height=250)
         Rlistbox.config(yscrollcommand = scrollbar.set)
         scrollbar.config(command = Rlistbox.yview)
 
+        # COLUMN 3
         # Create Listbox of Food Items
-        Foodbox = tk.Listbox(f3, exportselection=False)
-        Foodbox.place(in_= f3, relx = 0.1, rely = 0.30, anchor=NW, height = 250, width = 180)
+        Foodbox = tk.Listbox(f2subc, exportselection=False)
+        Foodbox.place(in_= f2subc, relx = 0.1, rely = 0.30, anchor=NW, height = 250, width = 180)
         Foodbox.bind('<<ListboxSelect>>', fon_select)
 
         # Add scrollbar to listbox https://www.geeksforgeeks.org/scrollable-listbox-in-python-tkinter/
-        scrollbar = Scrollbar(f3)
-        scrollbar.place(in_=f3, relx = 0.95, rely = 0.30, anchor=NW, height=250)
+        scrollbar = Scrollbar(f2subc)
+        scrollbar.place(in_=f2subc, relx = 0.95, rely = 0.30, anchor=NW, height=250)
         Foodbox.config(yscrollcommand = scrollbar.set)
         scrollbar.config(command = Foodbox.yview)
 
-        self.fdnext_button = Button(f4, text ="Next", bg=buttcolor, command = self.switch_to_result)
-        self.fdnext_button.place(in_= f4, relx = 0.5, rely = 0.4, anchor=CENTER)
+        # COLUMN 4
+        self.fdnext_button = Button(f2subd, text ="Next", bg=buttcolor, command = self.switch_to_result)
+        self.fdnext_button.place(in_= f2subd, relx = 0.5, rely = 0.4, anchor=CENTER)
 
     def switch_to_result(self):
         if self.frame is not None:
@@ -414,6 +464,21 @@ class App(object):
         exertable = self.get_exertable()
         food_dict = self.get_food_dict()
 
+        # CREATE FRAMES
+        # Create two primary rows
+        f1 = Frame(self.frame, background="white", width=appwidth, height=appheight*0.1)
+        f2 = Frame(self.frame, background="white", width=appwidth, height=appheight*0.9)
+        f1.pack(side=TOP)
+        f2.pack(side=BOTTOM)
+        # Create columns within the second row
+        f2suba = Frame(f2, background="white", width=appwidth * 0.2, height=appheight*0.9) # Use a multiplier in app width to allocate column width
+        f2subb = Frame(f2, background="white", width=appwidth * 0.6, height=appheight*0.9)
+        f2subc = Frame(f2, background="white", width=appwidth * 0.2, height=appheight*0.9)
+        f2suba.pack(side=LEFT)
+        f2subb.pack(side=LEFT)
+        f2subc.pack(side=LEFT)
+
+        '''
         # Add sub-frames
         f1 = Frame(self.frame, background="white", width=appwidth*.2, height=appheight)
         f2 = Frame(self.frame, background="white", width=appwidth*.6, height=appheight)
@@ -421,48 +486,53 @@ class App(object):
         f1.pack(side=LEFT)
         f2.pack(side=LEFT)
         f3.pack(side=LEFT)
+        '''
+
+        self.weight_label = Label(f1, text="STEP 4: REVIEW RESULT SUMMARY",bg='white')
+        self.weight_label.config(font=headfont)
+        self.weight_label.place(in_= f1, relx = 0.5, rely = 0.5, anchor=CENTER)
 
         # COLUMN ONE
-        self.back_button = Button(f1, text ="Back", bg=buttcolor,command = self.switch_to_findfood)
-        self.back_button.place(in_= f1, relx = 0.5, rely = 0.4, anchor=CENTER)
+        self.back_button = Button(f2suba, text ="Back", bg=buttcolor,command = self.switch_to_findfood)
+        self.back_button.place(in_= f2suba, relx = 0.5, rely = 0.4, anchor=CENTER)
 
         # COLUMN TWO
-        self.chooser_label = Label(f2, text="RESULT:", bg='white')
+        self.chooser_label = Label(f2subb, text="RESULT:", bg='white')
         self.chooser_label.config(font=subheadfont)
-        self.chooser_label.place(in_=f2, relx = 0.5, rely = 0.25, anchor = CENTER)
+        self.chooser_label.place(in_=f2subb, relx = 0.5, rely = 0.25, anchor = CENTER)
 
-        self.food_label = Label(f2, text= userzero.Item.Restaurant +" "+ userzero.Item.Food, bg='white')
+        self.food_label = Label(f2subb, text= userzero.Item.Restaurant +" "+ userzero.Item.Food, bg='white')
         self.food_label.config(font=subheadfont)
-        self.food_label.place(in_=f2, relx = 0.5, rely = 0.30, anchor = CENTER)
+        self.food_label.place(in_=f2subb, relx = 0.5, rely = 0.30, anchor = CENTER)
 
-        self.calories_label = Label(f2, text= "Calories="+str(food_dict[userzero.Item.Restaurant][userzero.Item.Food][0]), bg='white')
+        self.calories_label = Label(f2subb, text= "Calories="+str(food_dict[userzero.Item.Restaurant][userzero.Item.Food][0]), bg='white')
         self.calories_label.config(font=subheadfont)
-        self.calories_label.place(in_=f2, relx = 0.5, rely = 0.35, anchor = CENTER)
+        self.calories_label.place(in_=f2subb, relx = 0.5, rely = 0.35, anchor = CENTER)
 
         # Add an if statement in case they only pick one preferred exercise (note that theoretically there should always be at least one exercise chosen)
         if userzero.Pref1 != "NA":
             userzero.MinEquiv1 = self.get_minutes(userzero.Pref1, float(userzero.Weight), userzero.Units, float(food_dict[userzero.Item.Restaurant][userzero.Item.Food][0]), exertable) # Get the total numbeer of minutes
             Exer1_string = convert_time_string(userzero.MinEquiv1) # Convert integer minutes to a string that makes sense
-            self.ex1equivalent_label = Label(f2, text=Exer1_string +" "+userzero.Pref1, bg='white')
+            self.ex1equivalent_label = Label(f2subb, text=Exer1_string +" "+userzero.Pref1, bg='white')
             self.ex1equivalent_label.config(font=subheadfont)
-            self.ex1equivalent_label.place(in_=f2, relx = 0.5, rely = 0.40, anchor = CENTER)
+            self.ex1equivalent_label.place(in_=f2subb, relx = 0.5, rely = 0.40, anchor = CENTER)
         if userzero.Pref2 != "NA":
             userzero.MinEquiv2 = self.get_minutes(userzero.Pref2, float(userzero.Weight), userzero.Units, float(food_dict[userzero.Item.Restaurant][userzero.Item.Food][0]), exertable)
             Exer2_string = convert_time_string(userzero.MinEquiv2)
-            self.ex2equivalent_label = Label(f2, text=Exer2_string +" "+userzero.Pref2, bg='white')
+            self.ex2equivalent_label = Label(f2subb, text=Exer2_string +" "+userzero.Pref2, bg='white')
             self.ex2equivalent_label.config(font=subheadfont)
-            self.ex2equivalent_label.place(in_=f2, relx = 0.5, rely = 0.45, anchor = CENTER)
+            self.ex2equivalent_label.place(in_=f2subb, relx = 0.5, rely = 0.45, anchor = CENTER)
         if userzero.Pref3 != "NA":
             userzero.MinEquiv3 = self.get_minutes(userzero.Pref3, float(userzero.Weight), userzero.Units, float(food_dict[userzero.Item.Restaurant][userzero.Item.Food][0]), exertable)
             Exer3_string = convert_time_string(userzero.MinEquiv3)
-            self.ex3equivalent_label = Label(f2, text=Exer3_string +" "+userzero.Pref3, bg='white')
+            self.ex3equivalent_label = Label(f2subb, text=Exer3_string +" "+userzero.Pref3, bg='white')
             self.ex3equivalent_label.config(font=subheadfont)
-            self.ex3equivalent_label.place(in_=f2, relx = 0.5, rely = 0.50, anchor = CENTER)
+            self.ex3equivalent_label.place(in_=f2subb, relx = 0.5, rely = 0.50, anchor = CENTER)
         
         # COLUMN THREE
         # Right hand side button to show the first card.
-        self.fdnext_button = Button(f3, text ="Show Meme Cards", bg=buttcolor, command = self.show_memes)
-        self.fdnext_button.place(in_= f3, relx = 0.5, rely = 0.4, anchor=CENTER)
+        self.fdnext_button = Button(f2subc, text ="Show Meme Cards", bg=buttcolor, command = self.show_memes)
+        self.fdnext_button.place(in_= f2subc, relx = 0.5, rely = 0.4, anchor=CENTER)
 
     def show_memes(self):
         if self.frame is not None:
@@ -483,20 +553,23 @@ class App(object):
         food=userzero.Item
         if self.meme_count == 1: # Depending on which meme currently being shown, set the exercise and minutes string to the correct one. 
             exercise=exertable[userzero.Pref1][1]
-            minutes=convert_time_string(userzero.MinEquiv1)
+            minutes = int(userzero.MinEquiv1)
+            minutestring=convert_time_string(userzero.MinEquiv1)
         elif self.meme_count == 2:
             exercise=exertable[userzero.Pref2][1]
-            minutes=convert_time_string(userzero.MinEquiv2)
+            minutes = int(userzero.MinEquiv1)
+            minutestring=convert_time_string(userzero.MinEquiv2)
         elif self.meme_count == 3:
             exercise=exertable[userzero.Pref3][1]
-            minutes=convert_time_string(userzero.MinEquiv3)
+            minutes = int(userzero.MinEquiv1)
+            minutestring=convert_time_string(userzero.MinEquiv3)
 
         # Add code to change command button based on which meme page you're on
         self.start_button = Button(f1, text ="Previous", bg=buttcolor, command = self.prev_meme)
         self.start_button.place(in_= f1, relx = 0.5, rely = 0.4, anchor=CENTER)
 
         # COLUMN 2 MAIN IMAGE
-        startimg = get_meme_image(food_dict, food, exercise, minutes, self.meme_count)
+        startimg = get_meme_image(food_dict, food, exercise, minutes, minutestring, self.meme_count)
         self.start_image = Label(f2, image = startimg)
         self.start_image.image = startimg # Had to add this to "anchor" image - don't know why
         self.start_image.place(in_= f2, relx = 0.5, rely = 0.4, anchor=CENTER)
@@ -540,26 +613,40 @@ class App(object):
         self.frame = Frame(self.master, background="white", width=appwidth, height=appheight) # A
         self.frame.pack(fill=BOTH)
 
-        f1 = Frame(self.frame, background="white", width=appwidth / 3, height=appheight)
-        f2 = Frame(self.frame, background="white", width=appwidth / 3, height=appheight)
-        f3 = Frame(self.frame, background="white", width=appwidth / 3, height=appheight)
-        f1.pack(side=LEFT)
-        f2.pack(side=LEFT)
-        f3.pack(side=LEFT)
+        #f1 = Frame(self.frame, background="white", width=appwidth / 3, height=appheight)
+        #f2 = Frame(self.frame, background="white", width=appwidth / 3, height=appheight)
+        f1 = Frame(self.frame, background="white", width=appwidth, height=appheight*0.2)
+        f2 = Frame(self.frame, background="white", width=appwidth, height=appheight*0.8)
+        #f3 = Frame(self.frame, background="white", width=appwidth / 3, height=appheight)
+        f1.pack(side=TOP)
+        f2.pack(side=BOTTOM)
+        #f3.pack(side=LEFT)
         # put B label in self.frame
         #self.start_label = Label(self.frame, text="PLACEHOLDER: Logo image, example meme, call to action")
         #self.start_label.pack()
 
+        f2suba = Frame(f2, background="white", width=appwidth * 0.4, height=appheight*0.8)
+        f2subb = Frame(f2, background="white", width=appwidth * 0.4, height=appheight*0.8)
+        f2subc = Frame(f2, background="white", width=appwidth * 0.2, height=appheight*0.8)
+
+
+        f2suba.pack(side=LEFT)
+        f2subb.pack(side=LEFT)
+        f2subc.pack(side=RIGHT)
+        
+        self.start_label1 = Label(f1, text="Learning Important Factual Equivalents\nFast Food : Activity Equivalents", font=("Helvetica", 15, 'bold'),bg="white")
+        self.start_label1.place(in_= f1, relx = 0.5, rely = 0.5, anchor=CENTER)
+
         startimg = ImageTk.PhotoImage(Image.open(startimgpath))
-        self.start_image = Label(f1, image = startimg)
+        self.start_image = Label(f2suba, image = startimg)
         self.start_image.image = startimg # Had to add this to "anchor" image - don't know why
-        self.start_image.place(in_= f1, relx = 0.5, rely = 0.4, anchor=CENTER)
+        self.start_image.place(in_= f2suba, relx = 0.5, rely = 0.4, anchor=CENTER)
 
-        self.start_label = Label(f2, text="This program will show you\nwhat your favorite fast food\nequivalents are in terms of\nyour preferred physical activity.", bg="white")
-        self.start_label.place(in_= f2, relx = 0.5, rely = 0.4, anchor=CENTER)
+        self.start_label2 = Label(f2subb, text="This program will show you\nwhat your favorite fast food\nequivalents are in terms of\nyour preferred physical activity.", bg="white")
+        self.start_label2.place(in_= f2subb, relx = 0.5, rely = 0.4, anchor=CENTER)
 
-        self.start_button = Button(f3, text ="Start Now", bg=buttcolor, command = self.switch_to_setexpref)
-        self.start_button.place(in_= f3, relx = 0.5, rely = 0.4, anchor=CENTER)
+        self.start_button = Button(f2subc, text ="Start Now", bg=buttcolor, command = self.switch_to_setexpref)
+        self.start_button.place(in_= f2subc, relx = 0.5, rely = 0.4, anchor=CENTER)
 
     #About
     def about(self):
