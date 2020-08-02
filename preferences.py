@@ -55,11 +55,18 @@ defaultBG = "images\WhiteBG.png"
 #Fonts
 headfont = ('arial', 12, 'bold')
 subheadfont = ('arial', 10, 'bold')
+buttonfont = ('arial', 14, 'bold')
+
 parafont = ('times', 10) # Main Text Font
 
+#Colors
+statuscolor = 'goldenrod' # statusbar
 #Buttons
 exprefNextImg = "images\\Next.png" # Button image
-buttcolor = 'green yellow' # Try "chartreuse2", "green2"
+buttcolor = 'dark green' # Try "chartreuse2", "green2", "green yellow"
+butttextcolor = 'white'
+fdnext_Button_Color = 'gray33'
+fdnext_ButtonText_Color = 'gray75'
 #Window Size
 appwidth=800
 appheight=600

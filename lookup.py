@@ -3,8 +3,9 @@
 # Purpose:   Primary program flow for LIFE webapp
 # Author(s): Vincent Lin
 # Created:   06/10/2020
-# TODO:      XXX YYY ZZZ
-# Note:      This function looks up the multiplier to be used in the calculation
+# TODO:      Fold the primary equivalency calculation back into this module.
+# Note:      This module handles the time string conversion and the 
+#            Meme Card creation.  
 #-------------------------------------------------------------------------------
 
 # importing module  
@@ -15,13 +16,23 @@ import os.path # used with pathlib to check to see if file exists in get meme
 from os import path
 import csv # used throughout to import data files for exercise, food
 
-def pull_csv(file, delimiter=','):
-    if not delimiter:
-        delimiter = ','
-    readexertable = csv.DictReader(open(file), delimiter=delimiter)
-    return readexertable
-
 def convert_time_string(minutes):
+    '''Time String Converter
+
+    Function converts integer (assumed minutes) into a string (a phrase)
+
+    Example: 
+    Input integer '87' will convert to '1 hour and 27 minutes'
+    Input integer '120' will convert to '2 hours'
+    Input integer '34' will convert to '34 minutes' 
+
+    Args:
+    minutes: integer representing the total number of minute equivalents needed of a specific exercise
+
+    Returns:
+    time_s: string - a phrase that will be used in the Meme Card text.
+
+    '''
     time_s = ""
     hours = minutes / 60
     rhours = minutes // 60
@@ -41,20 +52,27 @@ def convert_time_string(minutes):
         if mhours == 0:
             time_s = (str(int(rhours)) + " hours of")
         else:
-            time_s = (str(int(rhours)) + " hours "+str(int(minutes%60))+" minutes of")
+            time_s = (str(int(rhours)) + " hours and "+str(int(minutes%60))+" minutes of")
     else:
         time_s = (str(int(minutes))+" minutes of")
     return time_s
 
 def get_meme_image(food_dict, food, exercise, minutes, minutestring, meme_count):
-    '''
+    '''MemeCard Renderer
+
+    This function renders the memecard and saves it.
+
+    Args:
     food_dict: food table w/ restaurant, item, calories, and image - used to lookup image
     food: food item being passed for the meme
     exercise: the exercise selected being passed for the meme
     minutes: integer - number of actual minutes so that the meme text can be adjusted based on this value
     minutestring: minutes converted to a readable string, e.g. 220 = "3 hours 40 minutes"
     mem_count: keeps track of which meme we're on
-    NOTE: This function renders the memecard and saves it.
+    
+    Returns: 
+    MemeCard: Photo Image that is rendered in the app frame.
+
     '''
 
     global defaultFdImg # Make sure the default image is picked up from Preferences
