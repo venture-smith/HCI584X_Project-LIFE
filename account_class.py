@@ -1,3 +1,9 @@
+''' PRIMARY DATA STRUCTURE 
+
+This module describes the primary user account class and includes subclass for the restaurant and food item.
+
+'''
+
 class Account:
     # Create user account
     def __init__(self, id, LoginId, Email, Password, FirstName, LastName, Pref1, Pref2, Pref3, Weight, Units, Item, MinEquiv1, MinEquiv2, MinEquiv3):

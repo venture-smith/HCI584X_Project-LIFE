@@ -1,12 +1,10 @@
-#-------------------------------------------------------------------------------
-# Name:      lookup.py
-# Purpose:   Primary program flow for LIFE webapp
-# Author(s): Vincent Lin
-# Created:   06/10/2020
-# TODO:      Fold the primary equivalency calculation back into this module.
-# Note:      This module handles the time string conversion and the 
-#            Meme Card creation.  
-#-------------------------------------------------------------------------------
+''' PRIMARY LIFE FUNCTIONS 
+
+This module handles the time string conversion and the Meme Card creation.
+
+TODO: Fold the primary equivalency calculation back into this module.
+
+'''
 
 # importing module  
 from preferences import * 
@@ -123,7 +121,7 @@ def get_meme_image(food_dict, food, exercise, minutes, minutestring, meme_count)
     global MemeDiscFillColor
 
     # LINE 1
-    # Can generate some random phrases based on how many minutes are involved "The eye-popping reality" "The horror sicks in:"
+    # Can generate some phrases (in the future add even more, and randomize) based on how many minutes are involved "The eye-popping reality" "The horror sicks in:"
     if minutes > 119:
         Mstr1="The nauseating realization"
     elif minutes > 59:
@@ -142,7 +140,10 @@ def get_meme_image(food_dict, food, exercise, minutes, minutestring, meme_count)
 
     # Get the width and height of the specific string
     M1Wt,M1Ht=Line1Font.getsize(Mstr1)
+
     #Generate shadow https://stackoverflow.com/questions/18974194/text-shadow-with-python
+    # Based on the preference setting for thickness of the shadow, change the overlay positions for each setting
+    # Render the shadow for Line 2
     if MemeTextShadowOn == "thin":
         thickness = 1
         imageBd.text((((MemeWt - M1Wt)/2)-thickness,TextpadY), Mstr1, font=Line1Font, fill =MemeTextShadowColor)
@@ -161,7 +162,8 @@ def get_meme_image(food_dict, food, exercise, minutes, minutestring, meme_count)
         imageBd.text((((MemeWt - M1Wt)/2)+thickness,TextpadY-thickness), Mstr1, font=Line1Font, fill =MemeTextShadowColor)
         imageBd.text((((MemeWt - M1Wt)/2)-thickness,TextpadY-thickness), Mstr1, font=Line1Font, fill =MemeTextShadowColor)
         imageBd.text((((MemeWt - M1Wt)/2)+thickness,TextpadY+thickness), Mstr1, font=Line1Font, fill =MemeTextShadowColor)
-    #Lay down the text
+    
+    # Render the actual LINE 1 text on top of its shadow
     imageBd.text(((MemeWt - M1Wt)/2,TextpadY), Mstr1, font=Line1Font, fill =MemeTextFontColor)
 
     # LINE 2
@@ -171,7 +173,9 @@ def get_meme_image(food_dict, food, exercise, minutes, minutestring, meme_count)
 
     # Get the width and height of the specific string
     M2Wt,M2Ht=Line2Font.getsize(Mstr2)
-    #Generate shadow
+
+    # Based on the preference setting for thickness of the shadow, change the overlay positions for each setting
+    # Render the shadow for Line 2
     if MemeTextShadowOn == "thin":
         thickness = 1
         imageBd.text((((MemeWt - M2Wt)/2)-thickness,(TextpadY + int(M1Ht * MemeLinespacing))), 
@@ -193,13 +197,16 @@ def get_meme_image(food_dict, food, exercise, minutes, minutestring, meme_count)
         imageBd.text((((MemeWt - M2Wt)/2)+thickness,(TextpadY + int(M1Ht * MemeLinespacing)-thickness)), Mstr2, font=Line2Font, fill =MemeTextShadowColor)
         imageBd.text((((MemeWt - M2Wt)/2)-thickness,(TextpadY + int(M1Ht * MemeLinespacing)-thickness)), Mstr2, font=Line2Font, fill =MemeTextShadowColor)
         imageBd.text((((MemeWt - M2Wt)/2)+thickness,(TextpadY + int(M1Ht * MemeLinespacing)+thickness)), Mstr2, font=Line2Font, fill =MemeTextShadowColor)
-    #Lay down the text
+    
+    # Render the actual LINE 2 text on top of its shadow
     imageBd.text(((MemeWt - M2Wt)/2,(TextpadY + int(M1Ht * MemeLinespacing))), Mstr2, font=Line2Font, fill =MemeTextFontColor)
 
     # LINE 3
     Mstr3=minutestring
     M3Wt,M3Ht=Line3Font.getsize(Mstr3)     # Get the width and height of the specific string
-    #Generate shadow
+    
+    # Based on the preference setting for thickness of the shadow, change the overlay positions for each setting
+    # Render the shadow for Line 3
     if MemeTextShadowOn == "thin":
         thickness = 1
         imageBd.text(((MemeWt - M3Wt)/2)-thickness,((int(MemeHt * 0.75))), Mstr3, font=Line3Font, fill =MemeTextShadowColor)
@@ -219,15 +226,17 @@ def get_meme_image(food_dict, food, exercise, minutes, minutestring, meme_count)
         imageBd.text((((MemeWt - M3Wt)/2)-thickness,((int(MemeHt * 0.75)-thickness))), Mstr3, font=Line3Font, fill =MemeTextShadowColor)
         imageBd.text((((MemeWt - M3Wt)/2)+thickness,((int(MemeHt * 0.75)+thickness))), Mstr3, font=Line3Font, fill =MemeTextShadowColor)
     
+    # Render the actual LINE 3 text on top of its shadow
     imageBd.text(((MemeWt - M3Wt)/2,(int(MemeHt * 0.75))), Mstr3, font=Line3Font, fill =MemeTextFontColor)
 
     # LINE 4
-    Mstr4=exercise
+    Mstr4=exercise # Get the passed exercise string
     Mstr4 = Mstr4.upper() # Make all upper case
 
-    M4Wt,M4Ht=Line4Font.getsize(Mstr4)
-    #imageBd.text((0, 0), Mstr1, font=Line4Font, fill =(255, 0, 0))
+    M4Wt,M4Ht=Line4Font.getsize(Mstr4) # Get the size of the string height and width
 
+    # Based on the preference setting for thickness of the shadow, change the overlay positions for each setting
+    # Render the shadow for Line 4
     if MemeTextShadowOn == "thin":
         thickness = 1
         imageBd.text(((MemeWt - M4Wt)/2)-thickness,((int(MemeHt * 0.75)+(M1Ht * MemeLinespacing))), Mstr4, font=Line4Font, fill =MemeTextShadowColor)
@@ -247,6 +256,7 @@ def get_meme_image(food_dict, food, exercise, minutes, minutestring, meme_count)
         imageBd.text((((MemeWt - M4Wt)/2)-thickness,((int(MemeHt * 0.75)+(M1Ht * MemeLinespacing)-thickness))), Mstr4, font=Line4Font, fill =MemeTextShadowColor)
         imageBd.text((((MemeWt - M4Wt)/2)+thickness,((int(MemeHt * 0.75)+(M1Ht * MemeLinespacing)+thickness))), Mstr4, font=Line4Font, fill =MemeTextShadowColor)
     
+    # Render the actual LINE 4 text on top of its shadow
     imageBd.text(((MemeWt - M4Wt)/2,(int(MemeHt * 0.75)+(M1Ht * MemeLinespacing))), Mstr4, font=Line4Font, fill =MemeTextFontColor)
     
     # LINE 5

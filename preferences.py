@@ -1,11 +1,12 @@
-#-------------------------------------------------------------------------------
-# Name:      preferences.py
-# Purpose:   Program preferences/settings
-# Author(s): Vincent Lin
-# Created:   06/10/2020
-# TODO:       
-# Note:      
-#-------------------------------------------------------------------------------
+''' PREFERENCES DEFAULT SETTINGS 
+
+This module contains the default paths, settings to make some cosmetic changes easier.
+
+TODO: Include additional aesthetic settings within the preference file.
+
+'''
+versionnum = "2.01"
+verdate = "20200803"
 
 # Files
 foodfile = "db\mfoodv3.csv" # Food database - contains restaurant, item, calorie name, and image path of food item
@@ -35,6 +36,10 @@ dMinEquiv3 = ""
 
 memeTotal = 1
 
+# Tolerances
+MinWeight = 50
+MaxWeight = 500
+
 # Meme Card Settings
 MemeHt = 500 # Height dimension of the Meme Card - DO NOT EXCEED WINDOW SIZE
 MemeWt = 500 # Width dimension of the Meme Card
@@ -61,6 +66,8 @@ parafont = ('times', 10) # Main Text Font
 
 #Colors
 statuscolor = 'goldenrod' # statusbar
+headlabelbg = 'RoyalBlue2'
+headlabeltxt = 'white'
 #Buttons
 exprefNextImg = "images\\Next.png" # Button image
 buttcolor = 'dark green' # Try "chartreuse2", "green2", "green yellow"

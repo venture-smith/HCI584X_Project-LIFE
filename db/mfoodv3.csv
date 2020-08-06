@@ -1,26 +1,13 @@
 Restaurant,Item,Calories,Image
-Arby's,Angus 3 Cheese and Bacon no ranch,560,default_item.png
 Arby's,Fire Roasted Philly,630,FireRoastedPhilly_18_tile_Desktop_1024x557.png
-Arby's,Chicken Bacon Swiss,610,default_item.png
-Arby's,Chicken Cordon Bleu no mayo,540,default_item.png
-Arby's,Chicken Cordon Bleu no mayo,540,default_item.png
 Arby's,Chicken n Cheese Slider,290,Chicken-Slider_20_tile_Desktop_1024x557.png
 Arby's,Classic Beef n Cheddar no sauce or mayo,390,ClassicBnC_18_tile_Desktop_1024x557.png
 Arby's,Classic Roast Beef no sauce/mayo,360,ClassicRB_18_tile_Desktop_1024x557.png
-Arby's,Corned Beef n Cheese Slider,220,default_item.png
-Arby's,Crispy Chicken Farmhouse Salad w/light Italian,440,default_item.png
 Arby's,Crispy Chicken no mayo,400,CrispyChicken_18_tile_Desktop_1024x557.png
-Arby's,Crispy Fish Flatbread no sauce,480,default_item.png
-Arby's,Crispy Fish no sauce,450,default_item.png
 Arby's,French Dip n Swiss no au jus,490,FrenchDip_18_tile_Desktop_1024x557_v2.png
-Arby's,Grand Turkey Club no mayo,480,default_item.png
 Arby's,Ham n Cheese Slider,230,Ham-Slider_20_tile_Desktop_1024x557.png
 Arby's,Hamburger no ketchup,220,default_item.png
 Arby's,Jalapeno Roast Beef Slider,240,JalapenoRB-Slider_20_tile_Desktop_1024x557.png
-Arby's,Jr Bacon Cheddar Melt,280,default_item.png
-Arby's,Jr Ham and Cheddar,230,default_item.png
-Arby's,Jr Roast Beef,210,default_item.png
-Arby's,King's Hawaiian Fish Deluxe no sauce,580,default_item.png
 Arby's,Loaded Italian,670,LoadedItalian_18_tile_Desktop_1024x557.png
 Arby's,Max Roast Beef no sauce,560,ClassicRB_18_tile_Desktop_1024x557.png
 Arby's,Mid Beef n Cheddar no sauce/mayo,490,ClassicBnC_18_tile_Desktop_1024x557.png
@@ -31,49 +18,31 @@ Arby's,Reuben no spread,540,Reuben_18_tile_Desktop_1024x557.png
 Arby's,Roast Beef n Cheese Slider,240,RoastBeef-Slider_20_tile_Desktop_1024x557.png
 Arby's,Roast Turkey and Swiss no mayo,610,RoastTurkeySwiss_18_tile_Desktop_1024x557.png
 Arby's,Roast Turkey and Swiss Wrap no mayo,410,TRB-Wrap_20_tile_Desktop_1024x557.png
-Arby's,Roast Turkey Farmhouse Salad w/light Italian,250,default_item.png
 Arby's,Roast Turkey Ranch and Bacon no ranch,660,TurkeyBaconRanch_18_tile_Desktop_1024x557.png
-Arby's,Roast Turkey Ranch and Bacon Wrap no ranch,470,default_item.png
 Arby's,Smokehoues Brisket no mayon or onion strings,480,SmokeHouseBrisket_18_tile_Desktop_1024x557.png
-Burger King,A1 Smokey Bacon Tendercrisp,600,default_item.png
-Burger King,A1 Ultimate Bacon Cheeseburger,810,default_item.png
-Burger King,Bacon and Cheese Tendercrisp no mayo,580,default_item.png
 Burger King,Bacon and Cheese Whopper no mayo,630,33d6f14492cfd584a1671fb39e3275362fa51c43-400x266.png
 Burger King,Bacon Double Cheeseburger no ketchup,380,3d1b8bfcf86f970151e8f7020e6a395e666e2e09-592x344.png
 Burger King,"Bacon, Egg and Cheese Biscuit",450,a73168cca799f9ff5bec303938117c0045d83217-400x266.png
 Burger King,"Bacon, Egg and Cheese Croissan'wich",340,932eedf07b738b450fb3c96894830cfc380bb103-400x266.png
-Burger King,Breakfast Burrito Junior,370,default_item.png
-Burger King,Cheeseburger no ketchup,250,default_item.png
 Burger King,Chicken Club Salad,610,bcf57f8b9969f05bfabe44da3e42198213336c3f-400x266.png
 Burger King,"Chicken Fries, 9",290,833fe1247051e9b8fd02624aceb3465069b7c13d-400x266.png
-Burger King,Chicken Garden Salad,520,default_item.png
 Burger King,"Chicken Nuggets, 10",470,0ca059b6b202484acd1f74301091951e94595b4a-400x266.png
 Burger King,"Chicken Nuggets, 4",190,0ca059b6b202484acd1f74301091951e94595b4a-400x266.png
 Burger King,"Chicken Nuggets, 6",280,0ca059b6b202484acd1f74301091951e94595b4a-400x266.png
 Burger King,Crispy Chicken Jr no mayo,290,0df2b1047c801f865db6d9f7f21407ef0a9f232e-400x266.png
 Burger King,Double Whopper no mayo,740,7f9dfb65fee737b14ff1767725f3d3e3e6eb0512-400x266.png
 Burger King,Egg and Cheese Croissan'wich,300,546c4446da94eb6ddbee72f5f28f9d031d003993-400x266.png
-Burger King,Egg-normous Burrito,900,default_item.png
-Burger King,Extra Long Cheeseburger no ketchup/mayo,470,default_item.png
 Burger King,Extra Long Fish Sandwich no sauce,390,d9ade26c553f32e775828e85bbc36c87b11267c7-400x266.png
-Burger King,Fully Loaded Croissan'wich,570,default_item.png
-Burger King,Grilled Chicken Salad no dressing,320,default_item.png
-Burger King,Grilled Chicken Sandwich,470,default_item.png
-Burger King,"Ham, Egg and Cheese Croissan'wich",640,default_item.png
 Burger King,King Croissan'wich with Double Sausage,700,b9e13a667e09b403ae65821265711338ad22a748-400x266.png
 Burger King,King Croissan'wich with Ham and Sausage,530,13a55b75cb2763c2f905bdf1563c69347fb83504-400x266.png
 Burger King,King Croissan'wich with Sausage and Bacon,570,932eedf07b738b450fb3c96894830cfc380bb103-400x266.png
 Burger King,Original Chicken Sandwich no mayo,450,0df2b1047c801f865db6d9f7f21407ef0a9f232e-400x266.png
 Burger King,"Sausage, Egg and Cheese Biscuit",510,ea6c181c2aaa701494d595ad581961284bc25def-400x266.png
 Burger King,"Sausage, Egg and Cheese Croissan'wich",470,546c4446da94eb6ddbee72f5f28f9d031d003993-400x266.png
-Burger King,Spicy Crispy Chicken Jr no sauce,290,default_item.png
-Burger King,Supreme Breakfast Sandwich,880,default_item.png
-Burger King,Tendercrisp Chicken Salad no dressing,450,default_item.png
 Burger King,Tendercrisp Chicken Sandwich no mayo,440,c5160b84f374bdb22d3dbd1c7585be56e3263c1e-400x266.png
-Burger King,Tendergrill Chicken Salad no dressing,320,default_item.png
 Burger King,Tendergrill Chicken Sandwich no Mayo,350,c5160b84f374bdb22d3dbd1c7585be56e3263c1e-400x266.png
 Burger King,Tendergrill Chicken Sandwich no mayo,350,c5160b84f374bdb22d3dbd1c7585be56e3263c1e-400x266.png
-Burger King,Triple Whopper no mayo,1020,ccfadaf0383a241cd972af84daab901113dae81c-400x266.webp
+Burger King,Triple Whopper no mayo,1020,ccfadaf0383a241cd972af84daab901113dae81c-400x266.png
 Burger King,Whopper Jr. Sandwich no Mayo,230,2f82c53b868df2fe462a9fa76f596633d72dae77-592x344.png
 Burger King,Whopper no ketchup/mayo,500,bc1de9d5b571a315f9d75c881c548c2519825458-400x266.png
 Chick-fil-a,Chicken Biscuit,460,_0000s_0000_Stack620_0000_CFA_1605_60_Biscuit_Chicken_PROD_2155_1240px.png

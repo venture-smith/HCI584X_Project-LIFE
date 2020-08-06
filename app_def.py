@@ -1,13 +1,19 @@
-from preferences import *
-from tkinter import filedialog
-from tkinter import simpledialog
+#-------------------------------------------------------------------------------
+# Name:      app_def.py
+# Purpose:   
+# Author(s): Vincent Lin
+# Created:   06/10/2020
+# TODO:      
+# Note:      Window inteface and screens. Handles the primary program flow.
+#              
+#-------------------------------------------------------------------------------
+
+# External modules
 from tkinter import *
-from tkinter import ttk
 import tkinter as tk
-import tkinter.scrolledtext as tkst
-from tkinter import messagebox as msgbox
-from PIL import ImageTk, Image
-import fileinput # May not need this module - imported from a different application.
+
+# Internal modules
+from preferences import *
 from lookup import *
 from account_class import Account, Item
 
@@ -23,7 +29,7 @@ class App(object):
 
         # SETUP WINDOW
         self.master = master # Naming the master widget       	
-        self.master.title("LIFE PROTOTYPE") #window title
+        self.master.title("LIFE: Fast Food Equivalency Calculator") #window title
         master.geometry(appresolution)
         self.frame = None
         self.switch_to_main() # start with main screen
@@ -36,19 +42,19 @@ class App(object):
         menu.add_command(label="Main", command=self.switch_to_main)
         # MENU ITEM 1
         setexprefmenu = Menu(menu, tearoff=0)
-        menu.add_command(label="Exercise Prefs", command=self.switch_to_setexpref)
+        menu.add_command(label="1. Select Activity", command=self.switch_to_setexpref)
         # MENU ITEM 2
         weigntmenu = Menu(menu, tearoff=0)
-        menu.add_command(label="Set Weight", command=self.switch_to_weight)
+        menu.add_command(label="2. Set Weight", command=self.switch_to_weight)
         # MENU ITEM 3
         findfoodmenu = Menu(menu, tearoff=0)
-        menu.add_command(label="Fast Food Match", command=self.switch_to_findfood)
+        menu.add_command(label="3. Select Food Item", command=self.switch_to_findfood)
         # MENU ITEM 4
         optionsmenu = Menu(menu, tearoff=0)
         optionsmenu.add_command(label="About LIFE", command=self.about)
         optionsmenu.add_separator()
         optionsmenu.add_command(label="Exit", command=self.prog_exit)
-        menu.add_cascade(label="Options", menu=optionsmenu)
+        menu.add_cascade(label="|||", menu=optionsmenu)
         self.master.config(menu=menu)
 
         # INITIALIZE VALUES
@@ -302,26 +308,26 @@ class App(object):
         scrollbar.config(command = listbox.yview)
 
         # COLUMN 2
-        self.fav1a_label = Label(f2subb, text="FAVORITE ACTIVITY #1",bg='white')
+        self.fav1a_label = Label(f2subb, text="FAVORITE ACTIVITY #1", bg = headlabelbg, fg = headlabeltxt, height = 2, width = 22)
         self.fav1a_label.config(font=subheadfont)
-        self.fav1a_label.place(in_= f2subb, relx = 0.5, rely = 0.22, anchor=N)
+        self.fav1a_label.place(in_= f2subb, relx = 0.5, rely = 0.10, anchor=N)
 
         self.fav1b_label = Label(f2subb, textvariable = self.fa1,bg='white')
-        self.fav1b_label.place(in_= f2subb, relx = 0.5, rely = 0.28, anchor=N)
+        self.fav1b_label.place(in_= f2subb, relx = 0.5, rely = 0.20, anchor=N)
 
-        self.fav2a_label = Label(f2subb, text="FAVORITE ACTIVITY #2",bg='white')
+        self.fav2a_label = Label(f2subb, text="FAVORITE ACTIVITY #2", bg = headlabelbg, fg = headlabeltxt, height = 2, width = 22)
         self.fav2a_label.config(font=subheadfont)
-        self.fav2a_label.place(in_= f2subb, relx = 0.5, rely = 0.37, anchor=N)
+        self.fav2a_label.place(in_= f2subb, relx = 0.5, rely = 0.30, anchor=N)
 
         self.fav2b_label = Label(f2subb, textvariable = self.fa2,bg='white')
-        self.fav2b_label.place(in_= f2subb, relx = 0.5, rely = 0.43, anchor=N)
+        self.fav2b_label.place(in_= f2subb, relx = 0.5, rely = 0.40, anchor=N)
 
-        self.fav3a_label = Label(f2subb, text="FAVORITE ACTIVITY #3",bg='white')
+        self.fav3a_label = Label(f2subb, text="FAVORITE ACTIVITY #3", bg = headlabelbg, fg = headlabeltxt, height = 2, width = 22)
         self.fav3a_label.config(font=subheadfont)
-        self.fav3a_label.place(in_= f2subb, relx = 0.5, rely = 0.52, anchor=N)
+        self.fav3a_label.place(in_= f2subb, relx = 0.5, rely = 0.50, anchor=N)
 
         self.fav3b_label = Label(f2subb, textvariable = self.fa3,bg='white')
-        self.fav3b_label.place(in_= f2subb, relx = 0.5, rely = 0.58, anchor=N)
+        self.fav3b_label.place(in_= f2subb, relx = 0.5, rely = 0.60, anchor=N)
 
         self.exreset_button = Button(f2subb, text ="RESET", bg='white', fg ='black', command = reset)
         self.exreset_button['font'] = ('arial', 10)
@@ -343,15 +349,50 @@ class App(object):
         This function gets the weight in pounds or kilograms and also allows the user to select the preferred unit (LB/KG).
         
         '''
+        # Initialize Variables
+        self.errorstring = StringVar()
+
         def unit_sel():
+            '''
+            
+
+            
+            '''
             print( "You selected the option " + str(self.uvar.get())) # This is a diagnostic
             unitwt = str(self.uvar.get())
             userzero.Units = unitwt
 
+        def errorcheck():
+            ''' Error Warning
+            
+            Check to see if key entered is a number and within the program tolerances for minimum and maximum weight.
+
+            '''
+            errstring = "" # Clear errorstring
+            self.errorstring.set(errstring) 
+            error = 0
+            if not userzero.Weight.isnumeric():
+                errstring = errstring + "WARNING: Weight must be a positive integer."
+                print("WARNING: Weight must be an integer")
+                error = 1
+                self.errorstring.set(errstring)
+            else: 
+                if ((userzero.Units == "LB") and (int(userzero.Weight) < int(MinWeight) or (int(userzero.Weight) > int(MaxWeight)) )) or\
+                     ((userzero.Units == "KG") and ((int(userzero.Weight) < int(MinWeight * 0.45359237)) or (int(userzero.Weight) > int(MaxWeight * 0.45359237)) )):
+                    errstring = errstring + "WARNING: Weight must be a minimum of: " + str(MinWeight) + " LB/" + str(int(MinWeight * 0.45359237)) + " KG and maximum of " + \
+                     str(MaxWeight) + " LB/" + str(int(MaxWeight * 0.45359237)) + " KG."
+                    self.errorstring.set(errstring)
+
         def wton_keyrelease(event):
+            '''
+
+
+
+            '''
             # get text from entry
             value = event.widget.get()
             userzero.Weight = value
+            errorcheck()
             print (userzero.Weight)
 
         if self.frame is not None:
@@ -375,6 +416,10 @@ class App(object):
         f1suba.pack(side=TOP)
         f1subb.pack(side=BOTTOM)
 
+        # Error String - this is where the error message appears
+        self.f1subb_label = Label(f1subb, textvariable = self.errorstring, bg = statuscolor)
+        self.f1subb_label.place(in_= f1subb, relx = 0.5, rely = 0.5, anchor=CENTER)
+
         # Create sub-columns within the second row
         f2suba = Frame(f2, background="white", width=appwidth * 0.2, height=appheight*0.8) # Use a multiplier in app width to allocate column width
         f2subb = Frame(f2, background="white", width=appwidth * 0.4, height=appheight*0.8)
@@ -396,9 +441,13 @@ class App(object):
         self.back_button.place(in_= f2suba, relx = 0.5, rely = 0.4, anchor=CENTER)
         
         # COLUMN 2
-        self.start_fact = Label(f2subb, text="DID YOU KNOW\nthat the average American male\nweighs 197 pounds?\n\nThe average American female\n weighs 157 pounds.", bg='white')
-        self.start_fact.config(font=subheadfont)
-        self.start_fact.place(in_=f2subb, relx = 0.5, rely = 0.15, anchor = CENTER)
+        self.start_fact1 = Label(f2subb, text="DID YOU KNOW?", bg='white', fg='blue')
+        self.start_fact1.config(font=headfont)
+        self.start_fact1.place(in_=f2subb, relx = 0.5, rely = 0.075, anchor = CENTER)
+
+        self.start_fact2 = Label(f2subb, text="The average American male\nweighs 197 pounds.\n\nThe average American female\n weighs 157 pounds.", bg='white')
+        self.start_fact2.config(font=subheadfont)
+        self.start_fact2.place(in_=f2subb, relx = 0.5, rely = 0.20, anchor = CENTER)
 
         self.start_label = Label(f2subb, text="WEIGHT:", bg='white')
         self.start_label.config(font=subheadfont)
@@ -426,6 +475,10 @@ class App(object):
         self.wtnext_button['font'] = buttonfont
         self.wtnext_button.place(in_= f2subd, relx = 0.5, rely = 0.4, anchor=CENTER)
 
+    ############
+    # STEP THREE
+    ############
+
     def switch_to_findfood(self):
         ''' Select Fast Food Restaurant & Item
 
@@ -441,8 +494,10 @@ class App(object):
         # Initialize Variables
         self.meme_count = 1 # Reset current meme to 1
         self.errorstring = StringVar()
-        #foodnextbuttcolor = 'gray33' # Try "chartreuse2", "green2", "green yellow"
-        #foodnextbutttextcolor = 'gray75'
+        self.restaurantstrvar = StringVar()
+        self.restaurantstrvar.set(userzero.Item.Restaurant)
+        self.itemstrvar = StringVar()
+        self.itemstrvar.set(userzero.Item.Food)
 
         # CREATE FRAMES
         # Create two primary rows
@@ -452,7 +507,7 @@ class App(object):
         f2.pack(side=BOTTOM)
 
         # Create a sub-row for title and status
-        f1suba = Frame(f1, background="white", width=appwidth, height=appheight*0.2*0.8) # Multiplier added equals 1, but a fraction of the original row
+        f1suba = Frame(f1, background="white", width=appwidth, height=appheight*0.2*0.8) # Summed Multiplier equals 1, but a fraction of the original row
         f1subb = Frame(f1, background=statuscolor, width=appwidth, height=appheight*0.2*0.2)
         f1suba.pack(side=TOP)
         f1subb.pack(side=BOTTOM)
@@ -497,7 +552,11 @@ class App(object):
             print('---')
             Foodbox.delete(0, END)
             rcurrent_selection = event.widget.get(event.widget.curselection())
-            userzero.Item.Restaurant = rcurrent_selection
+            if rcurrent_selection != userzero.Item.Restaurant: # If the user selects a different restaurant, clear the current food item (otherwise it might create weird combos
+                userzero.Item.Food = ""
+                self.itemstrvar.set(userzero.Item.Food)
+            userzero.Item.Restaurant = rcurrent_selection           
+            self.restaurantstrvar.set(userzero.Item.Restaurant)
             fdict = []
             flist = []
             fdict = food_dict.get(rcurrent_selection)
@@ -514,6 +573,7 @@ class App(object):
             '''
             fcurrent_selection = fevent.widget.get(fevent.widget.curselection())
             userzero.Item.Food = fcurrent_selection
+            self.itemstrvar.set(userzero.Item.Food)
             precheck() # update the button color if the completion conditions are met
             print ("Food Selected:",userzero.Item.Food) # DIAGNOSTIC
         
@@ -532,30 +592,36 @@ class App(object):
             self.fdnext_button.configure(bg = fdnext_Button_Color, fg=fdnext_ButtonText_Color)
 
         def checkcomplete():
-            ''' 
+            ''' Final Error Check
             
             Check to see if all conditions are met to show meme results, show error in status bar.
 
             '''
             errstring = "" # Clear errorstring
             self.errorstring.set(errstring) 
+            WeightStr = str(userzero.Weight) # Have to switch integer into string to utilize isnumeric below.
             error = 0
+            errstring = "ERROR: "
             if userzero.Item.Food == "":
                 errstring = errstring + "No food item selected. Please select a food item. "
-                print("ERROR: NO FOOD ITEM SELECTED")
+                print("NO FOOD ITEM SELECTED")
                 error = 1
             if userzero.Pref1 == "NA":
                 errstring = errstring + "No activity selected. Please select at least one activity. "
-                print("ERROR: NO ACTIVITY SELECTED")
+                print("NO ACTIVITY SELECTED")
                 error = 1    
-            if (userzero.Units == "LB") and ((userzero.Weight < 50) or (userzero.Weight > 500)):
-                errstring = errstring + "Weight out of bounds. Please adjust weight (50 - 500 LBS)."
-                print("ERROR: OUT OF LB TOLERANCE")
-                error = 1 
-            if (userzero.Units == "KG") and ((userzero.Weight < 25) or (userzero.Weight > 250)):
-                errstring = errstring + "Weight out of bounds. Please adjust weight (25 - 250 KGS)."
-                print("ERROR: OUT OF KG TOLERANCE")
-                error = 1 
+            if not WeightStr.isnumeric():
+                errstring = errstring + "Weight is not a positive integer. "
+                error = 1
+            if WeightStr.isnumeric():
+                if (userzero.Units == "LB") and ((int(userzero.Weight) < MinWeight) or (int(userzero.Weight) > MaxWeight)):
+                    errstring = errstring + "Weight out of bounds. Please adjust weight (50 - 500 LBS). "
+                    print("ERROR: OUT OF LB TOLERANCE")
+                    error = 1 
+                if (userzero.Units == "KG") and ((int(userzero.Weight) < int(MinWeight * 0.45359237)) or (int(userzero.Weight) > int(MaxWeight * 0.45359237))):
+                    errstring = errstring + "Weight out of bounds. Please adjust weight (25 - 250 KGS). "
+                    print("ERROR: OUT OF KG TOLERANCE")
+                    error = 1 
             if error == 1: 
                 self.errorstring.set(errstring) 
             else:
@@ -573,13 +639,22 @@ class App(object):
         # COLUMN 1
         self.back_button = Button(f2suba, text ="<BACK", bg=buttcolor, fg=butttextcolor, command = self.switch_to_weight)
         self.back_button['font'] = buttonfont
-        self.back_button.place(in_= f2suba, relx = 0.5, rely = 0.4, anchor=CENTER)
-
-        self.chooser_label = Label(f2subb, text="CHOOSE A RESTAURANT:", bg='white')
-        self.chooser_label.config(font=subheadfont)
-        self.chooser_label.place(in_=f2subb, relx = 0.5, rely = 0.25, anchor = CENTER)
+        self.back_button.place(in_= f2suba, relx = 0.5, rely = 0.4, anchor = CENTER)
 
         # COLUMN 2
+
+        self.restauranta_label = Label(f2subb, text = "RESTAURANT", fg = headlabeltxt, bg = headlabelbg, height = 2, width = 25)
+        self.restauranta_label.config(font = subheadfont)
+        self.restauranta_label.place(in_ = f2subb, relx = 0.5, rely = 0.10, anchor = CENTER)
+
+        self.restaurantb_label = Label(f2subb, textvariable = self.restaurantstrvar, bg = 'white')
+        self.restaurantb_label.config(font = headfont)
+        self.restaurantb_label.place(in_=f2subb, relx = 0.5, rely = 0.20, anchor = CENTER)
+
+        self.chooser_label = Label(f2subb, text = "CHOOSE A RESTAURANT:", bg = 'white')
+        self.chooser_label.config(font=subheadfont)
+        self.chooser_label.place(in_=f2subb, relx = 0.5, rely = 0.28, anchor = CENTER)
+
         # Create Listbox of Restaurants
         Rlistbox = tk.Listbox(f2subb, exportselection=False) # NOTE: need to have the exportselection = false feature when you have two listboxes otherwise it will have problems
         Rlistbox.place(in_= f2subb, relx = 0.1, rely = 0.30, anchor=NW, height = 250, width = 180)
@@ -595,6 +670,19 @@ class App(object):
         scrollbar.config(command = Rlistbox.yview)
 
         # COLUMN 3
+        
+        self.itema_label = Label(f2subc, text = "FOOD ITEM", fg = headlabeltxt, bg = headlabelbg, height = 2, width = 25)
+        self.itema_label.config(font = subheadfont)
+        self.itema_label.place(in_ = f2subc, relx = 0.5, rely = 0.10, anchor = CENTER)
+
+        self.itemb_label = Label(f2subc, textvariable = self.itemstrvar, bg = 'white')
+        self.itemb_label.config(font = headfont)
+        self.itemb_label.place(in_=f2subc, relx = 0.5, rely = 0.20, anchor = CENTER)
+        
+        self.fchooser_label = Label(f2subc, text = "CHOOSE A FOOD ITEM:", bg = 'white')
+        self.fchooser_label.config(font=subheadfont)
+        self.fchooser_label.place(in_=f2subc, relx = 0.5, rely = 0.28, anchor = CENTER)
+
         # Create Listbox of Food Items
         Foodbox = tk.Listbox(f2subc, exportselection=False)
         Foodbox.place(in_= f2subc, relx = 0.1, rely = 0.30, anchor=NW, height = 250, width = 180)
@@ -614,6 +702,9 @@ class App(object):
 
         precheck() # Check to see if the conditions are met, if so change the next button color
 
+    ############
+    # STEP FOUR
+    ############
 
     def switch_to_result(self):
         ''' Show Summary Results
@@ -664,17 +755,25 @@ class App(object):
         self.back_button.place(in_= f2suba, relx = 0.5, rely = 0.4, anchor=CENTER)
 
         # COLUMN TWO
-        self.chooser_label = Label(f2subb, text="RESULT:", bg='white')
-        self.chooser_label.config(font=subheadfont)
-        self.chooser_label.place(in_=f2subb, relx = 0.5, rely = 0.25, anchor = CENTER)
+        self.resulta_label = Label(f2subb, text = "RESULTS", fg = headlabeltxt, bg = headlabelbg, height = 2, width = 25)
+        self.resulta_label.config(font = subheadfont)
+        self.resulta_label.place(in_ = f2subb, relx = 0.5, rely = 0.10, anchor = CENTER)
 
-        self.food_label = Label(f2subb, text= userzero.Item.Restaurant +" "+ userzero.Item.Food, bg='white')
+        self.rest_label = Label(f2subb, text= "Restaurant: " + userzero.Item.Restaurant, bg='white')
+        self.rest_label.config(font=subheadfont)
+        self.rest_label.place(in_=f2subb, relx = 0.5, rely = 0.20, anchor = CENTER)
+
+        self.food_label = Label(f2subb, text= "Food item: " + userzero.Item.Food, bg='white')
         self.food_label.config(font=subheadfont)
-        self.food_label.place(in_=f2subb, relx = 0.5, rely = 0.30, anchor = CENTER)
+        self.food_label.place(in_=f2subb, relx = 0.5, rely = 0.25, anchor = CENTER)
 
         self.calories_label = Label(f2subb, text= "Calories="+str(food_dict[userzero.Item.Restaurant][userzero.Item.Food][0]), bg='white')
         self.calories_label.config(font=subheadfont)
-        self.calories_label.place(in_=f2subb, relx = 0.5, rely = 0.35, anchor = CENTER)
+        self.calories_label.place(in_=f2subb, relx = 0.5, rely = 0.30, anchor = CENTER)
+
+        self.calories_label = Label(f2subb, text= "is the equivalent of", bg='white')
+        self.calories_label.config(font=subheadfont)
+        self.calories_label.place(in_=f2subb, relx = 0.5, rely = 0.40, anchor = CENTER)
 
         # Add an if statement in case they only pick one preferred exercise (note that theoretically there should always be at least one exercise chosen)
         if userzero.Pref1 != "NA":
@@ -682,25 +781,39 @@ class App(object):
             Exer1_string = convert_time_string(userzero.MinEquiv1) # Convert integer minutes to a string that makes sense
             self.ex1equivalent_label = Label(f2subb, text=Exer1_string +" "+userzero.Pref1, bg='white')
             self.ex1equivalent_label.config(font=subheadfont)
-            self.ex1equivalent_label.place(in_=f2subb, relx = 0.5, rely = 0.40, anchor = CENTER)
+            self.ex1equivalent_label.place(in_=f2subb, relx = 0.5, rely = 0.50, anchor = CENTER)
         if userzero.Pref2 != "NA":
             userzero.MinEquiv2 = self.get_minutes(userzero.Pref2, float(userzero.Weight), userzero.Units, float(food_dict[userzero.Item.Restaurant][userzero.Item.Food][0]), exertable)
             Exer2_string = convert_time_string(userzero.MinEquiv2)
             self.ex2equivalent_label = Label(f2subb, text=Exer2_string +" "+userzero.Pref2, bg='white')
             self.ex2equivalent_label.config(font=subheadfont)
-            self.ex2equivalent_label.place(in_=f2subb, relx = 0.5, rely = 0.45, anchor = CENTER)
+            self.ex2equivalent_label.place(in_=f2subb, relx = 0.5, rely = 0.55, anchor = CENTER)
         if userzero.Pref3 != "NA":
             userzero.MinEquiv3 = self.get_minutes(userzero.Pref3, float(userzero.Weight), userzero.Units, float(food_dict[userzero.Item.Restaurant][userzero.Item.Food][0]), exertable)
             Exer3_string = convert_time_string(userzero.MinEquiv3)
             self.ex3equivalent_label = Label(f2subb, text=Exer3_string +" "+userzero.Pref3, bg='white')
             self.ex3equivalent_label.config(font=subheadfont)
-            self.ex3equivalent_label.place(in_=f2subb, relx = 0.5, rely = 0.50, anchor = CENTER)
-        
+            self.ex3equivalent_label.place(in_=f2subb, relx = 0.5, rely = 0.60, anchor = CENTER)
+
+        if userzero.Units == "LB":
+            unitstr = "pounds"
+        elif userzero.Units == "KG":
+            unitstr = "kilograms"
+
+        self.weight_label = Label(f2subb, text= "(For an individual weighing "+str(userzero.Weight)+" "+unitstr+")", bg='white', fg='gray')
+        self.weight_label.config(font=subheadfont)
+        self.weight_label.place(in_=f2subb, relx = 0.5, rely = 0.65, anchor = CENTER)
+
+
         # COLUMN THREE
         # Right hand side button to show the first card.
         self.fdnext_button = Button(f2subc, text ="SHOW>", bg=buttcolor, fg=butttextcolor, command = self.show_memes)
         self.fdnext_button['font'] = buttonfont
         self.fdnext_button.place(in_= f2subc, relx = 0.5, rely = 0.4, anchor=CENTER)
+
+    ############
+    # STEP FIVE
+    ############
 
     def show_memes(self):
         ''' Display Meme Cards
@@ -738,32 +851,35 @@ class App(object):
         f2subb.pack(side=LEFT)
         f2subc.pack(side=LEFT)
         
-        food=userzero.Item
-        if self.meme_count == 1: # Depending on which meme currently being shown, set the exercise and minutes string to the correct one. 
+        food=userzero.Item  # Get the current food item to display 
+
+        # This sequence tells the function which data set and labels to use depending on which meme is being called. 
+        if self.meme_count == 1: # Sets the first preferred activity to the #1 MemeCard
             exercise=exertable[userzero.Pref1][1]
             minutes = int(userzero.MinEquiv1)
             minutestring=convert_time_string(userzero.MinEquiv1)
             prevtext = "<Results"
             if self.fss > 1:
-                nexttext = "See Card #2>"
+                nexttext = "See Card #2>" # This sets the Previous Button Text (If I'm #1, I want to see #2 next)
             else:
-                nexttext = "Start over"
-        elif self.meme_count == 2:
+                nexttext = "Start over" # This sets the Next Button Text (If I'm #1, but there's only 1, start over)
+        elif self.meme_count == 2: # Sets the second preferred activity to the #2 MemeCard
             exercise=exertable[userzero.Pref2][1]
             minutes = int(userzero.MinEquiv1)
             minutestring=convert_time_string(userzero.MinEquiv2)
-            prevtext = "<See Card #1"
+            prevtext = "<See Card #1" # Previous Button Text
             if self.fss > 2:
-                nexttext = "See Card #3>"
+                nexttext = "See Card #3>" # Next Button Text
             else:
-                nexttext = "Start over"
-        elif self.meme_count == 3:
+                nexttext = "Start over" # Next Button Text
+        elif self.meme_count == 3: # Sets the third preferred activity to the #3 MemeCard
             exercise=exertable[userzero.Pref3][1]
             minutes = int(userzero.MinEquiv1)
             minutestring=convert_time_string(userzero.MinEquiv3)
             prevtext = "<See Card #2"
             nexttext = "Start over"
-
+        
+        # TOP TWO ROWS - TITLE OF CARD and ITEMS COMPARED
         self.memecard_label = Label(f1suba, text="MEME CARD #"+str(self.meme_count)+":",bg='white')
         self.memecard_label.config(font=headfont)
         self.memecard_label.place(in_= f1suba, relx = 0.5, rely = 0.5, anchor=CENTER)
@@ -772,46 +888,48 @@ class App(object):
         self.memecardb_label.config(font=headfont)
         self.memecardb_label.place(in_= f1suba, relx = 0.5, rely = 0.75, anchor=CENTER)
 
-        # Add code to change command button based on which meme page you're on
+        # COLUMN 1: Previous button - Variable Text Button 
         self.prev_button = Button(f2suba, text =prevtext, bg=buttcolor, fg=butttextcolor, command = self.prev_meme)
         self.prev_button['font'] = buttonfont
         self.prev_button.place(in_= f2suba, relx = 0.5, rely = 0.4, anchor=CENTER)
 
         # COLUMN 2 MAIN IMAGE
-        startimg = get_meme_image(food_dict, food, exercise, minutes, minutestring, self.meme_count)
+        startimg = get_meme_image(food_dict, food, exercise, minutes, minutestring, self.meme_count) # THIS IS THE MEAT OF THE PROGRAM - Calls the renderer
         self.start_image = Label(f2subb, image = startimg)
         self.start_image.image = startimg # Had to add this to "anchor" image - don't know why
         self.start_image.place(in_= f2subb, relx = 0.5, rely = 0.5, anchor=CENTER)
 
-        # COLUMN 3 Next button
-        self.next_button = Button(f2subc, text =nexttext, bg=buttcolor, fg=butttextcolor, command = self.next_meme)
+        # COLUMN 3: Next button - Variable Text Button
+        self.next_button = Button(f2subc, text =nexttext, bg=buttcolor, fg=butttextcolor, command = self.next_meme) # nexttext changes depending on what card
         self.next_button['font'] = buttonfont
         self.next_button.place(in_= f2subc, relx = 0.5, rely = 0.4, anchor=CENTER)
 
     # This function is meant to determine which meme card you are currently on, correctly route back to the function if necessary on the correct meme
     def prev_meme(self):
-        '''
+        ''' Previous Meme Card
         
-        This function is meant to determine which meme card you are currently on, correctly route back to the function if necessary on the correct meme or
-        send to prior Results page.
+        This function is meant to determine which meme card you are currently on, correctly route back to the function if necessary on the prior meme or
+        send to prior Results page if on the first Meme Card.
         
         '''
         #self.frame.destroy() # Thought this might work to refresh the frame - but it only succeeds in destroying it - it doesn't come back.
-        print("Memcount before=", self.meme_count)
+        print("Memcount before=", self.meme_count) # Diagnostic
         if self.meme_count == 1:
-            print ("going to back to result")
+            print ("DIAGNOSTIC: going to BACK to RESULT")
             self.switch_to_result() # Switch back to all results
         else:
             self.meme_count -= 1
-            print ("going back one page") # go back to previous page
+            print ("DIAGNOSTIC: Going BACK ONE PAGE") # go back to previous page
             self.show_memes()
-        print("Memecount after=",self.meme_count)
+        print("Memecount after=",self.meme_count) # Diagnostic
 
     def next_meme(self):
-        '''    
+        ''' Next Meme Card   
         
-        This function is meant to determine which meme card you are currently on, correctly route back to the function if necessary on the correct meme.
-        Depending on which meme, will push to next meme card, or cycle back to beginning. Thanks CH!
+        This function is meant to determine which meme card you are currently on, correctly route back to the function if necessary on the another meme.
+        If on the first of second Meme Card, will push to next. If on the third or last available Meme Card, cycle back to beginning. 
+        
+        NOTE: Thanks CH!
 
         '''
         self.meme_count += 1
@@ -820,6 +938,10 @@ class App(object):
             self.switch_to_main()
         else:
             self.show_memes()
+
+    ############
+    # MAIN PAGE
+    ############
 
     def switch_to_main(self):
         ''' Main Page
@@ -832,25 +954,16 @@ class App(object):
         self.frame = Frame(self.master, background="white", width=appwidth, height=appheight) # A
         self.frame.pack(fill=BOTH)
 
-        #f1 = Frame(self.frame, background="white", width=appwidth / 3, height=appheight)
-        #f2 = Frame(self.frame, background="white", width=appwidth / 3, height=appheight)
         f1 = Frame(self.frame, background="white", width=appwidth, height=appheight*0.2)
         f2 = Frame(self.frame, background="white", width=appwidth, height=appheight*0.8)
-        #f3 = Frame(self.frame, background="white", width=appwidth / 3, height=appheight)
         f1.pack(side=TOP)
         f2.pack(side=BOTTOM)
-        #f3.pack(side=LEFT)
-        # put B label in self.frame
-        #self.start_label = Label(self.frame, text="PLACEHOLDER: Logo image, example meme, call to action")
-        #self.start_label.pack()
 
-        f2suba = Frame(f2, background="white", width=appwidth * 0.4, height=appheight*0.8)
-        f2subb = Frame(f2, background="white", width=appwidth * 0.4, height=appheight*0.8)
+        f2suba = Frame(f2, background="white", width=appwidth * 0.8, height=appheight*0.8)
         f2subc = Frame(f2, background="white", width=appwidth * 0.2, height=appheight*0.8)
 
 
         f2suba.pack(side=LEFT)
-        f2subb.pack(side=LEFT)
         f2subc.pack(side=RIGHT)
         
         self.start_label1 = Label(f1, text="Learning Important Factual Equivalents\nFast Food Items : Time Spent on Physical Activity", font=("Helvetica", 15, 'bold'),bg="white")
@@ -859,33 +972,52 @@ class App(object):
         startimg = ImageTk.PhotoImage(Image.open(startimgpath))
         self.start_image = Label(f2suba, image = startimg)
         self.start_image.image = startimg # Had to add this to "anchor" image - don't know why
-        self.start_image.place(in_= f2suba, relx = 0.5, rely = 0.4, anchor=CENTER)
-
-        self.start_label2 = Label(f2subb, text="This program will show you\nwhat your favorite fast food\nequivalents are in terms of\nyour preferred physical activity.", bg="white")
-        self.start_label2.place(in_= f2subb, relx = 0.5, rely = 0.4, anchor=CENTER)
+        self.start_image.place(in_= f2suba, relx = 0.5, rely = 0.5, anchor=CENTER)
 
         self.start_button = Button(f2subc, text ="Start Now >", bg=buttcolor, fg=butttextcolor, command = self.switch_to_setexpref)
         self.start_button['font'] = buttonfont
         self.start_button.place(in_= f2subc, relx = 0.5, rely = 0.4, anchor=CENTER)
 
-    #About
     def about(self):
-        '''
+        ''' About the Program
 
         Shows name of the program, contact information, and version information.
 
         '''
         if self.frame is not None:
             self.frame.destroy() # remove current frame
-        self.frame = Frame(self.master, background="white", width=300, height=100) # A
+        self.frame = Frame(self.master, background="white", width=appwidth, height=appheight) # A
         self.frame.pack(fill=BOTH)
 
-        # put B label in self.frame
-        self.start_label = Label(self.frame, text="ABOUT LIFE: A fastfood, exercise meme generator")
-        self.start_label.pack()
+        f1 = Frame(self.frame, background="white", width=appwidth, height=appheight)
+        #f2 = Frame(self.frame, background="white", width=appwidth, height=appheight*0.8)
+        f1.pack(side=TOP)
+        #f2.pack(side=BOTTOM)
+
+        f1suba = Frame(f1, background="white", width=appwidth, height=appheight*0.1)
+        f1subb = Frame(f1, background="white", width=appwidth, height=appheight*0.9)
+
+        f1suba.pack(side=TOP)
+        f1subb.pack(side=BOTTOM)
+        
+        self.start_label1 = Label(f1suba, text="About Learning Important Factual Equivalents\nFast Food Items : Time Spent on Physical Activity\n", font = ("Helvetica", 15, 'bold'),bg = "white", fg = headlabelbg, justify = LEFT)
+        self.start_label1.place(in_= f1suba, relx = 0.1, rely = 0.5, anchor=NW)
+
+        self.start_label2 = Label(f1subb, text="A program for figuring out activity equivalents of various fast food items.\n\nAuthor: Vincent Lin\nE-mail: vincent.joshua.lin@gmail.com\n\nSpecial thanks to: Professor Chris Harding, Iowa State University", font=("Helvetica", 12),bg="white", justify = LEFT)
+        self.start_label2.place(in_= f1subb, relx = 0.1, rely = 0.0, anchor=NW)
+
+        self.start_label3 = Label(f1subb, text="Version: " + versionnum + " " + verdate, font=("Helvetica", 12),bg="white", justify = LEFT)
+        self.start_label3.place(in_= f1subb, relx = 0.1, rely = 0.2, anchor=NW)
+
+        self.start_label4 = Label(f1subb, text="SOURCES:\n" + "     Caloric Burn Rate by Activity\n" + "     https://exceltemplate.net/weight/calorie-tracker/\n" + "     Restaurant Fast Food Item Calorie Table\n" + "     http://fastfoodmacros.com/", font=("Helvetica", 12),bg="white", justify = LEFT)
+        self.start_label4.place(in_= f1subb, relx = 0.1, rely = 0.4, anchor=NW)
+
+        #self.start_button = Button(f2subc, text ="Start Now >", bg=buttcolor, fg=butttextcolor, command = self.switch_to_setexpref)
+        #self.start_button['font'] = buttonfont
+        #self.start_button.place(in_= f2subc, relx = 0.5, rely = 0.4, anchor=CENTER)
 
     def donothing(self):
-        '''
+        ''' Stub
         
         A stub for further expansion/adding functions
 
@@ -898,4 +1030,4 @@ class App(object):
         A function to end the program
 
         '''
-        exit()
+        sys.exit("Goodbye")
