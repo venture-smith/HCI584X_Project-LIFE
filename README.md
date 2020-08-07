@@ -4,43 +4,20 @@ Start with a simple description of what your project does. This here gives examp
 2) run_testpak.py: uses a simple package (called testpak) that can be installed via pip. 
 
 # HCI584X_Project-LIFE
-Learning Important Factual Equivalents (Calorie Edition) - Python
-A small test app that translates common fast food menu items (that a User selects) to equivalent physical exercise duration/exertion level and healthy alternatives that people can more easily relate with. This information is meant to educate and entertain by helping the user understand the equivalent effort to offset consumption (provided the consumption is in excess of the minimum amount of calories for normal exertion throughout the day) as well as to share findings through messaging/social media in a consumable format a "Meme Card".
+LIFE (Learning Important Factual Equivalents) Food & Exercise is a POC (proof of concept) app that allows the user to select a specific fast food entree/item and compare it to up to three physical activities.
 
 
 # Requirements
 - Python 3.7 or higher
-- [rich](https://github.com/willmcgugan/rich)
-- [dill](https://dill.readthedocs.io/en/latest/dill.html) 0.3 or higher 
+- [tkinter]https://docs.python.org/3/library/tkinter.html)
+- [pillow](https://pypi.org/project/Pillow/) 7.2 or higher 
 
 # Installation 
-List what the user needs to do __before__ running your app 
-for main.py
-- use pip to install the required third party packages:  ` pip -r requirements.txt`
-
+- No additional packages required on install.
 Pillow==7.0.0
 
-
-
-for run_testpak.py
-- use `pip` to build and install testpack as a local package and install required packages
-- open a OS terminal, go into the project root folder and type: `pip install .` (<- dot!)
-
 # Usage
-Describe how to run your app
-- `main.py`: run it in the project root folder, so it can import from the testpack folder
-- `testpak.py`: can be run from any folder once it's been installed locally
-
-# Code Examples
-If your project code is meant to be integrated into python code, you should list at least a few usage examples that can be copy/pasted and run. For more complex cases, consider writing a separate tutorial (put it and its code into a separate folder called tutorial).
-Here, I'll just give one of the functions that my package defines:
-
-```
-# use the evenOdd function
-from testpak import evenOdd
-x = int(input("Enter a number:"))
-print(x, "is",  evenOdd(x))
-```
+- `main.py`: run in the project root folder, "python main.py"
 
 # Known issues
 List any known bugs and limitations
