@@ -26,11 +26,11 @@ Pillow==7.0.0
 
 3. MEME CARD TEXT TRUNCATION: There may be some iterations of the Meme Cards where the text strings are insufficiently formatted, and are also truncated in rendering.
 
-4. BACKGROUND CONTRAST: There may be some backgrounds where the contrast between the text and the background clash badly. A possibe future feature would be to allow the user to change the color of the text and shadow/outline.
+4. BACKGROUND CONTRAST: There may be some backgrounds where the contrast between the text and the background clash badly. A possible future feature would be to allow the user to change the color of the text and shadow/outline.
 
 5. IMAGE CENTERING/PLACEMENT: Because of the diverse sources of the food images, some of the items may not be correctly centered and may be too low or too high. In some cases the images may be too small or of insufficient resolution.
 
-6. DISCLAIMER: The program does not include text that gives more accurate advice regarding the average number of calories burned in a daily wakeful activity (e.g. - walking, breathing, sitting still). The equivalent values given assume that any other net calories in or out are zero, and that the food item is excess beyond the required calories an average individual needs to maintain homeostasis. In addition, the program does not specify that the burn rate is based on the average calories burned using a heart rate monitor during specific activities, assuming specific weights of individuals. Genetic variation as well as the exact amount of exertion in each activity may vary greatly. The descripton of the amount of exertion is also fairly subjective. As a result, the results given here are for directional use only, and not to be used as medical advice.
+6. DISCLAIMER: The program does not include text that gives more accurate advice regarding the average number of calories burned in a daily wakeful activity (e.g. - walking, breathing, sitting still). The equivalent values given assume that any other net calories in or out are zero, and that the food item is excess beyond the required calories an average individual needs to maintain homeostasis. In addition, the program does not specify that the burn rate is based on the average calories burned using a heart rate monitor during specific activities, assuming specific weights of individuals. Genetic variation as well as the exact amount of exertion in each activity may vary greatly. The description of the amount of exertion is also fairly subjective. As a result, the results given here are for directional use only, and not to be used as medical advice.
 
 # Acknowledgments
 Thanks to Professor Harding, Iowa State University for his guidance and troubleshooting on this project.
